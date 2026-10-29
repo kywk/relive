@@ -91,3 +91,21 @@
 
 .relive-viewport.controls-hidden .relive-overlay{opacity:0}
 .relive-viewport.controls-hidden .relive-overlay,.relive-viewport.controls-hidden .relive-overlay *{pointer-events:none}
+
+.relive-map-mode{display:flex;align-items:center;gap:6px;margin-left:auto;font-size:14px}
+.relive-map-mode select{min-height:36px;max-width:170px;background:var(--relive-panel);border:1px solid var(--relive-line);border-radius:4px;padding:4px 8px}
+.relive-map-surface{position:absolute;inset:0;width:100%;height:100%}
+.relive-player .relive-3d-pin{width:16px;height:16px;min-height:16px;padding:0;border-radius:50%;border:2px solid #fff;background:#925428;cursor:pointer}
+.relive-3d-cursor{width:17px;height:17px;border:3px solid #fff;border-radius:50%;background:#087eaa;pointer-events:none}
+.relive-player .maplibregl-popup-content{background:var(--relive-paper);color:var(--relive-ink);padding:12px 20px 12px 12px}
+.relive-player .maplibregl-popup-anchor-bottom .maplibregl-popup-tip{border-top-color:var(--relive-paper)}
+.relive-player .maplibregl-popup-anchor-top .maplibregl-popup-tip{border-bottom-color:var(--relive-paper)}
+.relive-player .maplibregl-popup-close-button{color:var(--relive-ink);border:0;background:transparent;min-height:24px;padding:2px 6px}
+.relive-player .maplibregl-ctrl-attrib{background:var(--relive-paper);color:var(--relive-ink)}
+.relive-player .maplibregl-ctrl-attrib a{color:inherit}
+.relive-player .maplibregl-ctrl-group button{border-radius:0;height:32px;width:32px;min-height:32px;background:#fff;color:#222;padding:0}
+/* Expanded provider credits must not cover navigation on narrow maps. */
+.relive-player .maplibregl-ctrl-top-right{max-width:calc(100% - 64px)}
+.relive-player .maplibregl-ctrl-attrib{max-width:100%;white-space:normal}
+.relive-player .maplibregl-ctrl-attrib-inner{white-space:normal;overflow-wrap:anywhere}
+@media(max-width:480px){.relive-maplibre-popup .relive-bubble{max-height:160px}.relive-maplibre-popup .relive-bubble img{max-height:90px}}

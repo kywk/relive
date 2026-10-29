@@ -43,7 +43,7 @@ export function parseBlock(source) {
     return out;
   });
   const renderer=c.renderer??'leaflet';
-  if(!['leaflet','google-3d'].includes(renderer))throw new Error('renderer 僅接受 leaflet 或 google-3d');
+  if(!['leaflet','maplibre-3d','google-3d'].includes(renderer))throw new Error('renderer 僅接受 leaflet、maplibre-3d 或 google-3d');
   const events=parseEvents(c.events);
   return {events, renderer, stopDuration, title: String(c.title ?? '旅程回放'), gpx, raw: c.raw ?? '', photos, timezoneOffset: offset, duration};
 }

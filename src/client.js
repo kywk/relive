@@ -7,7 +7,7 @@ export async function onRouteDidUpdate(){
   const hosts=Array.from(document.querySelectorAll('[data-relive]'));
   if(!hosts.length)return;
   const token=++generation;
-  const [{mountPlayer}]=await Promise.all([import('./player.js'),import('leaflet/dist/leaflet.css'),import('./styles.css')]);
+  const [{mountPlayer}]=await Promise.all([import('./player.js'),import('leaflet/dist/leaflet.css'),import('maplibre-gl/dist/maplibre-gl.css'),import('./styles.css')]);
   if(token!==generation)return;
   for(const host of hosts){
     if(mounted.has(host))continue;

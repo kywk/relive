@@ -10,4 +10,4 @@ for(const file of ['layers.png','layers-2x.png','marker-icon.png']){
  const bytes=await readFile(`node_modules/leaflet/dist/images/${file}`);
  css=css.replaceAll(`images/${file}`,`data:image/png;base64,${bytes.toString('base64')}`);
 }
-await writeFile('dist/obsidian/styles.css',css+'\n'+await readFile('src/styles.css','utf8'));
+await writeFile('dist/obsidian/styles.css',css+'\n'+await readFile('node_modules/maplibre-gl/dist/maplibre-gl.css','utf8')+'\n'+await readFile('src/styles.css','utf8'));

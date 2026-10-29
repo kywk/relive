@@ -1,4 +1,5 @@
 import 'leaflet/dist/leaflet.css';
+import 'maplibre-gl/dist/maplibre-gl.css';
 import '../../src/styles.css';
 import './style.css';
 import journey from '../generated/journey.json';
@@ -10,8 +11,6 @@ let ready;
 async function loadPlayer(){
  if(!ready)ready=import('../../src/player.js').then(({mountPlayer})=>{
   const destroy=mountPlayer(host,journey);
-  // Public demo offers only the configured 2D renderer.
-  host.querySelector('.relive-header > button').hidden=true;
   window.addEventListener('pagehide',destroy,{once:true});
  }).catch(error=>{ready=null;host.replaceChildren();const p=document.createElement('p');p.textContent='地圖未能載入，請重新整理，或下載範例在本機體驗。';host.append(p);console.error(error);throw error;});
  return ready;

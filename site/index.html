@@ -19,7 +19,7 @@
 <figure class="hero-image reveal"><img src="/photos/kamo-river-in-kyoto-20240820-1748-5192.jpg" width="1920" height="1273" alt="京都鴨川兩側的河岸步道與建築，遠處是山巒" fetchpriority="high"><figcaption>京都，鴨川。從一張照片，回到一段路。<a href="#credits">攝影與授權</a></figcaption></figure>
 </section>
 <section id="demo" class="demo frame" aria-labelledby="demo-title">
-<div class="section-head"><h2 id="demo-title" class="reveal">沿著鴨川，慢慢走</h2><p class="reveal">按下播放，讓地圖帶你前進。<br>拖曳時間軸，或點選照片，在喜歡的地方停留。</p></div>
+<div class="section-head"><h2 id="demo-title" class="reveal">沿著鴨川，慢慢走</h2><p class="reveal">選擇 MapLibre 3D，免金鑰探索立體地形。<br>按下播放、拖曳時間軸，或點選照片停留。</p></div>
 <div id="journey" class="reveal"><p>正在準備旅程。也可以先<a href="demo/kamo-river.gpx" download>下載示範 GPX</a>。</p></div>
 <p class="demo-note">真實京都照片，搭配人工編排的鴨川路線與播放時間。這是功能示範，並非一次實際錄製的旅程或導航指引。</p>
 <div class="download-row"><a href="demo/kamo-river.gpx" download>下載 GPX 範例</a><a href="demo/kyoto.md" download>下載 Markdown 範例</a><a href="https://github.com/kywk/relive/tree/main/site">查看 demo 原始碼</a></div>
@@ -56,7 +56,7 @@ photos:
   --package ./kywk-gpx-slim-0.1.0.tgz \
   gpx-slim ride.gpx --analyze</code></pre><p>工具在本機處理 GPX，並拒絕覆寫原檔。</p><a href="https://github.com/kywk/relive/tree/main/packages/gpx-slim">閱讀 CLI 說明</a></div>
 </div></div></section>
-<section class="faq frame" aria-labelledby="faq-title"><h2 id="faq-title" class="reveal">出發前，想知道的事</h2><details><summary>我的照片會被上傳嗎？</summary><p>Obsidian 中的本機照片不會由 Relive 自動上傳。發布 Docusaurus 網站時，文章引用的公開附件會進入網站產物，請只允許發布專用的 assetRoots。地圖圖磚需要連線到 OpenStreetMap。</p></details><details><summary>瘦身會改變照片的位置嗎？</summary><p>精簡會改變軌跡的內插位置與距離統計。只有 GPS 的照片，在停留或重訪同一位置時也可能改變播放時刻。網站建議明確選用 gentle；需要精確順序時，保留拍攝時間或關閉瘦身。</p><a href="https://github.com/kywk/relive/blob/main/docs/gpx-slim-performance.md">閱讀實測結果</a></details><details><summary>可以使用 Google 3D 嗎？</summary><p>Relive 支援選配 Google 3D，需自行設定 API key、啟用服務與帳務。官方 demo 使用 Leaflet 2D，不要求你提供 key。真實 Google 3D 環境尚未完成驗證。</p></details></section>
+<section class="faq frame" aria-labelledby="faq-title"><h2 id="faq-title" class="reveal">出發前，想知道的事</h2><details><summary>我的照片會被上傳嗎？</summary><p>Obsidian 中的本機照片不會由 Relive 自動上傳。發布 Docusaurus 網站時，文章引用的公開附件會進入網站產物，請只允許發布專用的 assetRoots。2D 圖磚連線到 OpenStreetMap；3D 底圖與地形連線到 OpenFreeMap、Mapterhorn。</p></details><details><summary>瘦身會改變照片的位置嗎？</summary><p>精簡會改變軌跡的內插位置與距離統計。只有 GPS 的照片，在停留或重訪同一位置時也可能改變播放時刻。網站建議明確選用 gentle；需要精確順序時，保留拍攝時間或關閉瘦身。</p><a href="https://github.com/kywk/relive/blob/main/docs/gpx-slim-performance.md">閱讀實測結果</a></details><details><summary>3D 地圖需要 API key 嗎？</summary><p>選擇 MapLibre 3D 即可使用開放底圖、立體地形與建築輪廓，不需要 API key。首次切換才載入 3D 引擎；裝置或網路不支援時會回到 2D。這不是寫實攝影城市。Google 寫實 3D 仍是需自備 key 的選配，官方 demo 不啟用。</p></details></section>
 </main>
 <footer class="footer"><div class="frame"><div class="footer-top"><a class="footer-brand" href="#main">RELIVE</a><p>每一段走過的路，<br>都值得再看一次。</p><a href="https://github.com/kywk/relive">GitHub 專案</a><a href="https://kywk.github.io/story-map/">探索 StoryMap</a></div><details id="credits"><summary>攝影來源與授權</summary><p>範例照片來自 Wikimedia Commons，由不同攝影者於不同日期拍攝。播放位置與時間為示範編排，不是照片的實際 EXIF 紀錄。圖片以 Commons 縮圖版本託管，頁面依版面裁切顯示；各照片保留原授權，未套用程式的 MIT 授權。</p><ul id="credit-list"></ul><a href="photos/credits.json">完整圖片來源資料</a></details><p class="footer-note">Relive by kywk · 程式 MIT License · 地圖 © OpenStreetMap contributors</p></div></footer>
 <div id="announcement" role="status" class="sr-only" aria-live="polite"></div>

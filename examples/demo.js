@@ -1,4 +1,5 @@
 import 'leaflet/dist/leaflet.css';
+import 'maplibre-gl/dist/maplibre-gl.css';
 import '../src/styles.css';
 import {parseBlock} from '../src/core.js';
 import {loadJourney} from '../src/load.js';

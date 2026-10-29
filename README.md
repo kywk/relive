@@ -1,6 +1,6 @@
 # Relive — Obsidian 與 Docusaurus 旅程回放
 
-把 `relive` fenced code block 放進筆記，以 Leaflet 播放 GPX 軌跡並顯示相片。第一版提供 2D 地圖、播放／暫停、拖曳進度、倍速、相機跟隨、相片縮圖與定位提示。支援選配 Google 寫實 3D；尚未提供影片匯出。
+把 `relive` fenced code block 放進筆記，以 Leaflet 播放 GPX 軌跡並顯示相片。第一版提供 2D 地圖、播放／暫停、拖曳進度、倍速、相機跟隨、相片縮圖與定位提示。支援免金鑰 MapLibre 3D 地形與選配 Google 寫實 3D；尚未提供影片匯出。
 
 ## 官方 Demo 與 GitHub Pages
 
@@ -189,7 +189,7 @@ npm run vault:serve
 
 ## 邊界與後續
 
-目前是可建置的第一版。Google 3D 需要使用者 API key，尚未以真實 key 驗證；未實作影片／音樂匯出、相片停留動畫、海拔圖、GPX 自動簡化、Vault 資產修改後即時刷新、離線地圖與發布精靈。超大型 GPX 每幀繪製可能較慢，跨國際換日線的地圖繪製尚未調整 world wrapping。地圖使用 OpenStreetMap 公開圖磚，需要網路；正式流量請確認圖磚服務使用政策並規劃供應商設定。
+目前是可建置的第一版。Google 3D 需要使用者 API key，尚未以真實 key 驗證；未實作影片／音樂匯出、海拔圖、Vault 資產修改後即時刷新、離線地圖與發布精靈。超大型 GPX 每幀繪製可能較慢，跨國際換日線的地圖繪製尚未調整 world wrapping。地圖使用 OpenStreetMap 公開圖磚，需要網路；正式流量請確認圖磚服務使用政策並規劃供應商設定。
 
 參考： [Obsidian Markdown post processing](https://github.com/obsidianmd/obsidian-developer-docs/blob/main/en/Plugins/Editor/Markdown%20post%20processing.md)、[Docusaurus MDX plugins](https://docusaurus.io/docs/markdown-features/plugins)、[Docusaurus client modules](https://docusaurus.io/docs/advanced/client)、[Leaflet API](https://leafletjs.com/reference.html)。
 
@@ -216,6 +216,24 @@ events:
 
 每筆需要 `title`，並擇一提供 `at`（從 GPX 起點經過的 HH:MM:SS）、`time`（絕對日期時間）、`progress`（0–1）。可附 `text` 與成對的 `lat`／`lon`，未填座標時由軌跡內插。`at`、`time` 需要完整單調的 GPX 時間，超出範圍會報錯。文字以純文字呈現，不執行 HTML。
 
+## MapLibre 3D（免 API key）
+
+播放器的「地圖」選單可切換 Leaflet 2D 與 MapLibre 3D；切換保留時間軸進度並暫停播放。預設使用 2D，選擇 3D 才下載 MapLibre 引擎；也可在區塊設定自動載入：
+
+```yaml
+renderer: maplibre-3d
+```
+
+MapLibre 搭配 [OpenFreeMap](https://openfreemap.org/) 向量底圖／建築輪廓及 [Mapterhorn](https://mapterhorn.com/) 地形，不需要註冊、API key 或 Google 帳務。可旋轉、傾斜、縮放、播放軌跡與點選照片，地形倍率為真實高度 1 倍。底圖隨網站深淺色或 Obsidian 主題切換；照片保留原色。道路和建築是地圖資料，不是 Google 式寫實攝影城市。
+
+需要網路與 WebGL，資料覆蓋、精度及公共服務可用性依供應商而異；保留地圖右上角署名。初始化失敗、逾時或 WebGL／圖磚錯誤會回到 2D；載入期間也可選回 2D 取消。GPX 與照片由播放器在本機處理，不上傳給底圖服務；服務仍會收到視野範圍的圖磚請求。
+
+網站與 Docusaurus 會延後載入 3D JavaScript。Obsidian 為單檔插件，MapLibre 程式與 worker 已打包進 `main.js`，樣式包含於 `styles.css`，不在執行時從 CDN 下載程式。新增依賴使用 MapLibre 5.24.0 的內含 worker 發行格式，以相容 Vite、Webpack 與 Obsidian 的 CJS 單檔建置。
+
+直接使用 `@kywk/relive/player` 的自訂網站，除 Leaflet 與 Relive 樣式外，需載入 `maplibre-gl/dist/maplibre-gl.css`。Docusaurus plugin 與 Obsidian 建置會自動處理。
+
+已驗證 Chromium 的桌面／平板／手機視窗、Docusaurus 發布頁面、播放／照片／縮放／主題切換、2D 進度保留、供應商失敗與載入取消；單元測試涵蓋分段、倒帶、增量更新與 WebGL 錯誤。Obsidian 單檔建置已通過，實際 Electron／手機硬體尚待驗證。
+
 ## Google 寫實 3D（選配）
 
 以 Google Maps JavaScript API 的 `Map3DElement`、`Polyline3DElement` 與 `PopoverElement` 整合 Google 的衛星／寫實 3D 地圖，提供傾斜視角、軌跡線、跟隨鏡頭與地圖對話框。這是 Google Maps 官方嵌入式 3D API，並非把 Google Earth 網頁塞進 iframe；可用影像與建築細節依區域覆蓋而異。
@@ -230,7 +248,7 @@ plugins: [[path.resolve('../src/docusaurus.cjs'), {
 }]],
 ```
 
-在畫面按「Google 3D」才載入 Google 程式；也可在 `relive` 區塊加入 `renderer: google-3d`，於開啟時自動嘗試。API key 不放在 Markdown 區塊中。沒有 key 或載入失敗會保留 Leaflet 2D；返回 2D 保留目前進度。Obsidian 的 `app://` 來源與 CSP、WebGL 支援需在實際環境驗證，不能假設網站的 referrer 限制也適用於桌面插件。不要為測試關閉 key 限制。
+設定 key 後，在「地圖」選單選擇「Google 3D」才載入 Google 程式；也可在 `relive` 區塊加入 `renderer: google-3d`，於開啟時自動嘗試。API key 不放在 Markdown 區塊中。沒有 key 或載入失敗會保留 Leaflet 2D；返回 2D 保留目前進度。Obsidian 的 `app://` 來源與 CSP、WebGL 支援需在實際環境驗證，不能假設網站的 referrer 限制也適用於桌面插件。不要為測試關閉 key 限制。
 
 本次已驗證無 key 提示、共用時間軸與網站建置；未提供使用者 key，因此尚未驗證 Google 實景載入、帳務或桌面端授權。官方參考：[3D Overview](https://developers.google.com/maps/documentation/javascript/3d/overview)、[3D shapes](https://developers.google.com/maps/documentation/javascript/3d/shapes-lines)、[Popover API](https://developers.google.com/maps/documentation/javascript/reference/3d-map-draw#PopoverElement)。
 

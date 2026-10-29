@@ -10,7 +10,12 @@ export function mountPlayer(host,journey,options={}){
   const el=(tag,parent,text,className)=>{const node=document.createElement(tag);if(text)node.textContent=text;if(className)node.className=className;parent.append(node);return node;};
   const header=el('div',host,'','relive-header');el('strong',header,journey.title);
   el('span',header,`${(journey.track.meters/1000).toFixed(2)} km${journey.track.elapsed==null?'':` · ${elapsedLabel(journey.track.elapsed)}`}`);
-  const mode=el('button',header,'Google 3D');mode.type='button';mode.setAttribute('aria-label','切換 Google 3D 地圖');
+  const modeLabel=el('label',header,'地圖 ','relive-map-mode');
+  const mode=el('select',modeLabel);mode.setAttribute('aria-label','地圖模式');
+  for(const [value,label] of [['leaflet','2D 地圖'],['maplibre-3d','MapLibre 3D'],['google-3d','Google 3D']]){
+    if(value==='google-3d'&&!options.googleMapsApiKey&&journey.renderer!=='google-3d')continue;
+    el('option',mode,label).value=value;
+  }
   const viewport=el('div',host,'','relive-viewport');
   const mapEl=el('div',viewport,'','relive-map');mapEl.setAttribute('aria-label','旅程軌跡地圖');
   const status=el('p',host,'','relive-map-status');status.hidden=true;status.setAttribute('role','status');
@@ -49,7 +54,9 @@ export function mountPlayer(host,journey,options={}){
   const timed=items.filter(p=>p.progress!==null).sort((a,b)=>a.progress-b.progress);
   const playback=createPlayback({duration:journey.duration,stopDuration:journey.stopDuration??3,events:timed});
   let progress=0,playing=false,frame=0,previous=0,active=-1,disposed=false,mapMode='leaflet',switchId=0;
-  let adapter=createLeafletMap(mapEl,journey,select);
+  let surface=el('div',mapEl,'','relive-map-surface');
+  let adapter=createLeafletMap(surface,journey,select),pendingMap;
+  viewport.dataset.mapMode=mapMode;
   let renderedAdapter,lastMapProgress,lastClock;
   const endLabel=timelineLabel(journey,1);
   function contentFor(group){
@@ -108,27 +115,45 @@ export function mountPlayer(host,journey,options={}){
   for(const item of journey.photos){const button=el('button',gallery);button.type='button';button.title=item.caption||item.src;const img=el('img',button);img.decoding='async';img.src=item.url;img.alt=item.caption||item.src;img.loading='lazy';button.onclick=()=>select(item);}
   const eventList=el('div',host,'','relive-event-list');
   for(const item of journey.events){const button=el('button',eventList,`${timelineLabel(journey,item.progress)} ${item.title}`);button.type='button';button.onclick=()=>select(item);}
-  async function switchMap(){
-    pause();const id=++switchId;mode.disabled=true;
+  async function switchMap(target){
+    pause();const id=++switchId;
+    if(pendingMap){pendingMap.destroy();pendingMap=null;}
+    if(target===mapMode){mode.value=mapMode;status.hidden=true;return;}
+    let candidate,candidateSurface;
+    const cancel=()=>{candidate?.destroy();candidateSurface?.remove();};
+    pendingMap={destroy:cancel};
+    status.hidden=false;status.textContent=`正在載入 ${target==='maplibre-3d'?'MapLibre 3D':target==='google-3d'?'Google 3D':'2D 地圖'}…`;
     try{
-      if(mapMode==='leaflet'){
-        status.hidden=false;status.textContent='正在載入 Google 3D…';
-        const api=await loadGoogleMaps(options.googleMapsApiKey);
-        if(disposed||id!==switchId)return;
-        adapter.destroy();mapEl.replaceChildren();
-        try{adapter=createGoogleMap(mapEl,journey,select,api,()=>{
-          if(disposed||mapMode!=='google-3d')return;
-          pause();adapter.destroy();mapEl.replaceChildren();adapter=createLeafletMap(mapEl,journey,select);mapMode='leaflet';viewport.dataset.mapMode=mapMode;active=-1;render(false);mode.textContent='Google 3D';mode.setAttribute('aria-label','切換 Google 3D 地圖');status.hidden=false;status.textContent='Google 3D 初始化失敗，請檢查 API 啟用、key 限制與 WebGL 支援。已切回 2D。';
-        });mapMode='google-3d';viewport.dataset.mapMode=mapMode;}
-        catch(error){mapEl.replaceChildren();adapter=createLeafletMap(mapEl,journey,select);throw error;}
-      }else{adapter.destroy();mapEl.replaceChildren();adapter=createLeafletMap(mapEl,journey,select);mapMode='leaflet';viewport.dataset.mapMode=mapMode;}
+      let api,create;
+      if(target==='maplibre-3d'){
+        const [runtime,module]=await Promise.all([import('maplibre-gl'),import('./maplibre-map.js')]);
+        api=runtime.default??runtime;create=module.createMapLibreMap;
+      }else if(target==='google-3d'){api=await loadGoogleMaps(options.googleMapsApiKey);create=createGoogleMap;}
+      else create=createLeafletMap;
+      if(disposed||id!==switchId)return;
+      candidateSurface=el('div',mapEl,'','relive-map-surface');candidateSurface.style.visibility='hidden';
+      const failed=()=>{
+        if(disposed||candidate!==adapter)return;
+        void switchMap('leaflet').then(()=>{if(!disposed&&mapMode==='leaflet'){status.hidden=false;status.textContent='3D 地圖資料或 WebGL 載入失敗，已切回 2D。';}});
+      };
+      candidate=create(candidateSurface,journey,select,api,failed);
+      if(candidate.ready)await candidate.ready;
+      if(disposed||id!==switchId){cancel();return;}
+      adapter.destroy();surface.remove();adapter=candidate;surface=candidateSurface;
+      surface.style.visibility='';mapMode=target;viewport.dataset.mapMode=target;
       active=-1;render(false);status.hidden=true;
-    }catch(error){if(!disposed){status.hidden=false;status.textContent=`${error.message} 目前保留 2D 地圖。`;}}
-    finally{if(!disposed){mode.disabled=false;mode.textContent=mapMode==='leaflet'?'Google 3D':'2D 地圖';mode.setAttribute('aria-label',mapMode==='leaflet'?'切換 Google 3D 地圖':'切換 2D 地圖');}}
+    }catch(error){
+      cancel();
+      if(!disposed&&id===switchId){
+        // If replacing another 3D renderer failed, return to the reliable 2D adapter.
+        if(mapMode!=='leaflet'){adapter.destroy();surface.remove();surface=el('div',mapEl,'','relive-map-surface');adapter=createLeafletMap(surface,journey,select);mapMode='leaflet';viewport.dataset.mapMode=mapMode;active=-1;render(false);}
+        status.hidden=false;status.textContent=`${error.message} 目前使用 2D 地圖。`;
+      }
+    }finally{if(!disposed&&id===switchId){pendingMap=null;mode.value=mapMode;}}
   }
-  mode.onclick=switchMap;
+  mode.onchange=()=>void switchMap(mode.value);
   if(journey.warnings.length){const details=el('details',host,'','relive-warnings');el('summary',details,`${journey.warnings.length} 項相片提示`);journey.warnings.forEach(w=>el('p',details,w));}
   slider.setAttribute('aria-valuetext',current.textContent);
-  if(journey.renderer==='google-3d')void switchMap();
-  return ()=>{clearTimeout(hideTimer);visibilityEvents.abort();disposed=true;switchId++;pause();adapter.destroy();host.replaceChildren();};
+  if(journey.renderer&&journey.renderer!=='leaflet'){mode.value=journey.renderer;void switchMap(journey.renderer);}
+  return ()=>{clearTimeout(hideTimer);visibilityEvents.abort();disposed=true;switchId++;pendingMap?.destroy();pause();adapter.destroy();host.replaceChildren();};
 }
