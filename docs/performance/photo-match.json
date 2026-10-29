@@ -1,0 +1,42 @@
+{
+  "node": "v22.23.2",
+  "platform": "darwin arm64",
+  "cpu": "Apple M1",
+  "points": 100000,
+  "photos": 100,
+  "warmupRounds": 5,
+  "measuredRounds": 10,
+  "beforeMedianMs": 321,
+  "afterMedianMs": 137.58,
+  "reductionPercent": 57.1,
+  "checksums": {
+    "before": 49.50884508845088,
+    "after": 49.50884508845088
+  },
+  "samplesMs": {
+    "before": [
+      321.15,
+      323.18,
+      321.72,
+      320.84,
+      320.81,
+      331.65,
+      320.44,
+      319.62,
+      319.66,
+      325.5
+    ],
+    "after": [
+      136.47,
+      137.73,
+      136.98,
+      153.86,
+      138.93,
+      137.53,
+      137.62,
+      137.01,
+      134.06,
+      138.64
+    ]
+  }
+}

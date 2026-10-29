@@ -1,9 +1,9 @@
 # @kywk/react-relive
 
-在 Vite、Next.js 或其他 React host 使用 Relive，不需 Docusaurus 或 Obsidian。
+在 Vite、Next.js 或其他 React host 使用 Relive，支援 React 19.x，不需 Docusaurus 或 Obsidian。
 
 ```sh
-npm install @kywk/react-relive react react-dom
+npm install @kywk/react-relive react@19 react-dom@19
 ```
 
 ```jsx

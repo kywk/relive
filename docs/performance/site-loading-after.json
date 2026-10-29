@@ -1,0 +1,219 @@
+{
+  "measurement": {
+    "browser": "156.0.8078.4",
+    "server": "Vite production preview (default gzip compression)",
+    "url": "http://127.0.0.1:4179/relive/",
+    "waitAfterLoadMs": 1500,
+    "externalResources": "blocked",
+    "metric": "PerformanceResourceTiming.encodedBodySize; body only, excludes HTTP headers",
+    "contentEncodings": [
+      "gzip",
+      "identity"
+    ]
+  },
+  "results": [
+    {
+      "name": "desktop",
+      "assets": [
+        {
+          "path": "/relive/theme.js",
+          "bytes": 586,
+          "type": "script"
+        },
+        {
+          "path": "/relive/assets/index-CLA_lMFq.js",
+          "bytes": 3451,
+          "type": "script"
+        },
+        {
+          "path": "/relive/assets/index--nZufxj7.css",
+          "bytes": 3558,
+          "type": "link"
+        },
+        {
+          "path": "/relive/photos/kamo-river-in-kyoto-20240820-1748-5192.jpg",
+          "bytes": 661081,
+          "type": "img"
+        },
+        {
+          "path": "/relive/assets/hero-CunC0-Sw.js",
+          "bytes": 1494,
+          "type": "script"
+        },
+        {
+          "path": "/relive/assets/leaflet-CIGW-MKW.css",
+          "bytes": 6455,
+          "type": "link"
+        },
+        {
+          "path": "/relive/assets/leaflet-src-CGTZB9wQ.js",
+          "bytes": 43415,
+          "type": "script"
+        },
+        {
+          "path": "/relive/photos/tokyo-credits.json",
+          "bytes": 725,
+          "type": "fetch"
+        },
+        {
+          "path": "/relive/photos/kamo-gawa-in-kyoto-birds-feeding-hdsr.jpg",
+          "bytes": 993334,
+          "type": "img"
+        },
+        {
+          "path": "/relive/photos/kamo-gawa-in-kyoto-hdsr-s5-05.jpg",
+          "bytes": 823409,
+          "type": "img"
+        },
+        {
+          "path": "/relive/photos/stepping-stones-in-kamo-river-kyoto.jpg",
+          "bytes": 729915,
+          "type": "img"
+        },
+        {
+          "path": "/relive/demo/tokyo.json",
+          "bytes": 2096,
+          "type": "fetch"
+        },
+        {
+          "path": "/relive/photos/tokyo-1.jpg",
+          "bytes": 259406,
+          "type": "img"
+        }
+      ],
+      "jsBytes": 48946,
+      "cssBytes": 10013,
+      "imageBytes": 3467145,
+      "journeyTop": 1259.59375,
+      "playerLoaded": false,
+      "errors": []
+    },
+    {
+      "name": "tablet",
+      "assets": [
+        {
+          "path": "/relive/theme.js",
+          "bytes": 586,
+          "type": "script"
+        },
+        {
+          "path": "/relive/assets/index--nZufxj7.css",
+          "bytes": 3558,
+          "type": "link"
+        },
+        {
+          "path": "/relive/assets/index-CLA_lMFq.js",
+          "bytes": 3451,
+          "type": "script"
+        },
+        {
+          "path": "/relive/photos/kamo-river-in-kyoto-20240820-1748-5192.jpg",
+          "bytes": 661081,
+          "type": "img"
+        },
+        {
+          "path": "/relive/photos/kamo-gawa-in-kyoto-birds-feeding-hdsr.jpg",
+          "bytes": 993334,
+          "type": "img"
+        },
+        {
+          "path": "/relive/photos/stepping-stones-in-kamo-river-kyoto.jpg",
+          "bytes": 729915,
+          "type": "img"
+        },
+        {
+          "path": "/relive/photos/kamo-gawa-in-kyoto-hdsr-s5-05.jpg",
+          "bytes": 823409,
+          "type": "img"
+        },
+        {
+          "path": "/relive/assets/hero-CunC0-Sw.js",
+          "bytes": 1494,
+          "type": "script"
+        },
+        {
+          "path": "/relive/assets/leaflet-src-CGTZB9wQ.js",
+          "bytes": 43415,
+          "type": "script"
+        },
+        {
+          "path": "/relive/assets/leaflet-CIGW-MKW.css",
+          "bytes": 6455,
+          "type": "link"
+        },
+        {
+          "path": "/relive/photos/tokyo-credits.json",
+          "bytes": 725,
+          "type": "fetch"
+        },
+        {
+          "path": "/relive/demo/tokyo.json",
+          "bytes": 2096,
+          "type": "fetch"
+        },
+        {
+          "path": "/relive/photos/tokyo-1.jpg",
+          "bytes": 259406,
+          "type": "img"
+        }
+      ],
+      "jsBytes": 48946,
+      "cssBytes": 10013,
+      "imageBytes": 3467145,
+      "journeyTop": 1439.6875,
+      "playerLoaded": false,
+      "errors": []
+    },
+    {
+      "name": "mobile",
+      "assets": [
+        {
+          "path": "/relive/theme.js",
+          "bytes": 586,
+          "type": "script"
+        },
+        {
+          "path": "/relive/photos/kamo-river-in-kyoto-20240820-1748-5192.jpg",
+          "bytes": 661081,
+          "type": "img"
+        },
+        {
+          "path": "/relive/assets/index--nZufxj7.css",
+          "bytes": 3558,
+          "type": "link"
+        },
+        {
+          "path": "/relive/assets/index-CLA_lMFq.js",
+          "bytes": 3451,
+          "type": "script"
+        },
+        {
+          "path": "/relive/photos/kamo-gawa-in-kyoto-hdsr-s5-05.jpg",
+          "bytes": 823409,
+          "type": "img"
+        },
+        {
+          "path": "/relive/photos/stepping-stones-in-kamo-river-kyoto.jpg",
+          "bytes": 729915,
+          "type": "img"
+        },
+        {
+          "path": "/relive/photos/kamo-gawa-in-kyoto-birds-feeding-hdsr.jpg",
+          "bytes": 993334,
+          "type": "img"
+        },
+        {
+          "path": "/relive/photos/tokyo-credits.json",
+          "bytes": 725,
+          "type": "fetch"
+        }
+      ],
+      "jsBytes": 4037,
+      "cssBytes": 3558,
+      "imageBytes": 3207739,
+      "journeyTop": 1044.515625,
+      "playerLoaded": false,
+      "errors": []
+    }
+  ]
+}

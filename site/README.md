@@ -38,3 +38,9 @@ npm run pages:preview
 東京照片的來源、作者、CC BY／CC BY-SA 授權另見 `public/photos/tokyo-credits.json`，並與京都署名一起顯示於頁尾。照片僅以 CSS 裁切，未修改原圖；不適用程式碼 MIT 授權。
 
 Hero 深色模式採 OpenStreetMap 圖磚的低對比炭灰處理，僅作用於底圖。相較原版 brightness(.8)，小幅提高至 .86，透明度維持 .5，讓主要道路稍微清楚；照片、青綠回放路線與署名不套用底圖濾鏡。
+
+## 首屏載入
+
+官網先載入文字互動與品牌樣式；播放器進入視窗前 150px 才載入 React、旅程資料與播放器樣式，點選照片會立即觸發載入。桌面背景只先載入 Leaflet，不提前載入 React 或 MapLibre。樣式由 Vite 共用 Leaflet CSS，避免 hero 與播放器重複下載。
+
+以 production preview 執行 `node scripts/perf/site-loading.mjs http://127.0.0.1:4176/relive/` 可量測三種視窗尺寸的首屏資產；需可用的 Playwright Chromium，可用 `PLAYWRIGHT_MODULE` 與 `CHROMIUM_EXECUTABLE` 指定環境路徑。量測阻擋外部圖磚與字體，Vite preview 預設對 JS/CSS 使用 gzip，僅比較瀏覽器 Resource Timing 回報的本機資產 encoded body bytes（不含 HTTP headers）；不代表公開站網速或 LCP。

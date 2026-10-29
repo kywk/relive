@@ -30,8 +30,15 @@ export function matchPhoto(photo, track) {
     return {...photo, ...sampleTrack(track,progress).position, progress, matchedBy:'time'};
   }
   if (coordinates(photo.lat, photo.lon)) {
+    // Haversine distance is monotonic in h: ranking needs no sqrt/atan2
+    // or conversion to meters. Clamp antipodal roundoff like distance(),
+    // keeping the first point on ties.
+    const rad=Math.PI/180,cosLat=Math.cos(photo.lat*rad);
     let nearest=pts[0],best=Infinity;
-    for(const point of pts){const meters=distance(photo,point);if(meters<best){best=meters;nearest=point;}}
+    for(const point of pts){
+      const h=Math.min(1,Math.sin((point.lat-photo.lat)*rad/2)**2+cosLat*Math.cos(point.lat*rad)*Math.sin((point.lon-photo.lon)*rad/2)**2);
+      if(h<best){best=h;nearest=point;}
+    }
     return {...photo, progress:nearest.progress, matchedBy:'gps'};
   }
   return {...photo, progress:null, matchedBy:null};

@@ -26,7 +26,7 @@ const consumer = mkdtempSync(join(tmpdir(),'react-relive-consumer-'));
 try {
   writeFileSync(join(consumer,'package.json'), '{"private":true,"type":"module"}\n');
   // Install both local artifacts: the first core release need not exist on npm yet.
-  run(['install','--ignore-scripts','--no-audit','--no-fund',join(destination,core.filename),join(destination,pkg.filename),'react@19','react-dom@19'], consumer);
+  run(['install','--ignore-scripts','--no-audit','--no-fund',join(destination,core.filename),join(destination,pkg.filename),'react@19.3.1','react-dom@19.3.1','jsdom@24.1.3'], consumer);
   writeFileSync(join(consumer,'smoke.mjs'), `
     import assert from 'node:assert/strict';
     import {createRequire} from 'node:module';
@@ -42,17 +42,16 @@ try {
     assert.throws(()=>require.resolve('obsidian'));
   `);
   execFileSync(process.execPath,['smoke.mjs'],{cwd:consumer,stdio:'inherit'});
-  // Validate the oldest declared React major with real React DOM lifecycle tests.
-  run(['install','--ignore-scripts','--no-audit','--no-fund','react@18.0.0','react-dom@18.0.0','jsdom@24.1.3'], consumer);
-  execFileSync(process.execPath,['smoke.mjs'],{cwd:consumer,stdio:'inherit'});
   for (const file of ['player-loader.js','player-double.js']) writeFileSync(join(consumer,file), readFileSync(join(root,'packages/react-relive/test',file)));
   const lifecycle = readFileSync(join(root,'packages/react-relive/test/react.test.js'),'utf8')
-    .replace('createElement, StrictMode, act','createElement, StrictMode')
-    .replace("import {JSDOM}", "import {act} from 'react-dom/test-utils';\nimport {JSDOM}")
     .replace("'../src/index.js'", "'@kywk/react-relive'");
   writeFileSync(join(consumer,'react.test.js'),lifecycle);
   execFileSync(process.execPath,['--test','react.test.js'],{cwd:consumer,stdio:'inherit'});
-  console.log(`Verified ${pkg.filename}: React 18/19 isolated SSR and React 18 lifecycle without Docusaurus/Obsidian`);
+  // The peer range supports every React 19 minor; verify its lower bound too.
+  run(['install','--ignore-scripts','--no-audit','--no-fund','react@19.0.0','react-dom@19.0.0'], consumer);
+  execFileSync(process.execPath,['smoke.mjs'],{cwd:consumer,stdio:'inherit'});
+  execFileSync(process.execPath,['--test','react.test.js'],{cwd:consumer,stdio:'inherit'});
+  console.log(`Verified ${pkg.filename}: React 19.0.0/19.3.1 isolated SSR and lifecycle without Docusaurus/Obsidian`);
 } finally {
   rmSync(consumer,{recursive:true,force:true});
   rmSync(join(destination,core.filename),{force:true});

@@ -1,4 +1,5 @@
 import L from 'leaflet';
+import 'leaflet/dist/leaflet.css';
 
 // A separate, disposable backdrop leaves the interactive Kyoto demo untouched.
 export async function mountHero(host) {

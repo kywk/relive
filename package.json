@@ -57,8 +57,8 @@
     "docusaurus-plugin-album": "^0.1.1",
     "esbuild": "^0.25.0",
     "obsidian": "^1.8.0",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
     "remark-wiki-link": "^2.0.1",
     "vite": "^6.0.0",
     "@kywk/react-relive": "file:packages/react-relive"

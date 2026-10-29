@@ -1,6 +1,6 @@
 # React 整合指南
 
-`@kywk/react-relive` 是獨立 npm 套件，參照 StoryMap 的 host 分層方式，包裝 Relive 共用播放器。React 18／19 應用程式可直接使用；不需要 Docusaurus、Obsidian API 或 Vault。
+`@kywk/react-relive` 是獨立 npm 套件，參照 StoryMap 的 host 分層方式，包裝 Relive 共用播放器。React 19.x 應用程式可直接使用；不需要 Docusaurus、Obsidian API 或 Vault。
 
 ## 安裝與本機驗證
 

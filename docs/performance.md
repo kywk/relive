@@ -1,4 +1,4 @@
-# Relive 效能量測與優化（2026-10-29）
+# Relive 效能量測與優化
 
 本次針對長 GPX 的播放熱路徑、照片 GPS 配對與網站播放器載入大小。所有軌跡均為合成資料；沒有讀取或上傳私人旅程。優化保留全部 GPX 點、原有分段及時間，不以照片連線取代軌跡，也不做有損簡化。
 
@@ -75,3 +75,41 @@ GPX/XML、EXIF 與 GPS 配對仍在載入端執行；照片配對仍是 O(照片
 ## GPX 瘦身對照測試
 
 完整軌跡、三種瘦身強度及 70% 刪點上限的 30 輪實際 Chromium 測試，包含 heap、首次顯示、播放、縮放與照片定位差異，見 [GPX 瘦身效能報告](../docs/gpx-slim-performance.md)。此報告與上方保留全部軌跡點的 renderer 優化是不同測試。
+
+
+## 2026-10-30：React 19 與第二輪評估
+
+本輪以 `2711ef5`（獨立 React 套件初版）為基準。開發版本統一為 React／ReactDOM 19.3.1，元件 peer 範圍為 `^19.0.0`；隔離 tarball 同時驗證 19.0.0 與 19.3.1 的 SSR、StrictMode、props 更新與卸載。
+
+以下分數是「值得現在調整的程度」，綜合實測影響、適用頻率、實作成本與回歸風險；不是 Lighthouse 分數。7 分以上才進行實作。
+
+| 項目 | 價值／10 | 決策與證據 |
+| --- | ---: | --- |
+| 官網旅程／樣式延後載入 | 9 | 實作。原 400px 預載範圍在三種測試視窗都會於首屏掛載播放器；改為 150px，將旅程資料與完整地圖 CSS 移到 lazy React bridge。 |
+| GPS 最近點配對 | 7.5 | 實作。只比較 haversine 中間值，省去逐點平方根及反三角函數；保留時間優先與平手取首點，對蹠浮點誤差夾至 1。 |
+| 響應式衍生圖片 | 6 | 暫緩。首屏照片仍約 3.2MB；隱藏 hero 圖與下方可見圖共用 URL，單改 picture 不能可靠減少請求。衍生縮圖需補產製與畫質驗證流程，本輪不更動原圖。 |
+| 播放 seek／trail 更新 | 3 | 維持。既有二分搜尋與分塊更新成本低，10k seeks 約 7.85ms、600 次 trail 更新約 5.78ms；本輪不再增加索引或快取。 |
+| React wrapper 重繪 | 2 | 維持。100 次父層／callback 更新只有一次播放器掛載、零重建；已有 lazy import、窄 effect 依賴與 callback ref。 |
+
+### GPS 配對
+
+Apple M1、macOS arm64、Node 22.23.2，同一程序暖機 5 輪，再交替先後順序測量 10 輪。10 萬個合成軌跡點配對 100 張僅有 GPS 的照片，中位數 **321.00 → 137.58ms（減少 57.1%）**。輸出 checksum 相同，另測全球隨機點、日界線、極區、對蹠與平手。這是配對 CPU 時間，不是播放器 FPS 或網站整體加速比例；複雜度仍是 O(照片數 × 軌跡點數)。
+
+原始資料：[photo-match.json](performance/photo-match.json)。重跑：`node scripts/perf/photo-match.mjs`。
+
+### 官網首屏
+
+Production Vite preview 啟用 gzip，Chromium 讀取同源資源的 `encodedBodySize`，載入後等待 1500ms；每個視窗建立新頁面，阻擋外部字體與圖磚以控制變因。尺寸為桌面 1440×1000、平板 820×1180、手機 390×844。數字不含 HTTP headers 與 HTML，不是公開網路時間或 LCP。
+
+| 資產 | 優化前 | 優化後 | 減少 |
+| --- | ---: | ---: | ---: |
+| 手機 JS | 149,161 B | 4,037 B | 97.3% |
+| 手機 CSS | 21,867 B | 3,558 B | 83.7% |
+| 桌面／平板 JS | 150,640 B | 48,946 B | 67.5% |
+| 桌面／平板 CSS | 21,867 B | 10,013 B | 54.2% |
+
+桌面仍載入背景地圖需要的 Leaflet；完整播放器進入視窗前 150px 或點照片時才載入。這是延後工作，不是移除功能或讓所有資產變小。照片在手機首屏仍約 3.21MB、桌面約 3.47MB，為剩餘主要下載成本；本輪保留原圖與署名，未聲稱整頁流量減少 97%。
+
+原始資料：[before](performance/site-loading-before.json)、[after](performance/site-loading-after.json)。重跑方式見 [官網維護說明](../site/README.md)。測試環境與瀏覽器版本記錄於 JSON metadata。
+
+本輪通過 45 項根測試、TypeScript、React 19 兩版本隔離 tarball 驗證、Obsidian 與兩個 Docusaurus 範例建置，以及獨立 React 範例建置。官網桌面／平板／手機播放、照片跳轉與安裝分頁另由瀏覽器驗證；3D 與實際 Obsidian Electron 長時間效能不在本輪量測範圍。

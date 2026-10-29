@@ -10,7 +10,7 @@
 
 ## 獨立 React 套件
 
-`@kywk/react-relive` 提供 `<Relive journey={journey} />`，可在 Vite、Next.js 或其他 React host 使用，不需要 Docusaurus。它沿用同一份播放器，提供播放、照片／事件、2D 與 3D；React 18／19 由應用程式提供。
+`@kywk/react-relive` 提供 `<Relive journey={journey} />`，可在 Vite、Next.js 或其他 React host 使用，不需要 Docusaurus。它沿用同一份播放器，提供播放、照片／事件、2D 與 3D；React 19.x 由應用程式提供。
 
 ```jsx
 import {Relive, makeTrack, parseGpx} from '@kywk/react-relive';
@@ -307,6 +307,8 @@ stopDuration: 3
 滑鼠移出地圖播放器 2 秒後，時間軸與控制列淡出；移回立即顯示。拖曳中或鍵盤焦點位於控制列時保持顯示，觸控操作不套用滑鼠離開計時。
 
 ## 效能與量測
+
+2026-10-30 第二輪評估：GPS 配對合成基準 CPU 時間減少 57.1%；官網將 React、旅程與地圖樣式延至接近播放器時載入，手機首屏 JS 由 149KB 降至 4KB（不含照片，並非整頁流量）。評分、負載條件與原始數據見下方效能報告。
 
 已針對 10 萬點 GPX 做真實 Leaflet 與資料處理基準測試。播放器採保留所有軌跡點的分塊更新、單次鏡頭平移、較小的瀏覽器依賴與停留期間的 DOM 更新去重。量測方法、前後數據、重跑命令與限制請見 [效能報告](docs/performance.md)。
 

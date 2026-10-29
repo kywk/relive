@@ -5,7 +5,7 @@
 ## 套件邊界
 
 - 根目錄是 `@kywk/relive`：共用資料處理、Docusaurus 整合與 Obsidian adapter。Obsidian plugin ID 保持 `relive`，以 GitHub Release 附件安裝。
-- `packages/react-relive` 是獨立的 `@kywk/react-relive` React 元件，透過 `@kywk/relive/player` 重用播放器；SSR 階段只渲染容器，掛載後才動態載入播放器。維持 React 18／19 peer dependency、TypeScript 宣告與可單獨匯入的 CSS。
+- `packages/react-relive` 是獨立的 `@kywk/react-relive` React 元件，透過 `@kywk/relive/player` 重用播放器；SSR 階段只渲染容器，掛載後才動態載入播放器。維持 React 19.x peer dependency、TypeScript 宣告與可單獨匯入的 CSS。
 - `packages/gpx-slim` 是獨立的 `@kywk/gpx-slim` CLI，命令為 `gpx-slim`。保留獨立版本、lockfile 與 runtime dependencies；CLI 安裝及執行不依賴根套件、Obsidian 或 Docusaurus。
 - GitHub repository metadata 使用 `kywk/relive`，npm scope 使用 `@kywk`。MIT LICENSE 必須同時包含於三個 npm tarball。
 
