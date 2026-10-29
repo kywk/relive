@@ -1,0 +1,80 @@
+{
+  "name": "@kywk/relive",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "GPX and photo replay for Obsidian and Docusaurus",
+  "exports": {
+    ".": "./src/core.js",
+    "./player": "./src/player.js",
+    "./remark": {
+      "import": "./src/remark.js",
+      "require": "./src/remark.cjs"
+    },
+    "./docusaurus": "./src/docusaurus.cjs",
+    "./styles.css": "./src/styles.css",
+    "./integration": "./src/integration.cjs"
+  },
+  "scripts": {
+    "test": "node --test test/*.test.js",
+    "build": "node scripts/build.mjs",
+    "demo": "vite --host 127.0.0.1",
+    "site:build": "docusaurus build examples/site",
+    "site:serve": "docusaurus serve examples/site --host 127.0.0.1",
+    "vault:build": "docusaurus build examples/shared-vault",
+    "vault:serve": "docusaurus serve examples/shared-vault --host 127.0.0.1",
+    "perf": "node scripts/perf/measure.mjs",
+    "perf:browser": "node scripts/perf/browser.mjs",
+    "release:check": "node scripts/check-release.mjs",
+    "release:pack": "node scripts/check-package.mjs",
+    "gpx:test": "npm --prefix packages/gpx-slim test",
+    "gpx:release:check": "node scripts/check-gpx-release.mjs",
+    "gpx:release:pack": "node scripts/check-gpx-package.mjs",
+    "perf:slim:prepare": "node scripts/perf/slim-fixtures.mjs",
+    "perf:slim:browser": "node scripts/perf/slim-run.mjs"
+  },
+  "dependencies": {
+    "exifr": "^7.1.3",
+    "fast-xml-parser": "^5.0.0",
+    "leaflet": "^1.9.4",
+    "yaml": "^2.8.0",
+    "saxes": "6.0.0"
+  },
+  "devDependencies": {
+    "@docusaurus/core": "^3.9.0",
+    "@docusaurus/faster": "^3.10.2",
+    "@docusaurus/preset-classic": "^3.9.0",
+    "@mdx-js/mdx": "^3.1.0",
+    "@story-map/remark-story-map": "^0.5.1",
+    "docusaurus-plugin-album": "^0.1.1",
+    "esbuild": "^0.25.0",
+    "obsidian": "^1.8.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "remark-wiki-link": "^2.0.1",
+    "vite": "^6.0.0"
+  },
+  "engines": {
+    "node": ">=20.19.0"
+  },
+  "files": [
+    "src",
+    "README.md",
+    "LICENSE",
+    "packages/gpx-slim/src",
+    "packages/gpx-slim/package.json",
+    "packages/gpx-slim/LICENSE"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "license": "MIT",
+  "author": "kywk",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kywk/relive.git"
+  },
+  "homepage": "https://github.com/kywk/relive#readme",
+  "bugs": {
+    "url": "https://github.com/kywk/relive/issues"
+  }
+}

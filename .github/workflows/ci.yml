@@ -1,0 +1,51 @@
+name: CI
+on:
+  push:
+    branches: ['**']
+  pull_request:
+permissions:
+  contents: read
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci
+      - run: npm test
+      - run: npm run build
+      - run: node scripts/check-release.mjs check --assets
+      - run: npm run release:pack
+      - run: npm run site:build
+      - run: npm run vault:build
+      - uses: actions/upload-artifact@v4
+        with:
+          name: obsidian-plugin
+          path: dist/obsidian/
+          if-no-files-found: error
+  gpx-slim:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: ['22', '24']
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: ${{ matrix.node }}
+          cache: npm
+          cache-dependency-path: packages/gpx-slim/package-lock.json
+      - run: npm --prefix packages/gpx-slim ci
+      - run: node scripts/check-gpx-release.mjs
+      - run: node scripts/check-gpx-package.mjs
+      - uses: actions/upload-artifact@v4
+        with:
+          name: gpx-slim-node-${{ matrix.node }}
+          path: .release/gpx-slim/*.tgz
+          if-no-files-found: error

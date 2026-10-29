@@ -1,0 +1,930 @@
+[
+  {
+    "scenario": "trail20k",
+    "variant": "full",
+    "points": 20000,
+    "slimMs": 0.004750000000001364,
+    "xmlBytes": 2590190,
+    "journeyBytes": 3335920,
+    "journeyGzipBytes": 898179,
+    "distanceChangePercent": 0,
+    "geometricErrorMeters": {
+      "median": 0,
+      "p95": 0,
+      "max": 0
+    },
+    "timePositionErrorMeters": {
+      "median": 2.864219920381582e-9,
+      "p95": 5.728456292554929e-9,
+      "max": 5.72856217604227e-9
+    },
+    "timedPhotoPositionErrorMeters": {
+      "median": 0,
+      "p95": 0,
+      "max": 0
+    },
+    "gpsPhotoTimeShiftSeconds": {
+      "median": 0,
+      "p95": 0,
+      "max": 0
+    },
+    "gpsPhotoCursorErrorMeters": {
+      "median": 0,
+      "p95": 0,
+      "max": 0
+    },
+    "gpsPhotoMarkerErrorMeters": {
+      "median": 0,
+      "p95": 0,
+      "max": 0
+    },
+    "report": null,
+    "gpsPhotosByPhase": {
+      "moving": {
+        "timeShiftSeconds": {
+          "count": 56,
+          "median": 0,
+          "p95": 0,
+          "max": 0
+        },
+        "cursorErrorMeters": {
+          "count": 56,
+          "median": 0,
+          "p95": 0,
+          "max": 0
+        }
+      },
+      "pause": {
+        "timeShiftSeconds": {
+          "count": 4,
+          "median": 0,
+          "p95": 0,
+          "max": 0
+        },
+        "cursorErrorMeters": {
+          "count": 4,
+          "median": 0,
+          "p95": 0,
+          "max": 0
+        }
+      }
+    }
+  },
+  {
+    "scenario": "trail20k",
+    "variant": "gentle",
+    "points": 2638,
+    "slimMs": 101.0088330000001,
+    "xmlBytes": 341745,
+    "journeyBytes": 450286,
+    "journeyGzipBytes": 127984,
+    "distanceChangePercent": -2.455466115612426,
+    "geometricErrorMeters": {
+      "median": 0.35085328590268283,
+      "p95": 1.6150750243197438,
+      "max": 2.9803701989692746
+    },
+    "timePositionErrorMeters": {
+      "median": 0.771417745702879,
+      "p95": 3.223762218875135,
+      "max": 13.779493159280275
+    },
+    "timedPhotoPositionErrorMeters": {
+      "median": 1.0406962358008864,
+      "p95": 3.978821144739916,
+      "max": 6.5457811850133245
+    },
+    "gpsPhotoTimeShiftSeconds": {
+      "median": 3.00000000000016,
+      "p95": 210.00000000000009,
+      "max": 543.0000000000001
+    },
+    "gpsPhotoCursorErrorMeters": {
+      "median": 3.209646372682241,
+      "p95": 15.840069696197933,
+      "max": 22.447414692427238
+    },
+    "gpsPhotoMarkerErrorMeters": {
+      "median": 0,
+      "p95": 0,
+      "max": 0
+    },
+    "report": {
+      "preset": "gentle",
+      "targetReduction": null,
+      "toleranceScale": 1,
+      "config": {
+        "tolerance": 3,
+        "elevation": 2,
+        "maxInterval": 30,
+        "stopRadius": 3,
+        "stopSeconds": 90,
+        "slowSpeed": 1.5
+      },
+      "inputPoints": 20000,
+      "outputPoints": 2638,
+      "removedPoints": 17362,
+      "pointReductionPercent": 86.81,
+      "inputBytes": 2590190,
+      "outputBytes": 341745,
+      "byteReductionPercent": 86.8061802416039,
+      "trackSegments": 2,
+      "stops": 2,
+      "stopSeconds": 1202,
+      "originalMeters": 39653.891082890696,
+      "outputMeters": 38680.203223804194,
+      "distanceChangePercent": -2.45546611567361,
+      "strippedExtensions": false,
+      "warnings": []
+    },
+    "gpsPhotosByPhase": {
+      "moving": {
+        "timeShiftSeconds": {
+          "count": 56,
+          "median": 3.00000000000016,
+          "p95": 26.000000000000647,
+          "max": 297
+        },
+        "cursorErrorMeters": {
+          "count": 56,
+          "median": 3.5464068566875375,
+          "p95": 15.840069696197933,
+          "max": 22.447414692427238
+        }
+      },
+      "pause": {
+        "timeShiftSeconds": {
+          "count": 4,
+          "median": 210.00000000000009,
+          "p95": 523.0000000000009,
+          "max": 543.0000000000001
+        },
+        "cursorErrorMeters": {
+          "count": 4,
+          "median": 0.26841129715359197,
+          "p95": 0.34745398014207657,
+          "max": 0.44290643206554714
+        }
+      }
+    }
+  },
+  {
+    "scenario": "trail20k",
+    "variant": "balanced",
+    "points": 1494,
+    "slimMs": 91.472625,
+    "xmlBytes": 193581,
+    "journeyBytes": 260132,
+    "journeyGzipBytes": 74501,
+    "distanceChangePercent": -4.363233024245861,
+    "geometricErrorMeters": {
+      "median": 0.9988717198812966,
+      "p95": 3.864029254478799,
+      "max": 7.86104288603369
+    },
+    "timePositionErrorMeters": {
+      "median": 1.9458130988515843,
+      "p95": 7.649249258977134,
+      "max": 29.672454086295065
+    },
+    "timedPhotoPositionErrorMeters": {
+      "median": 2.018976480538491,
+      "p95": 7.233758893286348,
+      "max": 9.364155548799204
+    },
+    "gpsPhotoTimeShiftSeconds": {
+      "median": 3.9999999999998432,
+      "p95": 210.00000000000009,
+      "max": 543.0000000000001
+    },
+    "gpsPhotoCursorErrorMeters": {
+      "median": 4.591664722604249,
+      "p95": 22.671424315489226,
+      "max": 27.683823813583583
+    },
+    "gpsPhotoMarkerErrorMeters": {
+      "median": 0,
+      "p95": 0,
+      "max": 0
+    },
+    "report": {
+      "preset": "balanced",
+      "targetReduction": null,
+      "toleranceScale": 1,
+      "config": {
+        "tolerance": 8,
+        "elevation": 5,
+        "maxInterval": 60,
+        "stopRadius": 6,
+        "stopSeconds": 60,
+        "slowSpeed": 1.5
+      },
+      "inputPoints": 20000,
+      "outputPoints": 1494,
+      "removedPoints": 18506,
+      "pointReductionPercent": 92.53,
+      "inputBytes": 2590190,
+      "outputBytes": 193581,
+      "byteReductionPercent": 92.52637837378725,
+      "trackSegments": 2,
+      "stops": 3,
+      "stopSeconds": 1265,
+      "originalMeters": 39653.891082890696,
+      "outputMeters": 37923.6994117533,
+      "distanceChangePercent": -4.36323302427164,
+      "strippedExtensions": false,
+      "warnings": []
+    },
+    "gpsPhotosByPhase": {
+      "moving": {
+        "timeShiftSeconds": {
+          "count": 56,
+          "median": 3.999999999998733,
+          "p95": 24.00000000000017,
+          "max": 221.99999999999852
+        },
+        "cursorErrorMeters": {
+          "count": 56,
+          "median": 4.723120920353486,
+          "p95": 22.671424315489226,
+          "max": 27.683823813583583
+        }
+      },
+      "pause": {
+        "timeShiftSeconds": {
+          "count": 4,
+          "median": 210.00000000000009,
+          "p95": 411.0000000000008,
+          "max": 543.0000000000001
+        },
+        "cursorErrorMeters": {
+          "count": 4,
+          "median": 0.26841129715359197,
+          "p95": 1.978052168394912,
+          "max": 2.0606819423377556
+        }
+      }
+    }
+  },
+  {
+    "scenario": "trail20k",
+    "variant": "aggressive",
+    "points": 788,
+    "slimMs": 80.29791599999999,
+    "xmlBytes": 102101,
+    "journeyBytes": 142769,
+    "journeyGzipBytes": 41266,
+    "distanceChangePercent": -9.564743727918101,
+    "geometricErrorMeters": {
+      "median": 2.778435893241354,
+      "p95": 10.965736021635596,
+      "max": 19.892750384554972
+    },
+    "timePositionErrorMeters": {
+      "median": 4.718993914585499,
+      "p95": 17.747856833913534,
+      "max": 48.35748845475638
+    },
+    "timedPhotoPositionErrorMeters": {
+      "median": 4.36172413386626,
+      "p95": 15.435130737501304,
+      "max": 18.97683515542261
+    },
+    "gpsPhotoTimeShiftSeconds": {
+      "median": 9.00000000000048,
+      "p95": 210.00000000000009,
+      "max": 543.0000000000001
+    },
+    "gpsPhotoCursorErrorMeters": {
+      "median": 8.95203606792641,
+      "p95": 28.383737368082752,
+      "max": 56.820146072161016
+    },
+    "gpsPhotoMarkerErrorMeters": {
+      "median": 0,
+      "p95": 0,
+      "max": 0
+    },
+    "report": {
+      "preset": "aggressive",
+      "targetReduction": null,
+      "toleranceScale": 1,
+      "config": {
+        "tolerance": 20,
+        "elevation": 10,
+        "maxInterval": 120,
+        "stopRadius": 12,
+        "stopSeconds": 45,
+        "slowSpeed": 2
+      },
+      "inputPoints": 20000,
+      "outputPoints": 788,
+      "removedPoints": 19212,
+      "pointReductionPercent": 96.06,
+      "inputBytes": 2590190,
+      "outputBytes": 102101,
+      "byteReductionPercent": 96.0581656171941,
+      "trackSegments": 2,
+      "stops": 21,
+      "stopSeconds": 2386,
+      "originalMeters": 39653.891082890696,
+      "outputMeters": 35861.09802266529,
+      "distanceChangePercent": -9.564743727915936,
+      "strippedExtensions": false,
+      "warnings": []
+    },
+    "gpsPhotosByPhase": {
+      "moving": {
+        "timeShiftSeconds": {
+          "count": 56,
+          "median": 7.9999999999996865,
+          "p95": 61.00000000000066,
+          "max": 225.99999999999946
+        },
+        "cursorErrorMeters": {
+          "count": 56,
+          "median": 10.029720264767983,
+          "p95": 28.383737368082752,
+          "max": 56.820146072161016
+        }
+      },
+      "pause": {
+        "timeShiftSeconds": {
+          "count": 4,
+          "median": 210.00000000000009,
+          "p95": 411.0000000000008,
+          "max": 543.0000000000001
+        },
+        "cursorErrorMeters": {
+          "count": 4,
+          "median": 0.26841129715359197,
+          "p95": 1.978052168394912,
+          "max": 2.0606819423377556
+        }
+      }
+    }
+  },
+  {
+    "scenario": "trail20k",
+    "variant": "balanced70",
+    "points": 6001,
+    "slimMs": 414.15366599999993,
+    "xmlBytes": 777298,
+    "journeyBytes": 1009285,
+    "journeyGzipBytes": 282167,
+    "distanceChangePercent": -1.2939655838469677,
+    "geometricErrorMeters": {
+      "median": 0.055633419418863135,
+      "p95": 0.27521723532163306,
+      "max": 0.44996079949777934
+    },
+    "timePositionErrorMeters": {
+      "median": 0.1760943919354138,
+      "p95": 1.0857905478061738,
+      "max": 4.257505571579488
+    },
+    "timedPhotoPositionErrorMeters": {
+      "median": 0.14802307173560775,
+      "p95": 1.6491097687394516,
+      "max": 3.92041494875133
+    },
+    "gpsPhotoTimeShiftSeconds": {
+      "median": 0.9999999999996833,
+      "p95": 77.99999999999972,
+      "max": 543.0000000000001
+    },
+    "gpsPhotoCursorErrorMeters": {
+      "median": 1.2203486682434288,
+      "p95": 5.225189426300182,
+      "max": 17.11974486064929
+    },
+    "gpsPhotoMarkerErrorMeters": {
+      "median": 0,
+      "p95": 0,
+      "max": 0
+    },
+    "report": {
+      "preset": "balanced",
+      "targetReduction": 70,
+      "toleranceScale": 0.056360840797424316,
+      "config": {
+        "tolerance": 8,
+        "elevation": 5,
+        "maxInterval": 60,
+        "stopRadius": 6,
+        "stopSeconds": 60,
+        "slowSpeed": 1.5
+      },
+      "inputPoints": 20000,
+      "outputPoints": 6001,
+      "removedPoints": 13999,
+      "pointReductionPercent": 69.99499999999999,
+      "inputBytes": 2590190,
+      "outputBytes": 777298,
+      "byteReductionPercent": 69.9906956632525,
+      "trackSegments": 2,
+      "stops": 3,
+      "stopSeconds": 1265,
+      "originalMeters": 39653.891082890696,
+      "outputMeters": 39140.783379647764,
+      "distanceChangePercent": -1.2939655837818087,
+      "strippedExtensions": false,
+      "warnings": [
+        "Target not fully reached: protected points, error limits or discrete point counts constrain reduction."
+      ]
+    },
+    "gpsPhotosByPhase": {
+      "moving": {
+        "timeShiftSeconds": {
+          "count": 56,
+          "median": 0.9999999999996833,
+          "p95": 9.00000000000159,
+          "max": 75.00000000000067
+        },
+        "cursorErrorMeters": {
+          "count": 56,
+          "median": 1.2203486682434288,
+          "p95": 5.225189426300182,
+          "max": 17.11974486064929
+        }
+      },
+      "pause": {
+        "timeShiftSeconds": {
+          "count": 4,
+          "median": 210.00000000000009,
+          "p95": 411.0000000000008,
+          "max": 543.0000000000001
+        },
+        "cursorErrorMeters": {
+          "count": 4,
+          "median": 0.26841129715359197,
+          "p95": 1.978052168394912,
+          "max": 2.0606819423377556
+        }
+      }
+    }
+  },
+  {
+    "scenario": "dense100k",
+    "variant": "full",
+    "points": 100000,
+    "slimMs": 0.007457999999587628,
+    "xmlBytes": 12952132,
+    "journeyBytes": 16643455,
+    "journeyGzipBytes": 4026568,
+    "distanceChangePercent": 0,
+    "geometricErrorMeters": {
+      "median": 0,
+      "p95": 0,
+      "max": 0
+    },
+    "timePositionErrorMeters": {
+      "median": 2.8641549384593484e-9,
+      "p95": 5.728459060128235e-9,
+      "max": 5.7285622779480934e-9
+    },
+    "timedPhotoPositionErrorMeters": {
+      "median": 0,
+      "p95": 0,
+      "max": 0
+    },
+    "gpsPhotoTimeShiftSeconds": {
+      "median": 0,
+      "p95": 0,
+      "max": 0
+    },
+    "gpsPhotoCursorErrorMeters": {
+      "median": 0,
+      "p95": 0,
+      "max": 0
+    },
+    "gpsPhotoMarkerErrorMeters": {
+      "median": 0,
+      "p95": 0,
+      "max": 0
+    },
+    "report": null,
+    "gpsPhotosByPhase": {
+      "moving": {
+        "timeShiftSeconds": {
+          "count": 56,
+          "median": 0,
+          "p95": 0,
+          "max": 0
+        },
+        "cursorErrorMeters": {
+          "count": 56,
+          "median": 0,
+          "p95": 0,
+          "max": 0
+        }
+      },
+      "pause": {
+        "timeShiftSeconds": {
+          "count": 4,
+          "median": 0,
+          "p95": 0,
+          "max": 0
+        },
+        "cursorErrorMeters": {
+          "count": 4,
+          "median": 0,
+          "p95": 0,
+          "max": 0
+        }
+      }
+    }
+  },
+  {
+    "scenario": "dense100k",
+    "variant": "gentle",
+    "points": 1373,
+    "slimMs": 612.3904999999995,
+    "xmlBytes": 177870,
+    "journeyBytes": 240002,
+    "journeyGzipBytes": 64055,
+    "distanceChangePercent": -40.59828702456101,
+    "geometricErrorMeters": {
+      "median": 0.29517642002344335,
+      "p95": 0.9822660166879252,
+      "max": 1.4971296467332191
+    },
+    "timePositionErrorMeters": {
+      "median": 0.6333367920658454,
+      "p95": 3.258278527124925,
+      "max": 12.512130161856986
+    },
+    "timedPhotoPositionErrorMeters": {
+      "median": 0.7479296878657266,
+      "p95": 2.5127193509295194,
+      "max": 4.526066560730148
+    },
+    "gpsPhotoTimeShiftSeconds": {
+      "median": 2.3000000000001313,
+      "p95": 68.29999999999994,
+      "max": 271.6
+    },
+    "gpsPhotoCursorErrorMeters": {
+      "median": 3.1808457968708805,
+      "p95": 11.575049270804437,
+      "max": 16.2739762514657
+    },
+    "gpsPhotoMarkerErrorMeters": {
+      "median": 0,
+      "p95": 0,
+      "max": 0
+    },
+    "report": {
+      "preset": "gentle",
+      "targetReduction": null,
+      "toleranceScale": 1,
+      "config": {
+        "tolerance": 3,
+        "elevation": 2,
+        "maxInterval": 30,
+        "stopRadius": 3,
+        "stopSeconds": 90,
+        "slowSpeed": 1.5
+      },
+      "inputPoints": 100000,
+      "outputPoints": 1373,
+      "removedPoints": 98627,
+      "pointReductionPercent": 98.627,
+      "inputBytes": 12952132,
+      "outputBytes": 177870,
+      "byteReductionPercent": 98.62671257519612,
+      "trackSegments": 2,
+      "stops": 2,
+      "stopSeconds": 602.2999999523163,
+      "originalMeters": 32636.250228430647,
+      "outputMeters": 19386.491686690595,
+      "distanceChangePercent": -40.59828702440116,
+      "strippedExtensions": false,
+      "warnings": []
+    },
+    "gpsPhotosByPhase": {
+      "moving": {
+        "timeShiftSeconds": {
+          "count": 56,
+          "median": 1.8999999999999877,
+          "p95": 8.299999999999509,
+          "max": 68.29999999999994
+        },
+        "cursorErrorMeters": {
+          "count": 56,
+          "median": 3.313479209117268,
+          "p95": 11.575049270804437,
+          "max": 16.2739762514657
+        }
+      },
+      "pause": {
+        "timeShiftSeconds": {
+          "count": 4,
+          "median": 104.99999999999991,
+          "p95": 205.10000000000016,
+          "max": 271.6
+        },
+        "cursorErrorMeters": {
+          "count": 4,
+          "median": 0.2691851133717456,
+          "p95": 0.6693035662688158,
+          "max": 0.7182336909565381
+        }
+      }
+    }
+  },
+  {
+    "scenario": "dense100k",
+    "variant": "balanced",
+    "points": 778,
+    "slimMs": 910.0235000000002,
+    "xmlBytes": 100815,
+    "journeyBytes": 141088,
+    "journeyGzipBytes": 37883,
+    "distanceChangePercent": -41.30319091777584,
+    "geometricErrorMeters": {
+      "median": 0.8067141777523449,
+      "p95": 2.877739946071667,
+      "max": 3.9793633628261484
+    },
+    "timePositionErrorMeters": {
+      "median": 1.774796017086384,
+      "p95": 7.65872400599738,
+      "max": 28.877757301296505
+    },
+    "timedPhotoPositionErrorMeters": {
+      "median": 1.975683239551093,
+      "p95": 6.688475615372751,
+      "max": 14.779466844516401
+    },
+    "gpsPhotoTimeShiftSeconds": {
+      "median": 4.900000000000231,
+      "p95": 81.79999999999964,
+      "max": 271.6
+    },
+    "gpsPhotoCursorErrorMeters": {
+      "median": 4.998300002968679,
+      "p95": 20.84666261079509,
+      "max": 42.59317317787314
+    },
+    "gpsPhotoMarkerErrorMeters": {
+      "median": 0,
+      "p95": 0,
+      "max": 0
+    },
+    "report": {
+      "preset": "balanced",
+      "targetReduction": null,
+      "toleranceScale": 1,
+      "config": {
+        "tolerance": 8,
+        "elevation": 5,
+        "maxInterval": 60,
+        "stopRadius": 6,
+        "stopSeconds": 60,
+        "slowSpeed": 1.5
+      },
+      "inputPoints": 100000,
+      "outputPoints": 778,
+      "removedPoints": 99222,
+      "pointReductionPercent": 99.222,
+      "inputBytes": 12952132,
+      "outputBytes": 100815,
+      "byteReductionPercent": 99.22163393640521,
+      "trackSegments": 2,
+      "stops": 2,
+      "stopSeconds": 604.6000001430511,
+      "originalMeters": 32636.250228430647,
+      "outputMeters": 19156.43748826258,
+      "distanceChangePercent": -41.30319091751938,
+      "strippedExtensions": false,
+      "warnings": []
+    },
+    "gpsPhotosByPhase": {
+      "moving": {
+        "timeShiftSeconds": {
+          "count": 56,
+          "median": 4.199999999999564,
+          "p95": 25.099999999999984,
+          "max": 81.79999999999964
+        },
+        "cursorErrorMeters": {
+          "count": 56,
+          "median": 5.541980799812007,
+          "p95": 20.84666261079509,
+          "max": 42.59317317787314
+        }
+      },
+      "pause": {
+        "timeShiftSeconds": {
+          "count": 4,
+          "median": 104.99999999999991,
+          "p95": 205.10000000000016,
+          "max": 271.6
+        },
+        "cursorErrorMeters": {
+          "count": 4,
+          "median": 0.2691851133717456,
+          "p95": 0.6693035662688158,
+          "max": 0.7182336909565381
+        }
+      }
+    }
+  },
+  {
+    "scenario": "dense100k",
+    "variant": "aggressive",
+    "points": 411,
+    "slimMs": 1019.1625830000003,
+    "xmlBytes": 53295,
+    "journeyBytes": 80152,
+    "journeyGzipBytes": 21498,
+    "distanceChangePercent": -43.543751656731544,
+    "geometricErrorMeters": {
+      "median": 2.271463692268896,
+      "p95": 8.05540346981329,
+      "max": 11.995217844794034
+    },
+    "timePositionErrorMeters": {
+      "median": 4.227721906516534,
+      "p95": 13.500027886440055,
+      "max": 40.606368860705764
+    },
+    "timedPhotoPositionErrorMeters": {
+      "median": 4.45099324032894,
+      "p95": 14.39653277845563,
+      "max": 18.15027384246454
+    },
+    "gpsPhotoTimeShiftSeconds": {
+      "median": 9.799999999999352,
+      "p95": 103.7,
+      "max": 271.6
+    },
+    "gpsPhotoCursorErrorMeters": {
+      "median": 9.646230866081591,
+      "p95": 25.819552393775155,
+      "max": 42.59317317787314
+    },
+    "gpsPhotoMarkerErrorMeters": {
+      "median": 0,
+      "p95": 0,
+      "max": 0
+    },
+    "report": {
+      "preset": "aggressive",
+      "targetReduction": null,
+      "toleranceScale": 1,
+      "config": {
+        "tolerance": 20,
+        "elevation": 10,
+        "maxInterval": 120,
+        "stopRadius": 12,
+        "stopSeconds": 45,
+        "slowSpeed": 2
+      },
+      "inputPoints": 100000,
+      "outputPoints": 411,
+      "removedPoints": 99589,
+      "pointReductionPercent": 99.589,
+      "inputBytes": 12952132,
+      "outputBytes": 53295,
+      "byteReductionPercent": 99.58852334117657,
+      "trackSegments": 2,
+      "stops": 14,
+      "stopSeconds": 1438.1999998092651,
+      "originalMeters": 32636.250228430647,
+      "outputMeters": 18425.202478953623,
+      "distanceChangePercent": -43.54375165654678,
+      "strippedExtensions": false,
+      "warnings": []
+    },
+    "gpsPhotosByPhase": {
+      "moving": {
+        "timeShiftSeconds": {
+          "count": 56,
+          "median": 8.9,
+          "p95": 71.90000000000012,
+          "max": 103.7
+        },
+        "cursorErrorMeters": {
+          "count": 56,
+          "median": 9.89946091584238,
+          "p95": 25.819552393775155,
+          "max": 42.59317317787314
+        }
+      },
+      "pause": {
+        "timeShiftSeconds": {
+          "count": 4,
+          "median": 104.99999999999991,
+          "p95": 205.10000000000016,
+          "max": 271.6
+        },
+        "cursorErrorMeters": {
+          "count": 4,
+          "median": 0.2691851133717456,
+          "p95": 0.6693035662688158,
+          "max": 0.7182336909565381
+        }
+      }
+    }
+  },
+  {
+    "scenario": "dense100k",
+    "variant": "balanced70",
+    "points": 30000,
+    "slimMs": 4399.68325,
+    "xmlBytes": 3885858,
+    "journeyBytes": 5000567,
+    "journeyGzipBytes": 1264793,
+    "distanceChangePercent": -22.642136123686328,
+    "geometricErrorMeters": {
+      "median": 0.05933481275596452,
+      "p95": 0.2533854828575605,
+      "max": 0.4836893331640223
+    },
+    "timePositionErrorMeters": {
+      "median": 0.15228766315661071,
+      "p95": 0.8255197889100575,
+      "max": 5.842279626725274
+    },
+    "timedPhotoPositionErrorMeters": {
+      "median": 0.1511163460686473,
+      "p95": 0.3960148059607735,
+      "max": 4.963928270997989
+    },
+    "gpsPhotoTimeShiftSeconds": {
+      "median": 0.10000000000003588,
+      "p95": 38.50000000000007,
+      "max": 271.6
+    },
+    "gpsPhotoCursorErrorMeters": {
+      "median": 0.20983771733588288,
+      "p95": 1.2541307481843358,
+      "max": 2.188475765885927
+    },
+    "gpsPhotoMarkerErrorMeters": {
+      "median": 0,
+      "p95": 0,
+      "max": 0
+    },
+    "report": {
+      "preset": "balanced",
+      "targetReduction": 70,
+      "toleranceScale": 0.07089722156524658,
+      "config": {
+        "tolerance": 8,
+        "elevation": 5,
+        "maxInterval": 60,
+        "stopRadius": 6,
+        "stopSeconds": 60,
+        "slowSpeed": 1.5
+      },
+      "inputPoints": 100000,
+      "outputPoints": 30000,
+      "removedPoints": 70000,
+      "pointReductionPercent": 70,
+      "inputBytes": 12952132,
+      "outputBytes": 3885858,
+      "byteReductionPercent": 69.9983137911195,
+      "trackSegments": 2,
+      "stops": 2,
+      "stopSeconds": 604.6000001430511,
+      "originalMeters": 32636.250228430647,
+      "outputMeters": 25246.706025944834,
+      "distanceChangePercent": -22.64213612398556,
+      "strippedExtensions": false,
+      "warnings": []
+    },
+    "gpsPhotosByPhase": {
+      "moving": {
+        "timeShiftSeconds": {
+          "count": 56,
+          "median": 0.0999999999998971,
+          "p95": 0.5999999999999377,
+          "max": 13.700000000000058
+        },
+        "cursorErrorMeters": {
+          "count": 56,
+          "median": 0.20096341792649922,
+          "p95": 1.2541307481843358,
+          "max": 2.188475765885927
+        }
+      },
+      "pause": {
+        "timeShiftSeconds": {
+          "count": 4,
+          "median": 104.99999999999991,
+          "p95": 205.10000000000016,
+          "max": 271.6
+        },
+        "cursorErrorMeters": {
+          "count": 4,
+          "median": 0.2691851133717456,
+          "p95": 0.6693035662688158,
+          "max": 0.7182336909565381
+        }
+      }
+    }
+  }
+]

@@ -1,0 +1,35 @@
+name: Release GPX Slim CLI
+on:
+  push:
+    tags: ['gpx-slim-v*']
+permissions:
+  contents: read
+concurrency:
+  group: gpx-slim-release
+  cancel-in-progress: false
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    env:
+      RELEASE_TAG: ${{ github.ref_name }}
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: packages/gpx-slim/package-lock.json
+      - run: node scripts/check-gpx-release.mjs --publish
+      - run: npm install --global npm@12.2.0
+      - run: npm --prefix packages/gpx-slim ci
+      - run: node scripts/check-gpx-package.mjs
+      - uses: actions/upload-artifact@v4
+        with:
+          name: gpx-slim-release
+          path: .release/gpx-slim/*.tgz
+          if-no-files-found: error
+      - name: Publish verified CLI tarball through npm OIDC
+        run: npm publish .release/gpx-slim/*.tgz --access public --provenance

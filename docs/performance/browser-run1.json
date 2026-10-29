@@ -1,0 +1,38 @@
+{
+  "points": 100000,
+  "frames": 120,
+  "results": [
+    {
+      "version": "before",
+      "follow": false,
+      "updateMedianMs": 12.799999982118607,
+      "updateP95Ms": 29.19999998807907,
+      "frameP95Ms": 33.400000000000546,
+      "framesOver32ms": 21
+    },
+    {
+      "version": "before",
+      "follow": true,
+      "updateMedianMs": 24.19999998807907,
+      "updateP95Ms": 45.79999998211861,
+      "frameP95Ms": 50,
+      "framesOver32ms": 61
+    },
+    {
+      "version": "after",
+      "follow": false,
+      "updateMedianMs": 0.7999999821186066,
+      "updateP95Ms": 1,
+      "frameP95Ms": 17.899999999999636,
+      "framesOver32ms": 0
+    },
+    {
+      "version": "after",
+      "follow": true,
+      "updateMedianMs": 9,
+      "updateP95Ms": 12.199999988079071,
+      "frameP95Ms": 17,
+      "framesOver32ms": 0
+    }
+  ]
+}

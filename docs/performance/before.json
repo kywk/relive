@@ -1,0 +1,23 @@
+{
+  "node": "v22.23.2",
+  "points": 100000,
+  "results": [
+    {
+      "name": "sampleTrack 10k seeks",
+      "medianMs": 6.08
+    },
+    {
+      "name": "GPS match 100 photos",
+      "medianMs": 619.69
+    },
+    {
+      "name": "trail 600 sequential frames",
+      "medianMs": 609.92
+    }
+  ],
+  "trailCoordinatesSubmitted": 30000601,
+  "playerBytes": 197074,
+  "playerGzipBytes": 61287,
+  "parserModules": 88,
+  "checksum": 2999640303.053072
+}

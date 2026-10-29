@@ -1,0 +1,43 @@
+{
+  "name": "@kywk/gpx-slim",
+  "version": "0.1.0",
+  "description": "Shape-aware GPX simplification with stop and slow-motion detection",
+  "type": "module",
+  "bin": {
+    "gpx-slim": "bin/gpx-slim.js"
+  },
+  "exports": "./src/index.js",
+  "files": [
+    "bin",
+    "src",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "test": "node --test",
+    "prepack": "npm test"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "saxes": "6.0.0"
+  },
+  "bundleDependencies": [
+    "saxes"
+  ],
+  "author": "kywk",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kywk/relive.git",
+    "directory": "packages/gpx-slim"
+  },
+  "homepage": "https://github.com/kywk/relive#readme",
+  "bugs": {
+    "url": "https://github.com/kywk/relive/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

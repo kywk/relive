@@ -1,0 +1,13 @@
+node_modules/
+dist/
+examples/site/build/
+examples/site/.docusaurus/
+.DS_Store
+examples/site/static/relive-assets/
+examples/shared-vault/build/
+examples/shared-vault/.docusaurus/
+*.tgz
+
+.perf/
+
+.release/

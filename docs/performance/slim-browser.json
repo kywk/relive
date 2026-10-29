@@ -1,0 +1,1580 @@
+{
+  "date": "2026-10-29",
+  "browser": "156.0.8078.4",
+  "platform": "darwin",
+  "arch": "arm64",
+  "cpu": "Apple M1",
+  "viewport": {
+    "width": 1000,
+    "height": 650
+  },
+  "map": {
+    "width": 900,
+    "height": 500
+  },
+  "rounds": 3,
+  "framesPerPlayback": 120,
+  "tiles": "disabled; real Leaflet SVG",
+  "rows": [
+    {
+      "round": 0,
+      "scenario": "trail20k",
+      "variant": "full",
+      "jsonParseMs": 8.199999988079071,
+      "mountSyncMs": 44.5,
+      "firstFrameReadyMs": 113.69999998807907,
+      "svgPaths": 145,
+      "baseHeapBytes": 1601740,
+      "mountedHeapBytes": 7295972,
+      "mountedHeapDeltaBytes": 5694232,
+      "afterPlaybackHeapDeltaBytes": 8048252,
+      "playback": {
+        "updateMs": {
+          "median": 0.29999998211860657,
+          "p95": 0.5,
+          "max": 0.800000011920929
+        },
+        "frameMs": {
+          "median": 16.699999999999818,
+          "p95": 16.800000000000182,
+          "max": 566.5999999999999
+        },
+        "framesOver32ms": 3
+      },
+      "follow": {
+        "updateMs": {
+          "median": 2.7999999821186066,
+          "p95": 3.699999988079071,
+          "max": 9.399999976158142
+        },
+        "frameMs": {
+          "median": 16.699999999999818,
+          "p95": 16.700000000000728,
+          "max": 16.800000000000182
+        },
+        "framesOver32ms": 0
+      },
+      "zoom": {
+        "syncMs": {
+          "median": 13.200000017881393,
+          "p95": 16.5,
+          "max": 18.400000005960464
+        },
+        "frameReadyMs": {
+          "median": 33.400000005960464,
+          "p95": 34.099999994039536,
+          "max": 35.099999994039536
+        }
+      },
+      "errors": []
+    },
+    {
+      "round": 0,
+      "scenario": "trail20k",
+      "variant": "gentle",
+      "jsonParseMs": 1.2999999821186066,
+      "mountSyncMs": 20.799999982118607,
+      "firstFrameReadyMs": 37.19999998807907,
+      "svgPaths": 77,
+      "baseHeapBytes": 1601740,
+      "mountedHeapBytes": 2720116,
+      "mountedHeapDeltaBytes": 1118376,
+      "afterPlaybackHeapDeltaBytes": 1605852,
+      "playback": {
+        "updateMs": {
+          "median": 0.20000001788139343,
+          "p95": 0.4000000059604645,
+          "max": 0.5
+        },
+        "frameMs": {
+          "median": 16.699999999999818,
+          "p95": 16.799999999999955,
+          "max": 16.800000000000182
+        },
+        "framesOver32ms": 0
+      },
+      "follow": {
+        "updateMs": {
+          "median": 1,
+          "p95": 1.5999999940395355,
+          "max": 2.800000011920929
+        },
+        "frameMs": {
+          "median": 16.699999999999818,
+          "p95": 16.700000000000728,
+          "max": 16.800000000000182
+        },
+        "framesOver32ms": 0
+      },
+      "zoom": {
+        "syncMs": {
+          "median": 3.199999988079071,
+          "p95": 4.9000000059604645,
+          "max": 6.5999999940395355
+        },
+        "frameReadyMs": {
+          "median": 33,
+          "p95": 34.79999998211861,
+          "max": 34.80000001192093
+        }
+      },
+      "errors": []
+    },
+    {
+      "round": 0,
+      "scenario": "trail20k",
+      "variant": "balanced",
+      "jsonParseMs": 1,
+      "mountSyncMs": 22.80000001192093,
+      "firstFrameReadyMs": 29,
+      "svgPaths": 71,
+      "baseHeapBytes": 1601740,
+      "mountedHeapBytes": 2400744,
+      "mountedHeapDeltaBytes": 799004,
+      "afterPlaybackHeapDeltaBytes": 1162336,
+      "playback": {
+        "updateMs": {
+          "median": 0.20000001788139343,
+          "p95": 0.4000000059604645,
+          "max": 0.6000000238418579
+        },
+        "frameMs": {
+          "median": 16.699999999999818,
+          "p95": 16.700000000000273,
+          "max": 16.800000000000182
+        },
+        "framesOver32ms": 0
+      },
+      "follow": {
+        "updateMs": {
+          "median": 0.9000000059604645,
+          "p95": 1.5,
+          "max": 2
+        },
+        "frameMs": {
+          "median": 16.699999999999818,
+          "p95": 16.700000000000273,
+          "max": 16.800000000000182
+        },
+        "framesOver32ms": 0
+      },
+      "zoom": {
+        "syncMs": {
+          "median": 2.800000011920929,
+          "p95": 3.5,
+          "max": 5.0999999940395355
+        },
+        "frameReadyMs": {
+          "median": 33.400000005960464,
+          "p95": 34.099999994039536,
+          "max": 34.099999994039536
+        }
+      },
+      "errors": []
+    },
+    {
+      "round": 0,
+      "scenario": "trail20k",
+      "variant": "aggressive",
+      "jsonParseMs": 0.5999999940395355,
+      "mountSyncMs": 21.5,
+      "firstFrameReadyMs": 22.80000001192093,
+      "svgPaths": 69,
+      "baseHeapBytes": 1601740,
+      "mountedHeapBytes": 2210248,
+      "mountedHeapDeltaBytes": 608508,
+      "afterPlaybackHeapDeltaBytes": 896376,
+      "playback": {
+        "updateMs": {
+          "median": 0.20000001788139343,
+          "p95": 0.4000000059604645,
+          "max": 0.6000000238418579
+        },
+        "frameMs": {
+          "median": 16.699999999999818,
+          "p95": 16.799999999999955,
+          "max": 16.799999999999955
+        },
+        "framesOver32ms": 0
+      },
+      "follow": {
+        "updateMs": {
+          "median": 0.699999988079071,
+          "p95": 1,
+          "max": 1.300000011920929
+        },
+        "frameMs": {
+          "median": 16.699999999999818,
+          "p95": 16.799999999999727,
+          "max": 16.800000000000182
+        },
+        "framesOver32ms": 0
+      },
+      "zoom": {
+        "syncMs": {
+          "median": 2,
+          "p95": 2.5999999940395355,
+          "max": 3.7000000178813934
+        },
+        "frameReadyMs": {
+          "median": 33.30000001192093,
+          "p95": 34.900000005960464,
+          "max": 35.400000005960464
+        }
+      },
+      "errors": []
+    },
+    {
+      "round": 0,
+      "scenario": "trail20k",
+      "variant": "balanced70",
+      "jsonParseMs": 3.0999999940395355,
+      "mountSyncMs": 25.099999994039536,
+      "firstFrameReadyMs": 39.70000001788139,
+      "svgPaths": 89,
+      "baseHeapBytes": 1601740,
+      "mountedHeapBytes": 3627604,
+      "mountedHeapDeltaBytes": 2025864,
+      "afterPlaybackHeapDeltaBytes": 2883304,
+      "playback": {
+        "updateMs": {
+          "median": 0.20000001788139343,
+          "p95": 0.4000000059604645,
+          "max": 0.6000000238418579
+        },
+        "frameMs": {
+          "median": 16.699999999999818,
+          "p95": 16.799999999999955,
+          "max": 16.800000000000068
+        },
+        "framesOver32ms": 0
+      },
+      "follow": {
+        "updateMs": {
+          "median": 1.9000000059604645,
+          "p95": 2.5999999940395355,
+          "max": 5.0999999940395355
+        },
+        "frameMs": {
+          "median": 16.699999999999818,
+          "p95": 16.799999999999727,
+          "max": 16.800000000000182
+        },
+        "framesOver32ms": 0
+      },
+      "zoom": {
+        "syncMs": {
+          "median": 7.199999988079071,
+          "p95": 8.899999976158142,
+          "max": 12.399999976158142
+        },
+        "frameReadyMs": {
+          "median": 33.19999998807907,
+          "p95": 33.5,
+          "max": 34.5
+        }
+      },
+      "errors": []
+    },
+    {
+      "round": 0,
+      "scenario": "dense100k",
+      "variant": "full",
+      "jsonParseMs": 33.69999998807907,
+      "mountSyncMs": 64.40000000596046,
+      "firstFrameReadyMs": 71.7000000178814,
+      "svgPaths": 459,
+      "baseHeapBytes": 1601740,
+      "mountedHeapBytes": 28444248,
+      "mountedHeapDeltaBytes": 26842508,
+      "afterPlaybackHeapDeltaBytes": 37648556,
+      "playback": {
+        "updateMs": {
+          "median": 0.5,
+          "p95": 0.7000000178813934,
+          "max": 0.800000011920929
+        },
+        "frameMs": {
+          "median": 16.699999999999818,
+          "p95": 16.700000000000273,
+          "max": 16.800000000000182
+        },
+        "framesOver32ms": 0
+      },
+      "follow": {
+        "updateMs": {
+          "median": 9.099999994039536,
+          "p95": 12.400000005960464,
+          "max": 18.799999982118607
+        },
+        "frameMs": {
+          "median": 16.699999999999818,
+          "p95": 16.799999999999272,
+          "max": 16.800000000000182
+        },
+        "framesOver32ms": 0
+      },
+      "zoom": {
+        "syncMs": {
+          "median": 59.099999994039536,
+          "p95": 76.59999999403954,
+          "max": 94
+        },
+        "frameReadyMs": {
+          "median": 67.59999999403954,
+          "p95": 83.90000000596046,
+          "max": 100.59999999403954
+        }
+      },
+      "errors": []
+    },
+    {
+      "round": 0,
+      "scenario": "dense100k",
+      "variant": "gentle",
+      "jsonParseMs": 0.800000011920929,
+      "mountSyncMs": 22.600000023841858,
+      "firstFrameReadyMs": 23.900000005960464,
+      "svgPaths": 71,
+      "baseHeapBytes": 1601740,
+      "mountedHeapBytes": 2368896,
+      "mountedHeapDeltaBytes": 767156,
+      "afterPlaybackHeapDeltaBytes": 1123196,
+      "playback": {
+        "updateMs": {
+          "median": 0.20000001788139343,
+          "p95": 0.4000000059604645,
+          "max": 0.9000000059604645
+        },
+        "frameMs": {
+          "median": 16.699999999999818,
+          "p95": 16.799999999999955,
+          "max": 16.800000000000182
+        },
+        "framesOver32ms": 0
+      },
+      "follow": {
+        "updateMs": {
+          "median": 0.9000000059604645,
+          "p95": 1.300000011920929,
+          "max": 1.5999999940395355
+        },
+        "frameMs": {
+          "median": 16.699999999999818,
+          "p95": 16.799999999999727,
+          "max": 16.800000000000182
+        },
+        "framesOver32ms": 0
+      },
+      "zoom": {
+        "syncMs": {
+          "median": 2.699999988079071,
+          "p95": 3.5,
+          "max": 5
+        },
+        "frameReadyMs": {
+          "median": 33.30000001192093,
+          "p95": 33.5,
+          "max": 35
+        }
+      },
+      "errors": []
+    },
+    {
+      "round": 0,
+      "scenario": "dense100k",
+      "variant": "balanced",
+      "jsonParseMs": 0.5,
+      "mountSyncMs": 21.5,
+      "firstFrameReadyMs": 29,
+      "svgPaths": 69,
+      "baseHeapBytes": 1601740,
+      "mountedHeapBytes": 2207780,
+      "mountedHeapDeltaBytes": 606040,
+      "afterPlaybackHeapDeltaBytes": 897544,
+      "playback": {
+        "updateMs": {
+          "median": 0.29999998211860657,
+          "p95": 0.5,
+          "max": 0.5999999940395355
+        },
+        "frameMs": {
+          "median": 16.699999999999818,
+          "p95": 16.799999999999955,
+          "max": 16.800000000000182
+        },
+        "framesOver32ms": 0
+      },
+      "follow": {
+        "updateMs": {
+          "median": 0.800000011920929,
+          "p95": 1.399999976158142,
+          "max": 1.9000000059604645
+        },
+        "frameMs": {
+          "median": 16.699999999999818,
+          "p95": 16.700000000000273,
+          "max": 16.800000000000182
+        },
+        "framesOver32ms": 0
+      },
+      "zoom": {
+        "syncMs": {
+          "median": 2.5999999940395355,
+          "p95": 3.5,
+          "max": 4.199999988079071
+        },
+        "frameReadyMs": {
+          "median": 33.30000001192093,
+          "p95": 34.70000001788139,
+          "max": 35.19999998807907
+        }
+      },
+      "errors": []
+    },
+    {
+      "round": 0,
+      "scenario": "dense100k",
+      "variant": "aggressive",
+      "jsonParseMs": 0.30000001192092896,
+      "mountSyncMs": 20.799999982118607,
+      "firstFrameReadyMs": 32.69999998807907,
+      "svgPaths": 67,
+      "baseHeapBytes": 1601740,
+      "mountedHeapBytes": 2086996,
+      "mountedHeapDeltaBytes": 485256,
+      "afterPlaybackHeapDeltaBytes": 750912,
+      "playback": {
+        "updateMs": {
+          "median": 0.20000001788139343,
+          "p95": 0.4000000059604645,
+          "max": 0.5
+        },
+        "frameMs": {
+          "median": 16.699999999999818,
+          "p95": 16.799999999999727,
+          "max": 16.799999999999955
+        },
+        "framesOver32ms": 0
+      },
+      "follow": {
+        "updateMs": {
+          "median": 0.6000000238418579,
+          "p95": 0.9000000059604645,
+          "max": 2.5
+        },
+        "frameMs": {
+          "median": 16.699999999999818,
+          "p95": 16.700000000000728,
+          "max": 16.800000000000182
+        },
+        "framesOver32ms": 0
+      },
+      "zoom": {
+        "syncMs": {
+          "median": 1.300000011920929,
+          "p95": 1.7999999821186066,
+          "max": 3.0999999940395355
+        },
+        "frameReadyMs": {
+          "median": 33.30000001192093,
+          "p95": 33.5,
+          "max": 33.80000001192093
+        }
+      },
+      "errors": []
+    },
+    {
+      "round": 0,
+      "scenario": "dense100k",
+      "variant": "balanced70",
+      "jsonParseMs": 13.900000005960464,
+      "mountSyncMs": 36.30000001192093,
+      "firstFrameReadyMs": 50.70000001788139,
+      "svgPaths": 183,
+      "baseHeapBytes": 1601740,
+      "mountedHeapBytes": 9938800,
+      "mountedHeapDeltaBytes": 8337060,
+      "afterPlaybackHeapDeltaBytes": 11750908,
+      "playback": {
+        "updateMs": {
+          "median": 0.3999999761581421,
+          "p95": 0.5,
+          "max": 0.7000000178813934
+        },
+        "frameMs": {
+          "median": 16.699999999999818,
+          "p95": 16.700000000000273,
+          "max": 16.800000000000182
+        },
+        "framesOver32ms": 0
+      },
+      "follow": {
+        "updateMs": {
+          "median": 4,
+          "p95": 5.300000011920929,
+          "max": 12.599999994039536
+        },
+        "frameMs": {
+          "median": 16.699999999999818,
+          "p95": 16.799999999999272,
+          "max": 16.800000000000182
+        },
+        "framesOver32ms": 0
+      },
+      "zoom": {
+        "syncMs": {
+          "median": 17.80000001192093,
+          "p95": 21.400000005960464,
+          "max": 25.399999976158142
+        },
+        "frameReadyMs": {
+          "median": 33.39999997615814,
+          "p95": 34.30000001192093,
+          "max": 34.5
+        }
+      },
+      "errors": []
+    },
+    {
+      "round": 1,
+      "scenario": "dense100k",
+      "variant": "balanced",
+      "jsonParseMs": 0.3999999761581421,
+      "mountSyncMs": 20.900000005960464,
+      "firstFrameReadyMs": 22.400000005960464,
+      "svgPaths": 69,
+      "baseHeapBytes": 1601740,
+      "mountedHeapBytes": 2207756,
+      "mountedHeapDeltaBytes": 606016,
+      "afterPlaybackHeapDeltaBytes": 899524,
+      "playback": {
+        "updateMs": {
+          "median": 0.19999998807907104,
+          "p95": 0.4000000059604645,
+          "max": 0.7000000178813934
+        },
+        "frameMs": {
+          "median": 16.699999999999818,
+          "p95": 16.700000000000273,
+          "max": 16.799999999999955
+        },
+        "framesOver32ms": 0
+      },
+      "follow": {
+        "updateMs": {
+          "median": 0.6000000238418579,
+          "p95": 0.9000000059604645,
+          "max": 1.5999999940395355
+        },
+        "frameMs": {
+          "median": 16.699999999999818,
+          "p95": 16.700000000000273,
+          "max": 16.800000000000182
+        },
+        "framesOver32ms": 0
+      },
+      "zoom": {
+        "syncMs": {
+          "median": 0.7000000178813934,
+          "p95": 0.9000000059604645,
+          "max": 1.300000011920929
+        },
+        "frameReadyMs": {
+          "median": 33.30000001192093,
+          "p95": 34.900000005960464,
+          "max": 34.900000005960464
+        }
+      },
+      "errors": []
+    },
+    {
+      "round": 1,
+      "scenario": "dense100k",
+      "variant": "aggressive",
+      "jsonParseMs": 0.20000001788139343,
+      "mountSyncMs": 14,
+      "firstFrameReadyMs": 35,
+      "svgPaths": 67,
+      "baseHeapBytes": 1601740,
+      "mountedHeapBytes": 2086996,
+      "mountedHeapDeltaBytes": 485256,
+      "afterPlaybackHeapDeltaBytes": 750908,
+      "playback": {
+        "updateMs": {
+          "median": 0.09999999403953552,
+          "p95": 0.20000001788139343,
+          "max": 0.30000001192092896
+        },
+        "frameMs": {
+          "median": 16.699999999999818,
+          "p95": 16.700000000000273,
+          "max": 16.800000000000182
+        },
+        "framesOver32ms": 0
+      },
+      "follow": {
+        "updateMs": {
+          "median": 0.30000001192092896,
+          "p95": 0.5,
+          "max": 0.699999988079071
+        },
+        "frameMs": {
+          "median": 16.699999999999818,
+          "p95": 16.700000000000728,
+          "max": 16.800000000000182
+        },
+        "framesOver32ms": 0
+      },
+      "zoom": {
+        "syncMs": {
+          "median": 0.5999999940395355,
+          "p95": 0.699999988079071,
+          "max": 1.800000011920929
+        },
+        "frameReadyMs": {
+          "median": 33.30000001192093,
+          "p95": 34.5,
+          "max": 35.099999994039536
+        }
+      },
+      "errors": []
+    },
+    {
+      "round": 1,
+      "scenario": "dense100k",
+      "variant": "balanced70",
+      "jsonParseMs": 10.699999988079071,
+      "mountSyncMs": 35,
+      "firstFrameReadyMs": 51.5,
+      "svgPaths": 183,
+      "baseHeapBytes": 1601740,
+      "mountedHeapBytes": 9938676,
+      "mountedHeapDeltaBytes": 8336936,
+      "afterPlaybackHeapDeltaBytes": 11750812,
+      "playback": {
+        "updateMs": {
+          "median": 0.19999998807907104,
+          "p95": 0.30000001192092896,
+          "max": 0.5
+        },
+        "frameMs": {
+          "median": 16.699999999999932,
+          "p95": 16.700000000000273,
+          "max": 16.800000000000182
+        },
+        "framesOver32ms": 0
+      },
+      "follow": {
+        "updateMs": {
+          "median": 2.699999988079071,
+          "p95": 4.199999988079071,
+          "max": 10.599999994039536
+        },
+        "frameMs": {
+          "median": 16.699999999999818,
+          "p95": 16.799999999999727,
+          "max": 16.800000000000182
+        },
+        "framesOver32ms": 0
+      },
+      "zoom": {
+        "syncMs": {
+          "median": 16.600000023841858,
+          "p95": 19.900000005960464,
+          "max": 22.700000017881393
+        },
+        "frameReadyMs": {
+          "median": 33.29999998211861,
+          "p95": 34.099999994039536,
+          "max": 34.599999994039536
+        }
+      },
+      "errors": []
+    },
+    {
+      "round": 1,
+      "scenario": "dense100k",
+      "variant": "full",
+      "jsonParseMs": 33.30000001192093,
+      "mountSyncMs": 64.2000000178814,
+      "firstFrameReadyMs": 74.7000000178814,
+      "svgPaths": 459,
+      "baseHeapBytes": 1601740,
+      "mountedHeapBytes": 28444536,
+      "mountedHeapDeltaBytes": 26842796,
+      "afterPlaybackHeapDeltaBytes": 37649844,
+      "playback": {
+        "updateMs": {
+          "median": 0.3999999761581421,
+          "p95": 0.5999999940395355,
+          "max": 0.9000000059604645
+        },
+        "frameMs": {
+          "median": 16.699999999999818,
+          "p95": 16.799999999999727,
+          "max": 16.799999999999955
+        },
+        "framesOver32ms": 0
+      },
+      "follow": {
+        "updateMs": {
+          "median": 9,
+          "p95": 12.599999994039536,
+          "max": 19.80000001192093
+        },
+        "frameMs": {
+          "median": 16.699999999999818,
+          "p95": 16.700000000000273,
+          "max": 16.800000000000182
+        },
+        "framesOver32ms": 0
+      },
+      "zoom": {
+        "syncMs": {
+          "median": 64.7999999821186,
+          "p95": 71.7000000178814,
+          "max": 74.09999999403954
+        },
+        "frameReadyMs": {
+          "median": 82.2999999821186,
+          "p95": 83.90000000596046,
+          "max": 85.40000000596046
+        }
+      },
+      "errors": []
+    },
+    {
+      "round": 1,
+      "scenario": "dense100k",
+      "variant": "gentle",
+      "jsonParseMs": 0.800000011920929,
+      "mountSyncMs": 24.600000023841858,
+      "firstFrameReadyMs": 32.400000005960464,
+      "svgPaths": 71,
+      "baseHeapBytes": 1601740,
+      "mountedHeapBytes": 2368872,
+      "mountedHeapDeltaBytes": 767132,
+      "afterPlaybackHeapDeltaBytes": 1123268,
+      "playback": {
+        "updateMs": {
+          "median": 0.20000001788139343,
+          "p95": 0.4000000059604645,
+          "max": 0.800000011920929
+        },
+        "frameMs": {
+          "median": 16.699999999999818,
+          "p95": 16.700000000000273,
+          "max": 16.800000000000182
+        },
+        "framesOver32ms": 0
+      },
+      "follow": {
+        "updateMs": {
+          "median": 0.800000011920929,
+          "p95": 1.300000011920929,
+          "max": 2.0999999940395355
+        },
+        "frameMs": {
+          "median": 16.699999999999818,
+          "p95": 16.799999999999727,
+          "max": 16.800000000000182
+        },
+        "framesOver32ms": 0
+      },
+      "zoom": {
+        "syncMs": {
+          "median": 2.300000011920929,
+          "p95": 3,
+          "max": 3.0999999940395355
+        },
+        "frameReadyMs": {
+          "median": 33.29999998211861,
+          "p95": 33.5,
+          "max": 35.30000001192093
+        }
+      },
+      "errors": []
+    },
+    {
+      "round": 1,
+      "scenario": "trail20k",
+      "variant": "balanced",
+      "jsonParseMs": 0.9000000059604645,
+      "mountSyncMs": 22.900000005960464,
+      "firstFrameReadyMs": 33.5,
+      "svgPaths": 71,
+      "baseHeapBytes": 1601740,
+      "mountedHeapBytes": 2400744,
+      "mountedHeapDeltaBytes": 799004,
+      "afterPlaybackHeapDeltaBytes": 1162336,
+      "playback": {
+        "updateMs": {
+          "median": 0.19999998807907104,
+          "p95": 0.4000000059604645,
+          "max": 0.5
+        },
+        "frameMs": {
+          "median": 16.699999999999818,
+          "p95": 16.700000000000273,
+          "max": 16.800000000000182
+        },
+        "framesOver32ms": 0
+      },
+      "follow": {
+        "updateMs": {
+          "median": 0.7999999821186066,
+          "p95": 1.199999988079071,
+          "max": 2
+        },
+        "frameMs": {
+          "median": 16.699999999999818,
+          "p95": 16.700000000000273,
+          "max": 16.800000000000182
+        },
+        "framesOver32ms": 0
+      },
+      "zoom": {
+        "syncMs": {
+          "median": 2.199999988079071,
+          "p95": 2.800000011920929,
+          "max": 2.9000000059604645
+        },
+        "frameReadyMs": {
+          "median": 33.29999998211861,
+          "p95": 33.400000005960464,
+          "max": 33.5
+        }
+      },
+      "errors": []
+    },
+    {
+      "round": 1,
+      "scenario": "trail20k",
+      "variant": "aggressive",
+      "jsonParseMs": 0.5,
+      "mountSyncMs": 20.5,
+      "firstFrameReadyMs": 22.600000023841858,
+      "svgPaths": 69,
+      "baseHeapBytes": 1601740,
+      "mountedHeapBytes": 2210248,
+      "mountedHeapDeltaBytes": 608508,
+      "afterPlaybackHeapDeltaBytes": 896408,
+      "playback": {
+        "updateMs": {
+          "median": 0.20000001788139343,
+          "p95": 0.4000000059604645,
+          "max": 0.5
+        },
+        "frameMs": {
+          "median": 16.699999999999818,
+          "p95": 16.799999999999727,
+          "max": 16.800000000000182
+        },
+        "framesOver32ms": 0
+      },
+      "follow": {
+        "updateMs": {
+          "median": 0.699999988079071,
+          "p95": 1.0999999940395355,
+          "max": 2.2000000178813934
+        },
+        "frameMs": {
+          "median": 16.699999999999818,
+          "p95": 16.700000000000728,
+          "max": 16.800000000000182
+        },
+        "framesOver32ms": 0
+      },
+      "zoom": {
+        "syncMs": {
+          "median": 2.300000011920929,
+          "p95": 2.800000011920929,
+          "max": 4.5
+        },
+        "frameReadyMs": {
+          "median": 33.30000001192093,
+          "p95": 34.5,
+          "max": 34.5
+        }
+      },
+      "errors": []
+    },
+    {
+      "round": 1,
+      "scenario": "trail20k",
+      "variant": "balanced70",
+      "jsonParseMs": 1.800000011920929,
+      "mountSyncMs": 18.400000005960464,
+      "firstFrameReadyMs": 23,
+      "svgPaths": 89,
+      "baseHeapBytes": 1601740,
+      "mountedHeapBytes": 3627516,
+      "mountedHeapDeltaBytes": 2025776,
+      "afterPlaybackHeapDeltaBytes": 2882240,
+      "playback": {
+        "updateMs": {
+          "median": 0.29999998211860657,
+          "p95": 0.5,
+          "max": 0.7000000178813934
+        },
+        "frameMs": {
+          "median": 16.699999999999818,
+          "p95": 16.799999999999727,
+          "max": 16.800000000000182
+        },
+        "framesOver32ms": 0
+      },
+      "follow": {
+        "updateMs": {
+          "median": 1.7999999821186066,
+          "p95": 2.4000000059604645,
+          "max": 4.300000011920929
+        },
+        "frameMs": {
+          "median": 16.699999999999818,
+          "p95": 16.800000000000182,
+          "max": 16.800000000000182
+        },
+        "framesOver32ms": 0
+      },
+      "zoom": {
+        "syncMs": {
+          "median": 5.300000011920929,
+          "p95": 6.4000000059604645,
+          "max": 6.9000000059604645
+        },
+        "frameReadyMs": {
+          "median": 33.30000001192093,
+          "p95": 34.900000005960464,
+          "max": 35.19999998807907
+        }
+      },
+      "errors": []
+    },
+    {
+      "round": 1,
+      "scenario": "trail20k",
+      "variant": "full",
+      "jsonParseMs": 6.399999976158142,
+      "mountSyncMs": 23.69999998807907,
+      "firstFrameReadyMs": 26.099999994039536,
+      "svgPaths": 145,
+      "baseHeapBytes": 1601740,
+      "mountedHeapBytes": 7296076,
+      "mountedHeapDeltaBytes": 5694336,
+      "afterPlaybackHeapDeltaBytes": 8045008,
+      "playback": {
+        "updateMs": {
+          "median": 0.30000001192092896,
+          "p95": 0.5,
+          "max": 0.5999999940395355
+        },
+        "frameMs": {
+          "median": 16.699999999999818,
+          "p95": 16.700000000000273,
+          "max": 16.800000000000182
+        },
+        "framesOver32ms": 0
+      },
+      "follow": {
+        "updateMs": {
+          "median": 2.9000000059604645,
+          "p95": 3.9000000059604645,
+          "max": 8.5
+        },
+        "frameMs": {
+          "median": 16.699999999999818,
+          "p95": 16.700000000000728,
+          "max": 16.800000000000182
+        },
+        "framesOver32ms": 0
+      },
+      "zoom": {
+        "syncMs": {
+          "median": 12.900000005960464,
+          "p95": 16.200000017881393,
+          "max": 17
+        },
+        "frameReadyMs": {
+          "median": 33.30000001192093,
+          "p95": 33.70000001788139,
+          "max": 34
+        }
+      },
+      "errors": []
+    },
+    {
+      "round": 1,
+      "scenario": "trail20k",
+      "variant": "gentle",
+      "jsonParseMs": 1.4000000059604645,
+      "mountSyncMs": 22.899999976158142,
+      "firstFrameReadyMs": 33.39999997615814,
+      "svgPaths": 77,
+      "baseHeapBytes": 1601740,
+      "mountedHeapBytes": 2726244,
+      "mountedHeapDeltaBytes": 1124504,
+      "afterPlaybackHeapDeltaBytes": 1606116,
+      "playback": {
+        "updateMs": {
+          "median": 0.29999998211860657,
+          "p95": 0.5,
+          "max": 0.5
+        },
+        "frameMs": {
+          "median": 16.699999999999818,
+          "p95": 16.700000000000273,
+          "max": 16.800000000000182
+        },
+        "framesOver32ms": 0
+      },
+      "follow": {
+        "updateMs": {
+          "median": 1.2000000178813934,
+          "p95": 2,
+          "max": 3.199999988079071
+        },
+        "frameMs": {
+          "median": 16.699999999999818,
+          "p95": 16.700000000000728,
+          "max": 16.800000000000182
+        },
+        "framesOver32ms": 0
+      },
+      "zoom": {
+        "syncMs": {
+          "median": 4,
+          "p95": 5.5999999940395355,
+          "max": 6
+        },
+        "frameReadyMs": {
+          "median": 33.30000001192093,
+          "p95": 33.900000005960464,
+          "max": 34.099999994039536
+        }
+      },
+      "errors": []
+    },
+    {
+      "round": 2,
+      "scenario": "trail20k",
+      "variant": "balanced70",
+      "jsonParseMs": 3,
+      "mountSyncMs": 24.400000005960464,
+      "firstFrameReadyMs": 42.400000005960464,
+      "svgPaths": 89,
+      "baseHeapBytes": 1601740,
+      "mountedHeapBytes": 3627580,
+      "mountedHeapDeltaBytes": 2025840,
+      "afterPlaybackHeapDeltaBytes": 2883292,
+      "playback": {
+        "updateMs": {
+          "median": 0.20000001788139343,
+          "p95": 0.4000000059604645,
+          "max": 0.5999999940395355
+        },
+        "frameMs": {
+          "median": 16.699999999999818,
+          "p95": 16.700000000000273,
+          "max": 16.800000000000182
+        },
+        "framesOver32ms": 0
+      },
+      "follow": {
+        "updateMs": {
+          "median": 1.600000023841858,
+          "p95": 2.5,
+          "max": 5.0999999940395355
+        },
+        "frameMs": {
+          "median": 16.699999999999818,
+          "p95": 16.700000000000728,
+          "max": 16.800000000000182
+        },
+        "framesOver32ms": 0
+      },
+      "zoom": {
+        "syncMs": {
+          "median": 5.5,
+          "p95": 7.5,
+          "max": 10.199999988079071
+        },
+        "frameReadyMs": {
+          "median": 33.30000001192093,
+          "p95": 33.89999997615814,
+          "max": 34.39999997615814
+        }
+      },
+      "errors": []
+    },
+    {
+      "round": 2,
+      "scenario": "trail20k",
+      "variant": "full",
+      "jsonParseMs": 9.700000017881393,
+      "mountSyncMs": 29.299999982118607,
+      "firstFrameReadyMs": 32,
+      "svgPaths": 145,
+      "baseHeapBytes": 1601740,
+      "mountedHeapBytes": 7296076,
+      "mountedHeapDeltaBytes": 5694336,
+      "afterPlaybackHeapDeltaBytes": 8049300,
+      "playback": {
+        "updateMs": {
+          "median": 0.30000001192092896,
+          "p95": 0.5,
+          "max": 0.6000000238418579
+        },
+        "frameMs": {
+          "median": 16.699999999999818,
+          "p95": 16.700000000000273,
+          "max": 16.799999999999955
+        },
+        "framesOver32ms": 0
+      },
+      "follow": {
+        "updateMs": {
+          "median": 3,
+          "p95": 3.9000000059604645,
+          "max": 9.800000011920929
+        },
+        "frameMs": {
+          "median": 16.699999999999818,
+          "p95": 16.800000000000182,
+          "max": 16.800000000000182
+        },
+        "framesOver32ms": 0
+      },
+      "zoom": {
+        "syncMs": {
+          "median": 12.800000011920929,
+          "p95": 15.900000005960464,
+          "max": 19.099999994039536
+        },
+        "frameReadyMs": {
+          "median": 33.30000001192093,
+          "p95": 34.19999998807907,
+          "max": 34.5
+        }
+      },
+      "errors": []
+    },
+    {
+      "round": 2,
+      "scenario": "trail20k",
+      "variant": "gentle",
+      "jsonParseMs": 1.5,
+      "mountSyncMs": 22.099999994039536,
+      "firstFrameReadyMs": 40.400000005960464,
+      "svgPaths": 77,
+      "baseHeapBytes": 1601740,
+      "mountedHeapBytes": 2726380,
+      "mountedHeapDeltaBytes": 1124640,
+      "afterPlaybackHeapDeltaBytes": 1605620,
+      "playback": {
+        "updateMs": {
+          "median": 0.20000001788139343,
+          "p95": 0.4000000059604645,
+          "max": 0.5999999940395355
+        },
+        "frameMs": {
+          "median": 16.699999999999818,
+          "p95": 16.700000000000273,
+          "max": 16.800000000000182
+        },
+        "framesOver32ms": 0
+      },
+      "follow": {
+        "updateMs": {
+          "median": 1.100000023841858,
+          "p95": 1.7999999821186066,
+          "max": 3.800000011920929
+        },
+        "frameMs": {
+          "median": 16.699999999999818,
+          "p95": 16.700000000000728,
+          "max": 16.800000000000182
+        },
+        "framesOver32ms": 0
+      },
+      "zoom": {
+        "syncMs": {
+          "median": 5.0999999940395355,
+          "p95": 6.4000000059604645,
+          "max": 6.5
+        },
+        "frameReadyMs": {
+          "median": 33.29999998211861,
+          "p95": 34.599999994039536,
+          "max": 34.79999998211861
+        }
+      },
+      "errors": []
+    },
+    {
+      "round": 2,
+      "scenario": "trail20k",
+      "variant": "balanced",
+      "jsonParseMs": 0.9000000059604645,
+      "mountSyncMs": 22.400000005960464,
+      "firstFrameReadyMs": 23.799999982118607,
+      "svgPaths": 71,
+      "baseHeapBytes": 1601740,
+      "mountedHeapBytes": 2400744,
+      "mountedHeapDeltaBytes": 799004,
+      "afterPlaybackHeapDeltaBytes": 1162336,
+      "playback": {
+        "updateMs": {
+          "median": 0.20000001788139343,
+          "p95": 0.4000000059604645,
+          "max": 0.7000000178813934
+        },
+        "frameMs": {
+          "median": 16.699999999999818,
+          "p95": 16.799999999999727,
+          "max": 16.800000000000182
+        },
+        "framesOver32ms": 0
+      },
+      "follow": {
+        "updateMs": {
+          "median": 0.9000000059604645,
+          "p95": 1.300000011920929,
+          "max": 2.4000000059604645
+        },
+        "frameMs": {
+          "median": 16.699999999999818,
+          "p95": 16.700000000000728,
+          "max": 16.800000000000182
+        },
+        "framesOver32ms": 0
+      },
+      "zoom": {
+        "syncMs": {
+          "median": 2.9000000059604645,
+          "p95": 3.5999999940395355,
+          "max": 5.0999999940395355
+        },
+        "frameReadyMs": {
+          "median": 33.30000001192093,
+          "p95": 33.69999998807907,
+          "max": 34.39999997615814
+        }
+      },
+      "errors": []
+    },
+    {
+      "round": 2,
+      "scenario": "trail20k",
+      "variant": "aggressive",
+      "jsonParseMs": 0.4000000059604645,
+      "mountSyncMs": 14.400000005960464,
+      "firstFrameReadyMs": 31,
+      "svgPaths": 69,
+      "baseHeapBytes": 1601740,
+      "mountedHeapBytes": 2210248,
+      "mountedHeapDeltaBytes": 608508,
+      "afterPlaybackHeapDeltaBytes": 896488,
+      "playback": {
+        "updateMs": {
+          "median": 0.19999998807907104,
+          "p95": 0.4000000059604645,
+          "max": 0.5999999940395355
+        },
+        "frameMs": {
+          "median": 16.699999999999932,
+          "p95": 16.700000000000273,
+          "max": 16.800000000000182
+        },
+        "framesOver32ms": 0
+      },
+      "follow": {
+        "updateMs": {
+          "median": 0.699999988079071,
+          "p95": 1.0999999940395355,
+          "max": 2.7999999821186066
+        },
+        "frameMs": {
+          "median": 16.699999999999818,
+          "p95": 16.800000000000182,
+          "max": 16.800000000000182
+        },
+        "framesOver32ms": 0
+      },
+      "zoom": {
+        "syncMs": {
+          "median": 2.100000023841858,
+          "p95": 2.699999988079071,
+          "max": 3.5
+        },
+        "frameReadyMs": {
+          "median": 33.29999998211861,
+          "p95": 34.70000001788139,
+          "max": 35.10000002384186
+        }
+      },
+      "errors": []
+    },
+    {
+      "round": 2,
+      "scenario": "dense100k",
+      "variant": "balanced70",
+      "jsonParseMs": 13.800000011920929,
+      "mountSyncMs": 32.20000001788139,
+      "firstFrameReadyMs": 47.20000001788139,
+      "svgPaths": 183,
+      "baseHeapBytes": 1601740,
+      "mountedHeapBytes": 9938836,
+      "mountedHeapDeltaBytes": 8337096,
+      "afterPlaybackHeapDeltaBytes": 11751320,
+      "playback": {
+        "updateMs": {
+          "median": 0.30000001192092896,
+          "p95": 0.5999999940395355,
+          "max": 0.6000000238418579
+        },
+        "frameMs": {
+          "median": 16.699999999999818,
+          "p95": 16.700000000000273,
+          "max": 16.800000000000182
+        },
+        "framesOver32ms": 0
+      },
+      "follow": {
+        "updateMs": {
+          "median": 4.0999999940395355,
+          "p95": 5.5,
+          "max": 12.699999988079071
+        },
+        "frameMs": {
+          "median": 16.699999999999818,
+          "p95": 16.700000000000273,
+          "max": 16.800000000000182
+        },
+        "framesOver32ms": 0
+      },
+      "zoom": {
+        "syncMs": {
+          "median": 18.099999994039536,
+          "p95": 21.599999994039536,
+          "max": 27.099999994039536
+        },
+        "frameReadyMs": {
+          "median": 33.30000001192093,
+          "p95": 34.099999994039536,
+          "max": 34.19999998807907
+        }
+      },
+      "errors": []
+    },
+    {
+      "round": 2,
+      "scenario": "dense100k",
+      "variant": "full",
+      "jsonParseMs": 33.900000005960464,
+      "mountSyncMs": 63.400000005960464,
+      "firstFrameReadyMs": 71.30000001192093,
+      "svgPaths": 459,
+      "baseHeapBytes": 1601740,
+      "mountedHeapBytes": 28444580,
+      "mountedHeapDeltaBytes": 26842840,
+      "afterPlaybackHeapDeltaBytes": 37648636,
+      "playback": {
+        "updateMs": {
+          "median": 0.5,
+          "p95": 0.699999988079071,
+          "max": 0.800000011920929
+        },
+        "frameMs": {
+          "median": 16.699999999999818,
+          "p95": 16.700000000000273,
+          "max": 16.800000000000182
+        },
+        "framesOver32ms": 0
+      },
+      "follow": {
+        "updateMs": {
+          "median": 8.900000005960464,
+          "p95": 12.400000005960464,
+          "max": 16.900000005960464
+        },
+        "frameMs": {
+          "median": 16.699999999999818,
+          "p95": 16.700000000000728,
+          "max": 16.800000000000182
+        },
+        "framesOver32ms": 0
+      },
+      "zoom": {
+        "syncMs": {
+          "median": 58.29999998211861,
+          "p95": 75.09999999403954,
+          "max": 91.5
+        },
+        "frameReadyMs": {
+          "median": 67.7999999821186,
+          "p95": 83.90000000596046,
+          "max": 100.09999999403954
+        }
+      },
+      "errors": []
+    },
+    {
+      "round": 2,
+      "scenario": "dense100k",
+      "variant": "gentle",
+      "jsonParseMs": 0.800000011920929,
+      "mountSyncMs": 21.80000001192093,
+      "firstFrameReadyMs": 38.19999998807907,
+      "svgPaths": 71,
+      "baseHeapBytes": 1601740,
+      "mountedHeapBytes": 2368920,
+      "mountedHeapDeltaBytes": 767180,
+      "afterPlaybackHeapDeltaBytes": 1123316,
+      "playback": {
+        "updateMs": {
+          "median": 0.20000001788139343,
+          "p95": 0.4000000059604645,
+          "max": 0.5999999940395355
+        },
+        "frameMs": {
+          "median": 16.699999999999818,
+          "p95": 16.700000000000273,
+          "max": 16.800000000000182
+        },
+        "framesOver32ms": 0
+      },
+      "follow": {
+        "updateMs": {
+          "median": 0.9000000059604645,
+          "p95": 1.4000000059604645,
+          "max": 2.2000000178813934
+        },
+        "frameMs": {
+          "median": 16.699999999999818,
+          "p95": 16.700000000000273,
+          "max": 16.800000000000182
+        },
+        "framesOver32ms": 0
+      },
+      "zoom": {
+        "syncMs": {
+          "median": 3.4000000059604645,
+          "p95": 4.5999999940395355,
+          "max": 4.5999999940395355
+        },
+        "frameReadyMs": {
+          "median": 33.30000001192093,
+          "p95": 33.400000005960464,
+          "max": 33.5
+        }
+      },
+      "errors": []
+    },
+    {
+      "round": 2,
+      "scenario": "dense100k",
+      "variant": "balanced",
+      "jsonParseMs": 0.5999999940395355,
+      "mountSyncMs": 20.600000023841858,
+      "firstFrameReadyMs": 34,
+      "svgPaths": 69,
+      "baseHeapBytes": 1601740,
+      "mountedHeapBytes": 2207780,
+      "mountedHeapDeltaBytes": 606040,
+      "afterPlaybackHeapDeltaBytes": 897512,
+      "playback": {
+        "updateMs": {
+          "median": 0.20000001788139343,
+          "p95": 0.4000000059604645,
+          "max": 0.6000000238418579
+        },
+        "frameMs": {
+          "median": 16.699999999999818,
+          "p95": 16.700000000000273,
+          "max": 16.800000000000182
+        },
+        "framesOver32ms": 0
+      },
+      "follow": {
+        "updateMs": {
+          "median": 0.699999988079071,
+          "p95": 1.199999988079071,
+          "max": 1.800000011920929
+        },
+        "frameMs": {
+          "median": 16.699999999999818,
+          "p95": 16.700000000000728,
+          "max": 16.800000000000182
+        },
+        "framesOver32ms": 0
+      },
+      "zoom": {
+        "syncMs": {
+          "median": 1.9000000059604645,
+          "p95": 2.7000000178813934,
+          "max": 3.4000000059604645
+        },
+        "frameReadyMs": {
+          "median": 33.29999998211861,
+          "p95": 33.5,
+          "max": 33.60000002384186
+        }
+      },
+      "errors": []
+    },
+    {
+      "round": 2,
+      "scenario": "dense100k",
+      "variant": "aggressive",
+      "jsonParseMs": 0.30000001192092896,
+      "mountSyncMs": 20.799999982118607,
+      "firstFrameReadyMs": 30.400000005960464,
+      "svgPaths": 67,
+      "baseHeapBytes": 1601740,
+      "mountedHeapBytes": 2086996,
+      "mountedHeapDeltaBytes": 485256,
+      "afterPlaybackHeapDeltaBytes": 750944,
+      "playback": {
+        "updateMs": {
+          "median": 0.20000001788139343,
+          "p95": 0.4000000059604645,
+          "max": 0.699999988079071
+        },
+        "frameMs": {
+          "median": 16.699999999999932,
+          "p95": 16.700000000000273,
+          "max": 16.800000000000182
+        },
+        "framesOver32ms": 0
+      },
+      "follow": {
+        "updateMs": {
+          "median": 0.7000000178813934,
+          "p95": 1.100000023841858,
+          "max": 1.5
+        },
+        "frameMs": {
+          "median": 16.699999999999818,
+          "p95": 16.700000000000728,
+          "max": 16.800000000000182
+        },
+        "framesOver32ms": 0
+      },
+      "zoom": {
+        "syncMs": {
+          "median": 1.5999999940395355,
+          "p95": 2.0999999940395355,
+          "max": 2.600000023841858
+        },
+        "frameReadyMs": {
+          "median": 33.30000001192093,
+          "p95": 33.599999994039536,
+          "max": 34.19999998807907
+        }
+      },
+      "errors": []
+    }
+  ]
+}

@@ -1,0 +1,69 @@
+name: Release GitHub artifacts
+on:
+  push:
+    tags: ['[0-9]*']
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Existing plain x.y.z tag
+        required: true
+permissions:
+  contents: read
+concurrency:
+  group: github-release
+  cancel-in-progress: false
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      id-token: write
+      attestations: write
+    env:
+      RELEASE_TAG: ${{ inputs.tag || github.ref_name }}
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: refs/tags/${{ inputs.tag || github.ref_name }}
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            packages/gpx-slim/package-lock.json
+      - run: node scripts/check-release.mjs obsidian
+      - run: node scripts/check-gpx-release.mjs
+      - run: npm ci
+      - run: npm --prefix packages/gpx-slim ci
+      - run: npm test
+      - run: npm run build
+      - run: node scripts/check-release.mjs obsidian --assets
+      - run: npm run release:pack
+      - run: npm run gpx:release:pack
+      - run: npm run site:build
+      - run: npm run vault:build
+      - name: Collect verified release assets
+        run: |
+          mkdir -p .release/github
+          cp dist/obsidian/main.js dist/obsidian/manifest.json dist/obsidian/styles.css .release/github/
+          cp .release/docusaurus/*.tgz .release/gpx-slim/*.tgz .release/github/
+          cd .release/github
+          sha256sum main.js manifest.json styles.css *.tgz > SHA256SUMS
+      - name: Compare existing assets on retry
+        id: existing
+        run: |
+          if gh release view "$RELEASE_TAG" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            gh release download "$RELEASE_TAG" --repo "$GITHUB_REPOSITORY" --dir "$RUNNER_TEMP/release-assets"
+            for asset in .release/github/*; do
+              cmp "$asset" "$RUNNER_TEMP/release-assets/$(basename "$asset")"
+            done
+            echo 'exists=true' >> "$GITHUB_OUTPUT"
+          fi
+      - uses: actions/attest@v4
+        with:
+          subject-path: .release/github/*
+      - name: Publish GitHub release
+        if: steps.existing.outputs.exists != 'true'
+        run: gh release create "$RELEASE_TAG" --repo "$GITHUB_REPOSITORY" --verify-tag --title "Relive $RELEASE_TAG" --notes-file "docs/releases/$RELEASE_TAG.md" .release/github/*
