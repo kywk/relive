@@ -17,3 +17,34 @@ p{max-width:70ch}.relive-player .leaflet-container{font-family:inherit}.relive-p
 :root[data-theme="dark"] .relive-player .leaflet-bar a{background:var(--surface);color:var(--ink);border-color:var(--bg)}
 @media(max-width:600px){.nav{flex-wrap:wrap;gap:12px}.nav nav{gap:14px}.theme-control{margin-left:auto}.theme-control select{min-height:44px}}
 :root[data-theme="dark"] .relive-player .leaflet-control-attribution a{color:var(--ink)}
+
+#hero-map,.hero-backdrop-controls{display:none}
+@media(min-width:768px){
+ .hero.frame{position:relative;isolation:isolate;width:100%;max-width:none;min-height:calc(100svh - 96px);padding:clamp(64px,10vh,120px) max(32px,calc((100vw - 1536px)/2));display:flex;flex-direction:column;justify-content:center;overflow:hidden}
+ #hero-map{display:block;position:absolute;inset:0;z-index:-2;background:var(--surface);font-family:inherit}
+ .hero::before{content:'';position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(90deg,var(--bg) 3%,color-mix(in srgb,var(--bg) 96%,transparent) 23%,color-mix(in srgb,var(--bg) 78%,transparent) 40%,transparent 69%),linear-gradient(0deg,var(--bg),transparent 18%)}
+ .hero .wordmark{font-size:clamp(96px,13vw,200px);margin:0;max-width:48%;pointer-events:none}
+ .hero-copy{display:block;max-width:43%;padding:32px 0 100px}
+ .hero-line{font-size:clamp(26px,3vw,44px)}
+ .hero-copy>div{margin-top:24px}.hero-copy p{font-size:clamp(16px,1.5vw,22px)}
+ .hero-image{display:none}
+ .hero-backdrop-controls{display:flex;align-items:center;gap:20px;position:absolute;bottom:28px;left:max(32px,calc((100vw - 1536px)/2));z-index:2}
+ .hero-backdrop-controls button{background:var(--bg);color:var(--ink);border:1px solid currentColor;min-height:44px;padding:10px 16px}
+ .hero-backdrop-controls p{font-size:12px;line-height:1.6}
+ #hero-map .leaflet-control-attribution{font-size:11px;background:var(--bg);color:var(--ink)}
+ .hero-popup .leaflet-popup-content-wrapper{background:var(--bg);color:var(--ink);border-radius:0}
+ .hero-popup .leaflet-popup-tip{background:var(--bg)}
+ .hero-popup .leaflet-popup-content{margin:8px;width:224px!important}
+ .hero-popup img{width:224px;height:150px;object-fit:cover}.hero-popup figcaption{padding:10px 4px;font-size:16px}
+}
+@media(min-width:768px){.hero-copy .hero-line{font-size:clamp(26px,3vw,44px)}}
+
+/* Restore the charcoal raster treatment; a small luminance lift keeps roads legible. */
+:root[data-theme="dark"] #hero-map{background:#101e22}
+:root[data-theme="dark"] #hero-map .leaflet-overlay-pane path{stroke:#91d8ce}
+:root[data-theme="dark"] #hero-map .leaflet-overlay-pane path:last-child{stroke:#d5eeeb;fill:#91d8ce}
+
+
+
+#hero-map .leaflet-tile-pane{filter:saturate(.35) sepia(.12)}
+:root[data-theme="dark"] #hero-map .leaflet-tile-pane{filter:grayscale(1) invert(1) brightness(.86);opacity:.5}

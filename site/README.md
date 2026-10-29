@@ -28,3 +28,13 @@ npm run pages:preview
 ## 免金鑰 3D
 
 播放器「地圖」選單提供 Leaflet 2D 與 MapLibre 3D。預設 2D，點選才載入 MapLibre、OpenFreeMap 向量圖與 Mapterhorn 地形；不需要 Google key。3D 支援照片彈窗、時間軸、進度保留及主題同步，失敗時回到 2D。開放資料是地形和建築輪廓，不是寫實城市；保留供應商署名，公共服務沒有本專案提供的可用性保證。
+
+## 桌面／平板背景回放
+
+768px 起使用滿版東京 hero；窄屏保留京都照片與原有互動示範。背景鏡頭焦點位於約 73% 寬處，避免左側文字遮擋。回放約 100 秒加每張照片 4 秒停留，循環播放；可暫停，離開畫面／背景分頁停止，減少動態偏好預設暫停。
+
+東京路線由官方課程頁嵌入的 [Google My Maps](https://www.google.com/maps/d/viewer?mid=1DkVRDZhVD4sp8pKTvYvHoZUIOA61YngW) LineString 轉成 GPX，原資料標示 **Tokyo Marathon 2020**，不是 2026 賽道或個人實跑紀錄。保存在 `public/demo/tokyo-marathon.gpx`，背景資料為 `public/demo/tokyo.json`。景點沿路線最近點展示，照片並非賽事實拍或同一次旅程；播放速度為示範編排，不供導航。
+
+東京照片的來源、作者、CC BY／CC BY-SA 授權另見 `public/photos/tokyo-credits.json`，並與京都署名一起顯示於頁尾。照片僅以 CSS 裁切，未修改原圖；不適用程式碼 MIT 授權。
+
+Hero 深色模式採 OpenStreetMap 圖磚的低對比炭灰處理，僅作用於底圖。相較原版 brightness(.8)，小幅提高至 .86，透明度維持 .5，讓主要道路稍微清楚；照片、青綠回放路線與署名不套用底圖濾鏡。
