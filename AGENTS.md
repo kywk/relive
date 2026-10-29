@@ -5,19 +5,22 @@
 ## 套件邊界
 
 - 根目錄是 `@kywk/relive`：共用資料處理、Docusaurus 整合與 Obsidian adapter。Obsidian plugin ID 保持 `relive`，以 GitHub Release 附件安裝。
+- `packages/react-relive` 是獨立的 `@kywk/react-relive` React 元件，透過 `@kywk/relive/player` 重用播放器；SSR 階段只渲染容器，掛載後才動態載入播放器。維持 React 18／19 peer dependency、TypeScript 宣告與可單獨匯入的 CSS。
 - `packages/gpx-slim` 是獨立的 `@kywk/gpx-slim` CLI，命令為 `gpx-slim`。保留獨立版本、lockfile 與 runtime dependencies；CLI 安裝及執行不依賴根套件、Obsidian 或 Docusaurus。
-- GitHub repository metadata 使用 `kywk/relive`，npm scope 使用 `@kywk`。MIT LICENSE 必須同時包含於兩個 npm tarball。
+- GitHub repository metadata 使用 `kywk/relive`，npm scope 使用 `@kywk`。MIT LICENSE 必須同時包含於三個 npm tarball。
 
 ## 修改與驗證
 
 - 修改共用解析、播放器或 Obsidian adapter：執行根目錄測試與建置；修改網站整合時，再建置兩個 Docusaurus 範例。
 - 修改 CLI：執行 `npm run gpx:release:pack`，涵蓋原有測試及隔離、離線 npx 驗證。維持原始 GPX 不被覆寫、分段不相連、分析模式不寫檔的行為。
-- 修改 exports、dependencies、套件名稱或發行腳本：驗證受影響套件的 lockfile 與實際 tarball。網站套件使用 `npm run release:pack`；CLI 使用 `npm run gpx:release:pack`。
-- 發行產物分別放在 `.release/docusaurus` 與 `.release/gpx-slim`，各自只清理自己的目錄。使用合成測試資料；私人 Vault、GPX、照片及 API key 留在發行內容之外。
+- 修改 exports、dependencies、套件名稱或發行腳本：驗證受影響套件的 lockfile 與實際 tarball。網站套件使用 `npm run release:pack`；React 使用 `npm run react:release:check` 與 `npm run react:release:pack`；CLI 使用 `npm run gpx:release:pack`。
+- 發行產物分別放在 `.release/docusaurus`、`.release/react` 與 `.release/gpx-slim`，各自只清理自己的目錄。使用合成測試資料；私人 Vault、GPX、照片及 API key 留在發行內容之外。
 
 ## 發行完成條件
 
 版本與 tag 規則、首次上架步驟和 workflow 對照集中在 README.md。發布前確認該產品的檢查通過，發布已驗證的 tarball／附件。報告須分別標示本機驗證、遠端 Actions、npm 發布及 Obsidian Community 審核狀態；只有實際成功的階段才可宣稱完成。
+
+React 變更需驗證 SSR 匯入、StrictMode、props 更新與卸載清理，並建置 `npm run react:build` 與官網。React 子套件的本機開發依賴讓尚未發布的共用套件能參與開發；隔離消費端須以兩個實際 tarball 驗證，不能依賴 repository alias。
 
 ## 官方網站
 

@@ -22,6 +22,10 @@ jobs:
       - run: npm run build
       - run: node scripts/check-release.mjs check --assets
       - run: npm run release:pack
+      - run: npm run react:release:check
+      - run: npm run react:release:pack
+      - run: npm run react:build
+      - run: npm run pages:build
       - run: npm run site:build
       - run: npm run vault:build
       - uses: actions/upload-artifact@v4

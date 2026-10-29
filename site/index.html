@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Relive — 讓旅程，再走一次</title>
-<meta name="description" content="把 GPX、照片與 Markdown 變成可播放的旅行誌。Relive 支援 Obsidian、Docusaurus 與獨立 GPX 瘦身工具。">
+<meta name="description" content="把 GPX、照片與 Markdown 變成可播放的旅行誌。Relive 支援 Obsidian、React、Docusaurus 與獨立 GPX 瘦身工具。">
 <meta property="og:title" content="Relive — 讓旅程，再走一次"><meta property="og:description" content="用 GPX 與照片，在筆記和網站上重走一段旅程。"><meta property="og:type" content="website"><meta property="og:url" content="https://kywk.github.io/relive/"><meta property="og:image" content="https://kywk.github.io/relive/photos/kamo-river-in-kyoto-20240820-1748-5192.jpg">
 <meta name="theme-color" content="#06525c"><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%2306525c'/%3E%3Ctext x='14' y='48' fill='%23f7f9f8' font-family='sans-serif' font-size='48' font-weight='700'%3Er%3C/text%3E%3C/svg%3E">
 <script src="/theme.js"></script>
@@ -23,7 +23,7 @@
 <section id="demo" class="demo frame" aria-labelledby="demo-title">
 <div class="section-head"><h2 id="demo-title" class="reveal">沿著鴨川，慢慢走</h2><p class="reveal">選擇 MapLibre 3D，免金鑰探索立體地形。<br>按下播放、拖曳時間軸，或點選照片停留。</p></div>
 <div id="journey" class="reveal"><p>正在準備旅程。也可以先<a href="demo/kamo-river.gpx" download>下載示範 GPX</a>。</p></div>
-<p class="demo-note">真實京都照片，搭配人工編排的鴨川路線與播放時間。這是功能示範，並非一次實際錄製的旅程或導航指引。</p>
+<p class="demo-note">真實京都照片，搭配人工編排的鴨川路線與播放時間。這是功能示範，並非一次實際錄製的旅程或導航指引。此播放器使用獨立的 @kywk/react-relive React 套件。</p>
 <div class="download-row"><a href="demo/kamo-river.gpx" download>下載 GPX 範例</a><a href="demo/kyoto.md" download>下載 Markdown 範例</a><a href="https://github.com/kywk/relive/tree/main/site">查看 demo 原始碼</a></div>
 <noscript><p>地圖回放需要 JavaScript。你仍可下載範例、閱讀使用方式，或前往 GitHub 取得安裝檔。</p></noscript>
 </section>
@@ -37,7 +37,7 @@
 </div>
 </section>
 <section id="workflow" class="workflow" aria-labelledby="workflow-title"><div class="frame workflow-inner">
-<div class="reveal"><h2 id="workflow-title">旅程，留在你的筆記</h2><p>原始 GPX 和照片放在自己的 Vault。用一個 <code>relive</code> 區塊，串起路線、拍攝時刻與沿途故事。</p><p>同一份內容可以在 Obsidian 回放，也能經 Docusaurus 發布成網站。你的文字與檔案始終由你保存。</p><a href="https://github.com/kywk/relive#markdown-格式">閱讀完整語法</a></div>
+<div class="reveal"><h2 id="workflow-title">旅程，留在你的筆記</h2><p>原始 GPX 和照片放在自己的 Vault。用一個 <code>relive</code> 區塊，串起路線、拍攝時刻與沿途故事。</p><p>同一份內容可以在 Obsidian 回放，也能經 Docusaurus 發布成網站，或用獨立 React 元件加入自己的應用程式。你的文字與檔案始終由你保存。</p><a href="https://github.com/kywk/relive#markdown-格式">閱讀完整語法</a></div>
 <div class="code-sheet reveal"><div class="code-top"><span>旅程.md</span><button data-copy="markdown">複製範例</button></div><pre id="markdown-code"><code>```relive
 title: 鴨川散步
 gpx: ./ride.gpx
@@ -50,10 +50,16 @@ photos:
 ```</code></pre><p>用照片時間或 GPS 配對軌跡，並保留每個停留片刻。</p></div>
 </div></section>
 <section id="install" class="install frame" aria-labelledby="install-title"><div class="section-head"><h2 id="install-title" class="reveal">從你的旅程開始</h2><p class="reveal">程式採 MIT 開源授權。<br>目前可從 GitHub Release 取得安裝檔。</p></div>
-<div class="install-layout"><div class="install-tabs" role="tablist" aria-label="選擇使用方式"><button id="tab-obsidian" role="tab" aria-controls="panel-obsidian" aria-selected="true" data-tab="obsidian">Obsidian</button><button id="tab-docusaurus" role="tab" aria-controls="panel-docusaurus" aria-selected="false" tabindex="-1" data-tab="docusaurus">Docusaurus</button><button id="tab-cli" role="tab" aria-controls="panel-cli" aria-selected="false" tabindex="-1" data-tab="cli">GPX Slim</button></div>
+<div class="install-layout"><div class="install-tabs" role="tablist" aria-label="選擇使用方式"><button id="tab-obsidian" role="tab" aria-controls="panel-obsidian" aria-selected="true" data-tab="obsidian">Obsidian</button><button id="tab-docusaurus" role="tab" aria-controls="panel-docusaurus" aria-selected="false" tabindex="-1" data-tab="docusaurus">Docusaurus</button><button id="tab-react" role="tab" aria-controls="panel-react" aria-selected="false" tabindex="-1" data-tab="react">React</button><button id="tab-cli" role="tab" aria-controls="panel-cli" aria-selected="false" tabindex="-1" data-tab="cli">GPX Slim</button></div>
 <div class="install-panels">
 <div id="panel-obsidian" role="tabpanel" aria-labelledby="tab-obsidian"><h3>在自己的 Vault 回放</h3><p>下載 <code>main.js</code>、<code>manifest.json</code>、<code>styles.css</code>，放入 Vault 的 <code>.obsidian/plugins/relive/</code>。重新載入 Obsidian，並啟用 Relive。</p><p>Community Plugin 尚未上架，目前採手動安裝。</p><a class="button" href="https://github.com/kywk/relive/releases/tag/0.1.0">下載安裝檔</a></div>
 <div id="panel-docusaurus" role="tabpanel" aria-labelledby="tab-docusaurus" hidden><h3>把旅行誌發布成網站</h3><p>先從 GitHub Release 下載 <code>kywk-relive-0.1.0.tgz</code>，再於網站專案安裝。npm registry 尚未發布。</p><pre><code>npm install ./kywk-relive-0.1.0.tgz</code></pre><p>使用 <code>@kywk/relive/integration</code>，指定公開附件目錄；建置時可選用 gentle 瘦身，Vault 原檔保持不變。</p><a href="https://github.com/kywk/relive#docusaurus-整合">查看 Docusaurus 設定</a></div>
+<div id="panel-react" role="tabpanel" aria-labelledby="tab-react" hidden><h3>在 React 應用中重走旅程</h3><p>獨立套件 <code>@kywk/react-relive</code> 支援 Vite、Next.js 等 React 專案，不需要 Docusaurus。先在原始碼專案執行 <code>npm run react:release:pack</code>，再安裝產生的 tarball；npm registry 尚未發布。</p><pre><code>npm install ./kywk-react-relive-0.1.0.tgz
+
+import {Relive} from '@kywk/react-relive';
+import '@kywk/react-relive/styles.css';
+
+&lt;Relive journey={journey} /&gt;</code></pre><p><code>journey</code> 包含已解析的軌跡、照片與事件。React 元件在瀏覽器掛載地圖，卸載時釋放資源。</p><a href="https://github.com/kywk/relive/tree/main/examples/react">執行獨立 React 範例</a></div>
 <div id="panel-cli" role="tabpanel" aria-labelledby="tab-cli" hidden><h3>讓長軌跡輕一點</h3><p>下載 <code>kywk-gpx-slim-0.1.0.tgz</code>，以 Node.js 22+ 執行。先比較各種強度，再決定怎麼精簡。</p><pre><code>npx --offline --yes \
   --package ./kywk-gpx-slim-0.1.0.tgz \
   gpx-slim ride.gpx --analyze</code></pre><p>工具在本機處理 GPX，並拒絕覆寫原檔。</p><a href="https://github.com/kywk/relive/tree/main/packages/gpx-slim">閱讀 CLI 說明</a></div>

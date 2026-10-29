@@ -42,13 +42,17 @@ jobs:
       - run: node scripts/check-release.mjs obsidian --assets
       - run: npm run release:pack
       - run: npm run gpx:release:pack
+      - run: npm run react:release:check
+      - run: npm run react:release:pack
+      - run: npm run react:build
+      - run: npm run pages:build
       - run: npm run site:build
       - run: npm run vault:build
       - name: Collect verified release assets
         run: |
           mkdir -p .release/github
           cp dist/obsidian/main.js dist/obsidian/manifest.json dist/obsidian/styles.css .release/github/
-          cp .release/docusaurus/*.tgz .release/gpx-slim/*.tgz .release/github/
+          cp .release/docusaurus/*.tgz .release/gpx-slim/*.tgz .release/react/*.tgz .release/github/
           cd .release/github
           sha256sum main.js manifest.json styles.css *.tgz > SHA256SUMS
       - name: Compare existing assets on retry

@@ -1,0 +1,35 @@
+name: Release React
+on:
+  push:
+    tags: ['react-relive-v*']
+permissions:
+  contents: read
+concurrency:
+  group: react-relive-release
+  cancel-in-progress: false
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    env:
+      RELEASE_TAG: ${{ github.ref_name }}
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: package-lock.json
+      - run: node scripts/check-react-release.mjs --publish
+      - run: npm install --global npm@12.2.0
+      - run: npm ci
+      - run: node scripts/check-react-package.mjs
+      - uses: actions/upload-artifact@v4
+        with:
+          name: react-relive-release
+          path: .release/react/*.tgz
+          if-no-files-found: error
+      - name: Publish verified React tarball through npm OIDC
+        run: npm publish .release/react/*.tgz --access public --provenance

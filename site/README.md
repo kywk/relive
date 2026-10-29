@@ -11,7 +11,7 @@ npm run pages:preview
 
 開發與預覽使用 `/relive/` 路徑。以 `SITE_BASE=/other/` 覆寫；GitHub Pages workflow 依 repository 名稱設定。main push 自動建置並部署；PR 只建置。
 
-`site/src` 管理官網樣式與互動，直接使用共用 `src/player.js`。`scripts/site/prepare.mjs` 產生 601 點示範軌跡、播放器資料與可下載的 GPX／Markdown。照片點擊可跳到播放器的示範時間，安裝分頁提供目前 GitHub Release 的可用安裝方式。
+`site/src` 管理官網樣式與互動，透過 `@kywk/react-relive` 的 `<Relive journey={journey} />` 顯示互動播放器；背景 hero 保留專用鏡頭控制。`scripts/site/prepare.mjs` 產生 601 點示範軌跡、播放器資料與可下載的 GPX／Markdown。照片點擊可跳到播放器的示範時間，安裝分頁提供 Obsidian、Docusaurus、獨立 React 與 GPX Slim 的安裝方式。React 套件目前需由原始碼打包，尚未發布至 npm。非 Docusaurus 的完整範例見 [`examples/react`](../examples/react)。
 
 ## 照片與示範資料
 

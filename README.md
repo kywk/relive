@@ -1,4 +1,4 @@
-# Relive — Obsidian 與 Docusaurus 旅程回放
+# Relive — Obsidian、React 與 Docusaurus 旅程回放
 
 把 `relive` fenced code block 放進筆記，以 Leaflet 播放 GPX 軌跡並顯示相片。第一版提供 2D 地圖、播放／暫停、拖曳進度、倍速、相機跟隨、相片縮圖與定位提示。支援免金鑰 MapLibre 3D 地形與選配 Google 寫實 3D；尚未提供影片匯出。
 
@@ -7,6 +7,33 @@
 [開啟 Relive Demo](https://kywk.github.io/relive/)：京都鴨川實景照片、可播放的示範路線、Markdown 範例及安裝方式。照片採 CC BY 4.0／CC0，完整署名見網站頁尾；路線與時間是示範編排。
 
 執行 `npm run pages:dev` 預覽，`npm run pages:build` 建置至 `site/dist`。main push 由 `.github/workflows/pages.yml` 自動部署，PR 僅建置；詳見 [網站維護說明](site/README.md)。此流程不發布 npm 或 Obsidian Community。
+
+## 獨立 React 套件
+
+`@kywk/react-relive` 提供 `<Relive journey={journey} />`，可在 Vite、Next.js 或其他 React host 使用，不需要 Docusaurus。它沿用同一份播放器，提供播放、照片／事件、2D 與 3D；React 18／19 由應用程式提供。
+
+```jsx
+import {Relive, makeTrack, parseGpx} from '@kywk/react-relive';
+import '@kywk/react-relive/styles.css';
+
+const journey = {
+  title: '示範散步', duration: 30, stopDuration: 3,
+  timezoneOffset: '+08:00', renderer: 'leaflet',
+  track: makeTrack(parseGpx(`<gpx version="1.1" creator="demo"><trk><trkseg>
+    <trkpt lat="25.05" lon="121.50"><time>2026-10-30T00:00:00Z</time></trkpt>
+    <trkpt lat="25.06" lon="121.51"><time>2026-10-30T00:10:00Z</time></trkpt>
+  </trkseg></trk></gpx>`)),
+  photos: [], events: [], warnings: [],
+};
+
+export default function App() {
+  return <Relive journey={journey} />;
+}
+```
+
+樣式入口已包含 Leaflet、MapLibre 與 Relive CSS。元件僅在瀏覽器 effect 載入地圖，卸載會清理播放器；`journey` 換成另一個物件時會重建並重置進度，因此請把資料保存在 state、`useMemo` 或模組常數。它接收已解析資料，不掃描 Vault，也不替應用程式抓取附件或解析 EXIF。
+
+本機開發執行 `npm run react:demo`，`npm run react:build` 驗證獨立 Vite 範例。npm 發布前，先以 `npm run release:pack` 與 `npm run react:release:pack` 產生並驗證兩個相依 tarball；安裝方式、SSR、照片定位與資料契約見 [React 整合指南](docs/react.md)。本機可打包不代表已發布至 registry。
 
 ## GPX 瘦身 CLI
 
@@ -179,13 +206,15 @@ npm run vault:serve
 
 - `src/core.js`：YAML、GPX、距離／時間進度、相片定位，兩端共用。
 - `src/load.js`：EXIF 與 host 提供的資產讀取器。
-- `src/player.js`：Leaflet 播放器，回傳清理函式。
+- `src/player.js`：共用播放器，回傳清理函式。
+- `packages/react-relive`：獨立 React 元件、型別與完整樣式入口；不依賴 Docusaurus。
+- `examples/react`：獨立 Vite／React 範例。
 - `src/obsidian.ts`：Obsidian code block 與 Vault adapter。
 - `src/remark.js`：Docusaurus MDX AST 與靜態資產處理。
 - `src/docusaurus.cjs`、`src/client.js`：網站客戶端載入與換頁生命週期。
 - `test/`：解析、配對、資產限制、MDX 編譯測試。
 
-與 StoryMap 的 Leaflet 模式保持類似分層，但沒有依賴 StoryMap 私有模組；後續可將播放器整合為其第三種 host。
+與 StoryMap 保持類似分層：資料處理、播放器與 host adapter 分開；React、Obsidian 與 Docusaurus 共用播放器，不依賴 StoryMap 私有模組。
 
 ## 邊界與後續
 
@@ -287,11 +316,12 @@ stopDuration: 3
 
 | 產品 | 安裝識別 | 發行 tag | Workflow |
 | --- | --- | --- | --- |
-| GitHub Release／Obsidian 安裝包 | plugin ID `relive`，另附兩個 npm tarball | `0.1.0` | `release-obsidian.yml` |
+| GitHub Release／Obsidian 安裝包 | plugin ID `relive`，另附三個 npm tarball | `0.1.0` | `release-obsidian.yml` |
 | Docusaurus／共用 library | `@kywk/relive` | `npm-v0.1.0` | `release-npm.yml` |
+| React 元件 | `@kywk/react-relive` | `react-relive-v0.1.0` | `release-react.yml` |
 | GPX Slim CLI | `@kywk/gpx-slim`，命令 `gpx-slim` | `gpx-slim-v0.1.0` | `release-gpx-slim.yml` |
 
-GitHub 發行流程同時建置網站、測試兩個 tarball，附 SHA256SUMS 與 artifact attestations，並使用 `docs/releases/<version>.md` 作為 release notes；建立新版本 tag 前須先備妥該檔案。此流程不會執行 npm publish 或提交 Community。
+GitHub 發行流程同時建置網站、測試三個 tarball，附 SHA256SUMS 與 artifact attestations，並使用 `docs/releases/<version>.md` 作為 release notes；建立新版本 tag 前須先備妥該檔案。此流程不會執行 npm publish 或提交 Community。
 
 Obsidian 從 GitHub Release 下載 `main.js`、`manifest.json`、`styles.css`，不透過 npm 安裝。根目錄 package 提供網站 library；CLI 在 `packages/gpx-slim`，保留自己的 lockfile 和獨立版本。
 
@@ -310,15 +340,20 @@ npm run vault:build
 npm run release:pack
 npm run gpx:release:check
 npm run gpx:release:pack
+npm run react:test
+npm run react:build
+npm run react:release:pack
 ```
 
 網站套件產生於 `.release/docusaurus/`，CLI 產生於 `.release/gpx-slim/`，兩者互不清除。網站 tarball 會在隔離消費端安裝並驗證 ESM／CommonJS 入口；CLI 會先跑 prepack 測試，再以空快取、離線 npx 驗證分析、實際瘦身與拒絕覆寫。workflow 發布的就是驗證過的 tarball。CI 另外在 Node 22／24 驗證 CLI，並保存 `gpx-slim-node-*` 與 Obsidian artifact。
 
+React 套件在 `packages/react-relive` 獨立維護版本，產物位於 `.release/react/`。它依賴 `@kywk/relive`，首次發布時先發布共用 library，再發布 React 套件；`release-react.yml` 使用自己的 tag 與 npm trusted publisher。它不會隨 Obsidian tag 自動發布。
+
 ### 首次上架
 
-1. 建立公開 `kywk/relive` repository 並提交原始碼、LICENSE、manifest、versions 與兩份 lockfile；確認 GitHub Actions 通過。
-2. 登入 npm 的 `kywk` 帳號，確認兩個 scoped 名稱可發布。首次發布／建立套件依 [npm Trusted Publishing 官方流程](https://docs.npmjs.com/trusted-publishers/) 辦理；如需本機首次發布，使用已驗證的 tarball，完成 npm 要求的登入／2FA。
-3. 在每個 npm 套件設定各自的 GitHub trusted publisher：owner `kywk`、repository `relive`；`@kywk/relive` 綁定 `release-npm.yml`，`@kywk/gpx-slim` 綁定 `release-gpx-slim.yml`，允許 publish。現有 workflow 沒有指定 environment，設定時也留空。使用 GitHub-hosted runner、Node 24、npm 12.2.0 與 OIDC，無需長效 npm token。
+1. 建立公開 `kywk/relive` repository 並提交原始碼、LICENSE、manifest、versions 與各套件 lockfile；確認 GitHub Actions 通過。
+2. 登入 npm 的 `kywk` 帳號，確認各產品的 scoped 名稱可發布。首次發布／建立套件依 [npm Trusted Publishing 官方流程](https://docs.npmjs.com/trusted-publishers/) 辦理；如需本機首次發布，使用已驗證的 tarball，完成 npm 要求的登入／2FA。
+3. 在每個 npm 套件設定各自的 GitHub trusted publisher：owner `kywk`、repository `relive`；`@kywk/relive` 綁定 `release-npm.yml`，`@kywk/gpx-slim` 綁定 `release-gpx-slim.yml`，`@kywk/react-relive` 綁定 `release-react.yml`，允許 publish。現有 workflow 沒有指定 environment，設定時也留空。使用 GitHub-hosted runner、Node 24、npm 12.2.0 與 OIDC，無需長效 npm token。
 4. 推送各產品對應 tag。若首次 npm 版本已手動發布，後續遞增版本再推 tag，避免重發既有版本。Obsidian tag 必須是純 `x.y.z`。
 5. GitHub Release 成功後，依 [Obsidian 官方上架流程](https://docs.obsidian.md/Plugins/Releasing/Submit%20your%20plugin) 登入 Community directory、連結 GitHub、提交插件並處理審核結果。CI 成功不代表 Community 上架完成。
 

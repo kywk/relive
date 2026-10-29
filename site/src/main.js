@@ -1,6 +1,4 @@
-import 'leaflet/dist/leaflet.css';
-import 'maplibre-gl/dist/maplibre-gl.css';
-import '../../src/styles.css';
+import '@kywk/react-relive/styles.css';
 import './style.css';
 import journey from '../generated/journey.json';
 import credits from '../public/photos/credits.json';
@@ -9,10 +7,7 @@ for(const photo of journey.photos)photo.url=base+photo.url;
 const host=document.querySelector('#journey');
 let ready;
 async function loadPlayer(){
- if(!ready)ready=import('../../src/player.js').then(({mountPlayer})=>{
-  const destroy=mountPlayer(host,journey);
-  window.addEventListener('pagehide',destroy,{once:true});
- }).catch(error=>{ready=null;host.replaceChildren();const p=document.createElement('p');p.textContent='地圖未能載入，請重新整理，或下載範例在本機體驗。';host.append(p);console.error(error);throw error;});
+ if(!ready)ready=import('./react-player.js').then(({mountReactPlayer})=>mountReactPlayer(host,journey)).catch(error=>{ready=null;host.replaceChildren();const p=document.createElement('p');p.textContent='地圖未能載入，請重新整理，或下載範例在本機體驗。';host.append(p);console.error(error);throw error;});
  return ready;
 }
 const observer=new IntersectionObserver(entries=>{if(entries.some(e=>e.isIntersecting)){void loadPlayer().catch(()=>{});observer.disconnect();}},{rootMargin:'400px'});observer.observe(host);
