@@ -2,6 +2,12 @@
 
 把 `relive` fenced code block 放進筆記，以 Leaflet 播放 GPX 軌跡並顯示相片。第一版提供 2D 地圖、播放／暫停、拖曳進度、倍速、相機跟隨、相片縮圖與定位提示。支援選配 Google 寫實 3D；尚未提供影片匯出。
 
+## 官方 Demo 與 GitHub Pages
+
+[開啟 Relive Demo](https://kywk.github.io/relive/)：京都鴨川實景照片、可播放的示範路線、Markdown 範例及安裝方式。照片採 CC BY 4.0／CC0，完整署名見網站頁尾；路線與時間是示範編排。
+
+執行 `npm run pages:dev` 預覽，`npm run pages:build` 建置至 `site/dist`。main push 由 `.github/workflows/pages.yml` 自動部署，PR 僅建置；詳見 [網站維護說明](site/README.md)。此流程不發布 npm 或 Obsidian Community。
+
 ## GPX 瘦身 CLI
 
 獨立發布的 GPX 瘦身工具位於 [`packages/gpx-slim`](./packages/gpx-slim/README.md)，支援停留／低速點精簡、三種壓縮強度與目標刪點比例，需要 Node.js 22+。

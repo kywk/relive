@@ -1,0 +1,16 @@
+import {mkdir,writeFile} from 'node:fs/promises';
+import {makeTrack,parseGpx,matchPhoto} from '../../src/core.js';
+const route=[[35.0034,135.7717],[35.0056,135.7721],[35.0074,135.7728],[35.0092,135.7733],[35.0106,135.7737],[35.0124,135.7741],[35.0142,135.7742],[35.0161,135.7743],[35.0181,135.7743],[35.0201,135.7742],[35.0222,135.7739],[35.0243,135.7735],[35.0263,135.773],[35.0281,135.7725],[35.0298,135.772],[35.0306,135.7719]];
+const points=Array.from({length:601},(_,i)=>{const f=i/600*(route.length-1),n=Math.min(route.length-2,Math.floor(f)),t=f-n;return {lat:route[n][0]+(route[n+1][0]-route[n][0])*t,lon:route[n][1]+(route[n+1][1]-route[n][1])*t,time:new Date(Date.UTC(2026,9,29,0,0)+i*4000).toISOString()};});
+const xml='<?xml version="1.0" encoding="UTF-8"?>\n<gpx version="1.1" creator="Relive demo" xmlns="http://www.topografix.com/GPX/1/1"><metadata><name>Kyoto Kamo River — illustrative route, not a recorded GPS track</name></metadata><trk><name>鴨川散步示範</name><trkseg>'+points.map(p=>`<trkpt lat="${p.lat}" lon="${p.lon}"><time>${p.time}</time></trkpt>`).join('')+'</trkseg></trk></gpx>\n';
+const track=makeTrack(parseGpx(xml));
+const files=['kamo-river-in-kyoto-20240820-1748-5192.jpg','kamo-gawa-in-kyoto-birds-feeding-hdsr.jpg','kamo-gawa-in-kyoto-hdsr-s5-05.jpg','stepping-stones-in-kamo-river-kyoto.jpg'];
+const names=['沿著河岸出發','停下來，看鳥群','淺灘上的白鷺','走到河中的飛石'];
+const indices=[30,220,400,570];
+const photos=files.map((file,i)=>matchPhoto({url:'photos/'+file,src:'photos/'+file,caption:names[i],timestamp:Date.parse(points[indices[i]].time)},track));
+const journey={title:'京都・鴨川散步',duration:40,stopDuration:3,timezoneOffset:'+09:00',renderer:'leaflet',track,photos,events:[],warnings:[]};
+await mkdir('site/generated',{recursive:true});await mkdir('site/public/demo',{recursive:true});
+await writeFile('site/generated/journey.json',JSON.stringify(journey));await writeFile('site/public/demo/kamo-river.gpx',xml);
+const snippet='```relive\ntitle: 京都・鴨川散步\ngpx: ./kamo-river.gpx\nduration: 40\nstopDuration: 3\ntimezoneOffset: "+09:00"\nphotos:\n'+files.map((f,i)=>`  - src: ../photos/${f}\n    time: "${points[indices[i]].time}"\n    caption: ${names[i]}`).join('\n')+'\n```\n';
+await writeFile('site/public/demo/kyoto.md','# 京都・鴨川散步\n\n示範路線與播放時間為人工編排，不是實際 GPS 紀錄；照片來源與授權見 ../photos/credits.json。\n\n'+snippet);
+console.log(`Site data ready: ${track.points.length} points, ${photos.length} licensed photos`);

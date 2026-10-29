@@ -18,3 +18,7 @@
 ## 發行完成條件
 
 版本與 tag 規則、首次上架步驟和 workflow 對照集中在 README.md。發布前確認該產品的檢查通過，發布已驗證的 tarball／附件。報告須分別標示本機驗證、遠端 Actions、npm 發布及 Obsidian Community 審核狀態；只有實際成功的階段才可宣稱完成。
+
+## 官方網站
+
+`site/` 是 GitHub Pages 官網，與 Docusaurus 整合範例分開。修改後執行 `npm run pages:build`，並檢查桌面、平板與手機上的播放、照片跳轉及安裝分頁。素材來源與授權集中在 `site/public/photos/credits.json`；替換照片須同步更新署名。示範軌跡由 `scripts/site/prepare.mjs` 生成，不得宣稱是真實紀錄。

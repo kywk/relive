@@ -30,7 +30,10 @@
     "gpx:release:check": "node scripts/check-gpx-release.mjs",
     "gpx:release:pack": "node scripts/check-gpx-package.mjs",
     "perf:slim:prepare": "node scripts/perf/slim-fixtures.mjs",
-    "perf:slim:browser": "node scripts/perf/slim-run.mjs"
+    "perf:slim:browser": "node scripts/perf/slim-run.mjs",
+    "pages:build": "node scripts/site/prepare.mjs && vite build --config site/vite.config.mjs",
+    "pages:dev": "node scripts/site/prepare.mjs && vite --config site/vite.config.mjs",
+    "pages:preview": "vite preview --config site/vite.config.mjs"
   },
   "dependencies": {
     "exifr": "^7.1.3",

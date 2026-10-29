@@ -11,3 +11,7 @@ examples/shared-vault/.docusaurus/
 .perf/
 
 .release/
+
+site/dist/
+site/generated/
+.taste-skill/
