@@ -1,3 +1,4 @@
+import {playerTranslator} from './player-i18n.js';
 import {createTrailChunks} from './trail.js';
 
 const coords=p=>[p.lon,p.lat];
@@ -8,6 +9,7 @@ export const TERRAIN_URL='https://tiles.mapterhorn.com/tilejson.json';
 
 // Runtime is supplied by the lazy loader; importing this adapter needs no DOM/WebGL.
 export function createMapLibreMap(host,journey,onSelect,api,onError=()=>{}){
+  const t=playerTranslator(journey.locale);
   const theme=()=>document.documentElement.dataset.theme==='dark'||document.body.classList.contains('theme-dark')?'dark':'light';
   let currentTheme=theme(),disposed=false,loaded=false,settled=false,trail,latest,updateCamera=false;
   let resolveReady,rejectReady;
@@ -29,15 +31,15 @@ export function createMapLibreMap(host,journey,onSelect,api,onError=()=>{}){
     const result=new api.Marker({element}).setLngLat(coords(point)).addTo(map);markers.push(result);return result;
   }
   const cursor=marker(start,'relive-3d-cursor');
-  for(const item of [...journey.photos,...journey.events])if(item.progress!==null)marker(item,'relive-3d-pin',item.title||item.caption||'相片',()=>onSelect(item));
+  for(const item of [...journey.photos,...journey.events])if(item.progress!==null)marker(item,'relive-3d-pin',item.title||item.caption||t('相片'),()=>onSelect(item));
   function fail(error){
     if(disposed)return;
     clearTimeout(timer);
-    const message=error instanceof Error?error:new Error('3D 地圖資料或 WebGL 載入失敗');
+    const message=error instanceof Error?error:new Error(t('3D 地圖資料或 WebGL 載入失敗'));
     if(!settled){settled=true;rejectReady(message);}else onError(message);
   }
-  const timer=setTimeout(()=>fail(new Error('MapLibre 3D 載入逾時，請檢查網路或 WebGL 支援')),20000);
-  const onMapError=()=>fail(new Error('MapLibre 底圖或地形載入失敗，請檢查網路與 WebGL 支援'));
+  const timer=setTimeout(()=>fail(new Error(t('MapLibre 3D 載入逾時，請檢查網路或 WebGL 支援'))),20000);
+  const onMapError=()=>fail(new Error(t('MapLibre 底圖或地形載入失敗，請檢查網路與 WebGL 支援')));
   map.on('error',onMapError);
   map.on('webglcontextlost',onMapError);
   function flush(){
@@ -83,7 +85,7 @@ export function createMapLibreMap(host,journey,onSelect,api,onError=()=>{}){
     destroy(){
       if(disposed)return;
       disposed=true;clearTimeout(timer);resize.disconnect();themes.disconnect();
-      if(!settled){settled=true;rejectReady(new Error('3D 載入已取消'));}
+      if(!settled){settled=true;rejectReady(new Error(t('3D 載入已取消')));}
       map.off('error',onMapError);map.off('webglcontextlost',onMapError);
       popup.remove();markers.forEach(m=>m.remove());map.remove();
     }

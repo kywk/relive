@@ -44,3 +44,9 @@ Hero 深色模式採 OpenStreetMap 圖磚的低對比炭灰處理，僅作用於
 官網先載入文字互動與品牌樣式；播放器進入視窗前 150px 才載入 React、旅程資料與播放器樣式，點選照片會立即觸發載入。桌面背景只先載入 Leaflet，不提前載入 React 或 MapLibre。樣式由 Vite 共用 Leaflet CSS，避免 hero 與播放器重複下載。
 
 以 production preview 執行 `node scripts/perf/site-loading.mjs http://127.0.0.1:4176/relive/` 可量測三種視窗尺寸的首屏資產；需可用的 Playwright Chromium，可用 `PLAYWRIGHT_MODULE` 與 `CHROMIUM_EXECUTABLE` 指定環境路徑。量測阻擋外部圖磚與字體，Vite preview 預設對 JS/CSS 使用 gzip，僅比較瀏覽器 Resource Timing 回報的本機資產 encoded body bytes（不含 HTTP headers）；不代表公開站網速或 LCP。
+
+## 中英文切換
+
+頁首提供「繁體中文／English」選單，切換會重新載入目前頁面並保留錨點。分享網址可使用 `?lang=zh-Hant` 或 `?lang=en`，網址選擇優先於瀏覽器儲存的偏好；沒有指定時採已儲存偏好，預設繁體中文。localStorage 不可用時仍可用網址切換。
+
+`src/i18n.js` 集中管理官網英文文案，涵蓋導覽、說明、安裝、FAQ、替代文字、無障礙標籤、網頁 metadata、複製／載入提示與背景照片名稱。新增中文文字時同步新增對應英文。翻譯保留原有 DOM 與控制元件；切換語言會重設播放進度。圖片作品名稱與作者署名保留來源原文。英文頁提供同時生成的 `demo/kyoto.en.md` 範例下載。

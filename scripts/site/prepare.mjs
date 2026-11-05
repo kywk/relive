@@ -13,4 +13,7 @@ await mkdir('site/generated',{recursive:true});await mkdir('site/public/demo',{r
 await writeFile('site/generated/journey.json',JSON.stringify(journey));await writeFile('site/public/demo/kamo-river.gpx',xml);
 const snippet='```relive\ntitle: 京都・鴨川散步\ngpx: ./kamo-river.gpx\nduration: 40\nstopDuration: 3\ntimezoneOffset: "+09:00"\nphotos:\n'+files.map((f,i)=>`  - src: ../photos/${f}\n    time: "${points[indices[i]].time}"\n    caption: ${names[i]}`).join('\n')+'\n```\n';
 await writeFile('site/public/demo/kyoto.md','# 京都・鴨川散步\n\n示範路線與播放時間為人工編排，不是實際 GPS 紀錄；照片來源與授權見 ../photos/credits.json。\n\n'+snippet);
+const englishNames=['Set off along the river','Stop to watch the birds','Egrets in the shallows','Step out into the river'];
+const englishSnippet=snippet.replace('京都・鴨川散步','Kyoto · Kamo River stroll').replace(/caption: (.+)/g,(_,name)=>'caption: '+englishNames[names.indexOf(name)]);
+await writeFile('site/public/demo/kyoto.en.md','# Kyoto · Kamo River stroll\n\nThe route and playback timing are manually arranged for demonstration, not an actual GPS recording. See ../photos/credits.json for photo sources and licenses.\n\n'+englishSnippet);
 console.log(`Site data ready: ${track.points.length} points, ${photos.length} licensed photos`);

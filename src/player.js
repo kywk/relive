@@ -1,3 +1,4 @@
+import {playerTranslator} from './player-i18n.js';
 import {createPlayback} from './playback.js';
 import {sampleTrack} from './track.js';
 import {timelineLabel,elapsedLabel} from './timeline.js';
@@ -5,19 +6,21 @@ import {createLeafletMap} from './leaflet-map.js';
 import {loadGoogleMaps,createGoogleMap,googleMapsSupported} from './google-map.js';
 
 export function mountPlayer(host,journey,options={}){
+  const t=playerTranslator(journey.locale);
+  const english=journey.locale==='en';
   journey.events??=[];
   host.replaceChildren();host.classList.add('relive-player');
   const el=(tag,parent,text,className)=>{const node=document.createElement(tag);if(text)node.textContent=text;if(className)node.className=className;parent.append(node);return node;};
   const header=el('div',host,'','relive-header');el('strong',header,journey.title);
   el('span',header,`${(journey.track.meters/1000).toFixed(2)} km${journey.track.elapsed==null?'':` · ${elapsedLabel(journey.track.elapsed)}`}`);
-  const modeLabel=el('label',header,'地圖 ','relive-map-mode');
-  const mode=el('select',modeLabel);mode.setAttribute('aria-label','地圖模式');
-  for(const [value,label] of [['leaflet','2D 地圖'],['maplibre-3d','MapLibre 3D'],['google-3d','Google 3D']]){
+  const modeLabel=el('label',header,t('地圖 '),'relive-map-mode');
+  const mode=el('select',modeLabel);mode.setAttribute('aria-label',t('地圖模式'));
+  for(const [value,label] of [['leaflet',t('2D 地圖')],['maplibre-3d','MapLibre 3D'],['google-3d','Google 3D']]){
     if(value==='google-3d'&&(!googleMapsSupported||(!options.googleMapsApiKey&&journey.renderer!=='google-3d')))continue;
     el('option',mode,label).value=value;
   }
   const viewport=el('div',host,'','relive-viewport');
-  const mapEl=el('div',viewport,'','relive-map');mapEl.setAttribute('aria-label','旅程軌跡地圖');
+  const mapEl=el('div',viewport,'','relive-map');mapEl.setAttribute('aria-label',t('旅程軌跡地圖'));
   const status=el('p',host,'','relive-map-status');status.hidden=true;status.setAttribute('role','status');
   const overlay=el('div',viewport,'','relive-overlay');
   const visibilityEvents=new AbortController();
@@ -39,15 +42,15 @@ export function mountPlayer(host,journey,options={}){
   listen(overlay,'focusin',showControls);
   listen(overlay,'focusout',()=>{queueMicrotask(()=>{if(!visibilityEvents.signal.aborted)scheduleHide();});});
   const controls=el('div',overlay,'','relive-controls');
-  const play=el('button',controls,'▶','relive-play');play.type='button';play.setAttribute('aria-label','播放');play.title='播放';
+  const play=el('button',controls,'▶','relive-play');play.type='button';play.setAttribute('aria-label',t('播放'));play.title=t('播放');
   const current=el('output',controls,`${timelineLabel(journey,0)} / ${timelineLabel(journey,1)}`,'relive-clock');
   const stopLabel=el('span',controls,'','relive-stop-label');stopLabel.hidden=true;stopLabel.setAttribute('role','status');
-  const speed=el('select',controls);speed.setAttribute('aria-label','播放速度');
+  const speed=el('select',controls);speed.setAttribute('aria-label',t('播放速度'));
   for(const n of [.5,1,2,4]){const opt=el('option',speed,`${n}×`);opt.value=String(n);opt.selected=n===1;}
-  const followLabel=el('label',controls,'','relive-follow');const follow=el('input',followLabel);follow.type='checkbox';follow.checked=true;followLabel.append('跟隨');
+  const followLabel=el('label',controls,'','relive-follow');const follow=el('input',followLabel);follow.type='checkbox';follow.checked=true;followLabel.append(t('跟隨'));
   const timeline=el('div',overlay,'','relive-timeline');
   const marks=el('div',timeline,'','relive-timeline-marks');
-  const slider=el('input',timeline);slider.type='range';slider.min='0';slider.max='10000';slider.step='1';slider.value='0';slider.setAttribute('aria-label','旅程時間軸');
+  const slider=el('input',timeline);slider.type='range';slider.min='0';slider.max='10000';slider.step='1';slider.value='0';slider.setAttribute('aria-label',t('旅程時間軸'));
   const ticks=el('div',timeline,'','relive-timeline-ticks');
   for(const p of [0,.25,.5,.75,1])el('span',ticks,timelineLabel(journey,p));
   const items=[...journey.photos.map(p=>({...p,kind:'photo'})),...journey.events];
@@ -63,10 +66,10 @@ export function mountPlayer(host,journey,options={}){
     const content=document.createElement('div');content.className='relive-bubble';
     for(const item of group){
       const section=el('section',content);
-      if(item.url){const img=el('img',section);img.decoding='async';img.src=item.url;img.alt=item.caption||'旅程相片';}
-      el('strong',section,item.title||item.caption||'旅程相片');
+      if(item.url){const img=el('img',section);img.decoding='async';img.src=item.url;img.alt=item.caption||t('旅程相片');}
+      el('strong',section,item.title||item.caption||t('旅程相片'));
       if(item.text)el('p',section,item.text);
-      el('small',section,item.progress===null?'未定位相片（顯示於目前位置）':timelineLabel(journey,item.progress,true));
+      el('small',section,item.progress===null?t('未定位相片（顯示於目前位置）'):timelineLabel(journey,item.progress,true));
     }
     return content;
   }
@@ -82,13 +85,13 @@ export function mountPlayer(host,journey,options={}){
     }
     const group=playback.stopGroup;
     stopLabel.hidden=!group;
-    const remainingLabel=group?`停留 ${Math.ceil(playback.remaining)} 秒`:'';
+    const remainingLabel=group?(english?`Photo stop · ${Math.ceil(playback.remaining)} s`:`停留 ${Math.ceil(playback.remaining)} 秒`):'';
     if(stopLabel.textContent!==remainingLabel)stopLabel.textContent=remainingLabel;
     const next=group??null;
     if(next!==active){active=next;if(group)adapter.show(group.items[0],contentFor(group.items));else adapter.hide();}
   }
 
-  function pause(){playing=false;viewport.classList.remove('is-playing');play.textContent='▶';play.setAttribute('aria-label','播放');play.title='播放';cancelAnimationFrame(frame);}
+  function pause(){playing=false;viewport.classList.remove('is-playing');play.textContent='▶';play.setAttribute('aria-label',t('播放'));play.title=t('播放');cancelAnimationFrame(frame);}
   function select(item){pause();playback.seek(progress);if(item.progress!==null){playback.seek(item.progress);progress=playback.progress;}render();adapter.show(item.progress===null?sampleTrack(journey.track,progress).position:item,contentFor([item]));}
   function tick(now){
     if(disposed||!playing)return;
@@ -99,18 +102,18 @@ export function mountPlayer(host,journey,options={}){
   play.onclick=()=>{
     if(playing){pause();return;}
     if(playback.ended){playback.seek(0);progress=0;}
-    playing=true;active=-1;viewport.classList.add('is-playing');previous=0;play.textContent='Ⅱ';play.setAttribute('aria-label','暫停');play.title='暫停';frame=requestAnimationFrame(tick);
+    playing=true;active=-1;viewport.classList.add('is-playing');previous=0;play.textContent='Ⅱ';play.setAttribute('aria-label',t('暫停'));play.title=t('暫停');frame=requestAnimationFrame(tick);
   };
   slider.oninput=()=>{playback.seek(Number(slider.value)/10000);progress=playback.progress;previous=0;render();
     const at=timed.filter(item=>Math.abs(item.progress-progress)<1e-8);
     if(at.length)adapter.show(at[0],contentFor(at));
   };
-  for(const item of timed){const marker=el('button',marks,item.kind==='event'?'◆':'●');marker.type='button';marker.style.left=`${item.progress*100}%`;marker.className=`relive-time-marker ${item.kind==='event'?'relive-event-marker':''}`;marker.setAttribute('aria-label',`${timelineLabel(journey,item.progress)} ${item.title||item.caption||'相片'}`);marker.title=marker.getAttribute('aria-label');marker.onclick=()=>select(item);}
+  for(const item of timed){const marker=el('button',marks,item.kind==='event'?'◆':'●');marker.type='button';marker.style.left=`${item.progress*100}%`;marker.className=`relive-time-marker ${item.kind==='event'?'relive-event-marker':''}`;marker.setAttribute('aria-label',`${timelineLabel(journey,item.progress)} ${item.title||item.caption||t('相片')}`);marker.title=marker.getAttribute('aria-label');marker.onclick=()=>select(item);}
   const album=el('details',host,'','relive-album');album.open=true;album.hidden=!journey.photos.length;
-  el('summary',album,`相片集錦 · ${journey.photos.length} 張`);
-  const albumTools=el('label',album,'縮圖大小','relive-album-tools');
-  const size=el('input',albumTools);size.type='range';size.min='72';size.max='220';size.value='120';size.step='4';size.setAttribute('aria-label','相片縮圖大小');
-  size.oninput=()=>{album.style.setProperty('--relive-thumb-size',`${size.value}px`);size.setAttribute('aria-valuetext',`${size.value} 像素`);};
+  el('summary',album,(english?`Photos · ${journey.photos.length}`:`相片集錦 · ${journey.photos.length} 張`));
+  const albumTools=el('label',album,t('縮圖大小'),'relive-album-tools');
+  const size=el('input',albumTools);size.type='range';size.min='72';size.max='220';size.value='120';size.step='4';size.setAttribute('aria-label',t('相片縮圖大小'));
+  size.oninput=()=>{album.style.setProperty('--relive-thumb-size',`${size.value}px`);size.setAttribute('aria-valuetext',(english?`${size.value} pixels`:`${size.value} 像素`));};
   const gallery=el('div',album,'','relive-gallery');
   for(const item of journey.photos){const button=el('button',gallery);button.type='button';button.title=item.caption||item.src;const img=el('img',button);img.decoding='async';img.src=item.url;img.alt=item.caption||item.src;img.loading='lazy';button.onclick=()=>select(item);}
   const eventList=el('div',host,'','relive-event-list');
@@ -122,7 +125,7 @@ export function mountPlayer(host,journey,options={}){
     let candidate,candidateSurface;
     const cancel=()=>{candidate?.destroy();candidateSurface?.remove();};
     pendingMap={destroy:cancel};
-    status.hidden=false;status.textContent=`正在載入 ${target==='maplibre-3d'?'MapLibre 3D':target==='google-3d'?'Google 3D':'2D 地圖'}…`;
+    status.hidden=false;status.textContent=`${english?'Loading ':'正在載入 '}${target==='maplibre-3d'?'MapLibre 3D':target==='google-3d'?'Google 3D':t('2D 地圖')}…`;
     try{
       let api,create;
       if(target==='maplibre-3d'){
@@ -135,7 +138,7 @@ export function mountPlayer(host,journey,options={}){
       candidateSurface=el('div',mapEl,'','relive-map-surface');candidateSurface.style.visibility='hidden';
       const failed=()=>{
         if(disposed||candidate!==adapter)return;
-        void switchMap('leaflet').then(()=>{if(!disposed&&mapMode==='leaflet'){status.hidden=false;status.textContent='3D 地圖資料或 WebGL 載入失敗，已切回 2D。';}});
+        void switchMap('leaflet').then(()=>{if(!disposed&&mapMode==='leaflet'){status.hidden=false;status.textContent=t('3D 地圖資料或 WebGL 載入失敗，已切回 2D。');}});
       };
       candidate=create(candidateSurface,journey,select,api,failed);
       if(candidate.ready)await candidate.ready;
@@ -148,12 +151,12 @@ export function mountPlayer(host,journey,options={}){
       if(!disposed&&id===switchId){
         // If replacing another 3D renderer failed, return to the reliable 2D adapter.
         if(mapMode!=='leaflet'){adapter.destroy();surface.remove();surface=el('div',mapEl,'','relive-map-surface');adapter=createLeafletMap(surface,journey,select);mapMode='leaflet';viewport.dataset.mapMode=mapMode;active=-1;render(false);}
-        status.hidden=false;status.textContent=`${error.message} 目前使用 2D 地圖。`;
+        status.hidden=false;status.textContent=`${t(error.message)} ${english?'Using the 2D map.':'目前使用 2D 地圖。'}`;
       }
     }finally{if(!disposed&&id===switchId){pendingMap=null;mode.value=mapMode;}}
   }
   mode.onchange=()=>void switchMap(mode.value);
-  if(journey.warnings.length){const details=el('details',host,'','relive-warnings');el('summary',details,`${journey.warnings.length} 項相片提示`);journey.warnings.forEach(w=>el('p',details,w));}
+  if(journey.warnings.length){const details=el('details',host,'','relive-warnings');el('summary',details,(english?`Photo notices · ${journey.warnings.length}`:`${journey.warnings.length} 項相片提示`));journey.warnings.forEach(w=>el('p',details,w));}
   slider.setAttribute('aria-valuetext',current.textContent);
   if(journey.renderer&&journey.renderer!=='leaflet'){mode.value=journey.renderer;void switchMap(journey.renderer);}
   return ()=>{clearTimeout(hideTimer);visibilityEvents.abort();disposed=true;switchId++;pendingMap?.destroy();pause();adapter.destroy();host.replaceChildren();};

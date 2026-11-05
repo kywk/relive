@@ -48,3 +48,12 @@ p{max-width:70ch}.relive-player .leaflet-container{font-family:inherit}.relive-p
 
 #hero-map .leaflet-tile-pane{filter:saturate(.35) sepia(.12)}
 :root[data-theme="dark"] #hero-map .leaflet-tile-pane{filter:grayscale(1) invert(1) brightness(.86);opacity:.5}
+
+/* Both language names remain readable and native selects stay keyboard accessible. */
+.language-control{display:flex;align-items:center;flex-shrink:0;font-size:14px}
+.language-control select{min-height:44px;padding:8px;color:var(--ink);background:var(--surface);border:1px solid currentColor;border-radius:0;cursor:pointer;font-size:16px}
+.language-control select:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+.nav{flex-wrap:wrap}.nav nav{flex-wrap:wrap}.nav nav,.hero-copy>div,.section-head>*{min-width:0}
+:root[lang="en"] .hero-line{letter-spacing:-.03em}
+@media(min-width:601px) and (max-width:1000px){.nav{gap:16px}.nav nav{gap:20px}.theme-control{margin-left:auto}.nav nav{flex:1}}
+@media(max-width:600px){.nav nav{justify-content:flex-end;gap:12px}.nav .brand{margin-right:auto}.theme-control{margin-left:auto}.language-control{margin-left:4px}.theme-control select{font-size:16px}:root[lang="en"] .hero-line{font-size:36px}.install-tabs{flex-wrap:wrap}}

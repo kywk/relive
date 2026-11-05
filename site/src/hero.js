@@ -1,3 +1,4 @@
+import {t} from './i18n.js';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
@@ -34,7 +35,7 @@ export async function mountHero(host) {
   const center=map.project(position,14);center.x-=host.clientWidth*.23;center.y-=host.clientHeight*.12;
   map.setView(map.unproject(center,14),14,{animate:false});
  }
- function sync(){button.textContent=paused?'播放背景回放':'暫停背景回放';cancelAnimationFrame(frame);last=0;if(!paused&&visible&&!document.hidden&&!disposed)frame=requestAnimationFrame(tick);}
+ function sync(){button.textContent=t(paused?'播放背景回放':'暫停背景回放');cancelAnimationFrame(frame);last=0;if(!paused&&visible&&!document.hidden&&!disposed)frame=requestAnimationFrame(tick);}
  function tick(now){
   const dt=last?Math.min((now-last)/1000,.1):0;last=now;
   if(hold>0){hold-=dt;if(hold<=0)map.closePopup();}
@@ -43,7 +44,7 @@ export async function mountHero(host) {
    const stop=stops[stopIndex];
    if(stop&&travel>=stop.distance){travel=stop.distance;hold=4;stopIndex++;
     const content=document.createElement('figure'),img=document.createElement('img'),caption=document.createElement('figcaption');
-    img.src=base+stop.url;img.alt=stop.caption;caption.textContent=stop.caption;content.append(img,caption);
+    img.src=base+stop.url;img.alt=t(stop.caption);caption.textContent=t(stop.caption);content.append(img,caption);
     popup.setLatLng(points[stop.index]).setContent(content).openOn(map);
    }
    if(travel>=total){travel=0;stopIndex=0;}

@@ -32,7 +32,7 @@ export function resolveEvents(events,track,offset){
 }
 export function elapsedLabel(seconds){const s=Math.max(0,Math.floor(seconds));return [Math.floor(s/3600),Math.floor(s/60)%60,s%60].map(v=>String(v).padStart(2,'0')).join(':');}
 export function timelineLabel(journey,progress,full=false){
-  if(!journey.track.timed)return `${elapsedLabel(journey.duration*progress)}${full?'（回放時間）':''}`;
+  if(!journey.track.timed)return `${elapsedLabel(journey.duration*progress)}${full?(journey.locale==='en'?' (replay time)':'（回放時間）'):''}`;
   const offset=journey.timezoneOffset??'+08:00';
   const minutes=(offset[0]==='-'?-1:1)*(Number(offset.slice(1,3))*60+Number(offset.slice(4,6)));
   const date=new Date(journey.track.points[0].time+journey.track.elapsed*1000*progress+minutes*60000).toISOString();

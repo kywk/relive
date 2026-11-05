@@ -6,6 +6,8 @@ export interface Photo {src: string; url?: string; caption?: string; time?: stri
 export interface ResolvedPhoto extends Photo {progress: number | null; matchedBy?: 'time' | 'gps' | null;}
 export interface JourneyEvent {title: string; text?: string; progress: number; lat: number; lon: number; kind?: 'event';}
 export interface Journey {
+  /** Player UI language; defaults to Traditional Chinese. */
+  locale?: 'zh-Hant' | 'en';
   title: string;
   track: Track;
   photos: ResolvedPhoto[];

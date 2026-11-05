@@ -1,3 +1,4 @@
+import {playerTranslator} from './player-i18n.js';
 export const googleMapsSupported = true;
 import {createTrailChunks} from './trail.js';
 let pending;
@@ -17,6 +18,7 @@ export function loadGoogleMaps(key){
   return pending.then(()=>globalThis.google.maps.importLibrary('maps3d'));
 }
 export function createGoogleMap(host,journey,onSelect,api,onError=()=>{}){
+  const t=playerTranslator(journey.locale);
   const {Map3DElement,Polyline3DElement,Marker3DElement,Marker3DInteractiveElement,PopoverElement}=api;
   const coords=p=>({lat:p.lat,lng:p.lon,altitude:0});
   const start=journey.track.points[0];
@@ -32,10 +34,10 @@ export function createGoogleMap(host,journey,onSelect,api,onError=()=>{}){
   for(const chunk of trail.chunks){
     const line=new Polyline3DElement({path:[],strokeColor:'#19c5ff',strokeWidth:7,altitudeMode:'CLAMP_TO_GROUND'});map.append(line);trails.push(line);
   }
-  const cursor=new Marker3DElement({position:coords(start),label:'目前位置',altitudeMode:'CLAMP_TO_GROUND'});map.append(cursor);
+  const cursor=new Marker3DElement({position:coords(start),label:t('目前位置'),altitudeMode:'CLAMP_TO_GROUND'});map.append(cursor);
   const popup=new PopoverElement({autoPanDisabled:true,lightDismissDisabled:true});map.append(popup);
   for(const item of [...journey.photos,...journey.events])if(item.progress!==null){
-    const marker=new Marker3DInteractiveElement({position:coords(item),title:item.title||item.caption||'相片',altitudeMode:'CLAMP_TO_GROUND'});
+    const marker=new Marker3DInteractiveElement({position:coords(item),title:item.title||item.caption||t('相片'),altitudeMode:'CLAMP_TO_GROUND'});
     marker.addEventListener('gmp-click',()=>onSelect(item));map.append(marker);
   }
   return {

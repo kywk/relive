@@ -1,5 +1,7 @@
 # Relive — Obsidian、React 與 Docusaurus 旅程回放
 
+**繁體中文** | [English](README.en.md)
+
 ## English overview
 
 Relive replays GPX journeys with time- and GPS-matched photos in Obsidian. Add a `relive` Markdown code block to a note, choose a GPX file, and optionally add photos and timeline events. It supports playback, seeking, photo stops, Leaflet 2D maps, and bundled MapLibre 3D terrain. Install `main.js`, `manifest.json`, and `styles.css` from the latest GitHub release in your vault's `.obsidian/plugins/relive/` directory, then enable Relive.
@@ -15,6 +17,8 @@ Code is MIT licensed. Map and photo attribution remains visible. The following s
 [開啟 Relive Demo](https://kywk.github.io/relive/)：京都鴨川實景照片、可播放的示範路線、Markdown 範例及安裝方式。照片採 CC BY 4.0／CC0，完整署名見網站頁尾；路線與時間是示範編排。
 
 執行 `npm run pages:dev` 預覽，`npm run pages:build` 建置至 `site/dist`。main push 由 `.github/workflows/pages.yml` 自動部署，PR 僅建置；詳見 [網站維護說明](site/README.md)。此流程不發布 npm 或 Obsidian Community。
+
+官網提供繁體中文／English 切換並記住選擇，也可用 `?lang=zh-Hant` 或 `?lang=en` 分享指定語言的頁面。
 
 ## 獨立 React 套件
 
@@ -40,6 +44,8 @@ export default function App() {
 ```
 
 樣式入口已包含 Leaflet、MapLibre 與 Relive CSS。元件僅在瀏覽器 effect 載入地圖，卸載會清理播放器；`journey` 換成另一個物件時會重建並重置進度，因此請把資料保存在 state、`useMemo` 或模組常數。它接收已解析資料，不掃描 Vault，也不替應用程式抓取附件或解析 EXIF。
+
+在 `journey` 設定 `locale: 'en'` 可使用英文播放器介面；`locale: 'zh-Hant'` 或省略此欄位則使用繁體中文。
 
 本機開發執行 `npm run react:demo`，`npm run react:build` 驗證獨立 Vite 範例。npm 發布前，先以 `npm run release:pack` 與 `npm run react:release:pack` 產生並驗證兩個相依 tarball；安裝方式、SSR、照片定位與資料契約見 [React 整合指南](docs/react.md)。目前已發布 `@kywk/relive@0.2.2` 與 `@kywk/react-relive@0.1.2`，可直接從 npm 安裝。
 

@@ -6,10 +6,18 @@ import sourceJourney from '../generated/journey.json';
 import {createElement} from 'react';
 import {createRoot} from 'react-dom/client';
 import {Relive} from '@kywk/react-relive';
+import {locale} from './i18n.js';
+
+const captions = ['Setting off along the river', 'Stopping to watch the birds', 'Egrets in the shallows', 'Stepping stones across the river'];
 
 // Resolve after the lazy player mounts so external photo buttons can seek safely.
 export function mountReactPlayer(host) {
-  const journey = {...sourceJourney, photos: sourceJourney.photos.map(photo => ({...photo, url: import.meta.env.BASE_URL + photo.url}))};
+  const journey = {...sourceJourney, locale,
+    title: locale === 'en' ? 'Kyoto · A walk along the Kamo River' : sourceJourney.title,
+    photos: sourceJourney.photos.map((photo, index) => ({...photo,
+      caption: locale === 'en' ? captions[index] ?? photo.caption : photo.caption,
+      url: import.meta.env.BASE_URL + photo.url})),
+  };
   const root = createRoot(host);
   return new Promise((resolve, reject) => {
     let disposed = false;
