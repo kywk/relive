@@ -4,7 +4,7 @@
 
 ## 安裝與本機驗證
 
-發布至 npm 後，在已有 React 的專案執行：
+目前 npm 版本為 0.1.2，搭配共用播放器 0.2.2；在已有 React 19 的專案執行：
 
 ```sh
 npm install @kywk/react-relive
@@ -24,7 +24,7 @@ npm run react:release:pack
 npm install /path/to/relive/.release/docusaurus/kywk-relive-0.2.2.tgz /path/to/relive/.release/react/kywk-react-relive-0.1.2.tgz
 ```
 
-React 套件依賴共用 `@kywk/relive`；首次上架前需同時提供它，不能只把 React tarball 交給 CI。依賴中的 Docusaurus 整合入口不會被 React 入口載入，Docusaurus 本身也不是 runtime dependency。
+React 套件依賴共用 `@kywk/relive`，一般安裝由 npm 自動取得；驗證尚未發布的共用變更時，需同時提供兩個 tarball。依賴中的 Docusaurus 整合入口不會被 React 入口載入，Docusaurus 本身也不是 runtime dependency。
 
 完整範例在 [`examples/react`](../examples/react/README.md)，於 repository 根目錄執行 `npm run react:demo`。官網同樣使用 React 元件；既有 Docusaurus 範例仍保留 Markdown 建置整合。
 
@@ -75,6 +75,10 @@ const journeyWithPhoto = {...journey, photos: [photo]};
 `Relive` 支援 `className`、`style`、`onReady`、`onError` 與選配 `googleMapsApiKey`。Google key 是交付瀏覽器的公開 client credential，應設定來源與 API 限制。
 
 元件在 effect 中動態載入播放器，SSR import 不建立地圖。卸載或切換旅程會清理動畫、事件與地圖，適用 React StrictMode。更換 `journey` 物件會重建播放器並重置進度；用模組常數、state 或 `useMemo` 保持不變資料的 identity。不要在每次 render 都重新組合整份旅程。
+
+## 3D 與 Worker
+
+0.1.2 搭配共用播放器 0.2.2，已封裝 MapLibre 6.4.1 Worker，不需為 Vite、Webpack 或其他框架另設 Worker URL。程式來自套件內建資產，透過本機 Blob URL 啟動；使用 CSP 的網站需允許 `worker-src blob:`。底圖與地形仍需網路及 WebGL，載入失敗會退回 2D。Google 3D 僅供網站／React 選用，Obsidian 版不提供此模式。
 
 ## SSR 與其他框架
 

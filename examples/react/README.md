@@ -10,7 +10,7 @@ npm run react:demo
 npm run react:build
 ```
 
-請先在 repository 根目錄安裝依賴，讓所有範例共用本機套件與工具。開發期間套件透過 `file:../../packages/react-relive` 連結；移植到其他專案時，安裝 `npm run react:release:pack` 產生的 tarball。套件尚未發布至 npm registry。
+請先在 repository 根目錄安裝依賴，讓所有範例共用本機套件與工具。開發期間套件透過 `file:../../packages/react-relive` 連結；移植到其他專案時執行 `npm install @kywk/react-relive react@19 react-dom@19`。目前 npm 版本為 0.1.2；只有驗證未發布的修改時才需要 `npm run react:release:pack` 產生的 tarball。
 
 ```jsx
 import {Relive} from '@kywk/react-relive';

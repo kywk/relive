@@ -41,7 +41,7 @@ export default function App() {
 
 樣式入口已包含 Leaflet、MapLibre 與 Relive CSS。元件僅在瀏覽器 effect 載入地圖，卸載會清理播放器；`journey` 換成另一個物件時會重建並重置進度，因此請把資料保存在 state、`useMemo` 或模組常數。它接收已解析資料，不掃描 Vault，也不替應用程式抓取附件或解析 EXIF。
 
-本機開發執行 `npm run react:demo`，`npm run react:build` 驗證獨立 Vite 範例。npm 發布前，先以 `npm run release:pack` 與 `npm run react:release:pack` 產生並驗證兩個相依 tarball；安裝方式、SSR、照片定位與資料契約見 [React 整合指南](docs/react.md)。本機可打包不代表已發布至 registry。
+本機開發執行 `npm run react:demo`，`npm run react:build` 驗證獨立 Vite 範例。npm 發布前，先以 `npm run release:pack` 與 `npm run react:release:pack` 產生並驗證兩個相依 tarball；安裝方式、SSR、照片定位與資料契約見 [React 整合指南](docs/react.md)。目前已發布 `@kywk/relive@0.2.2` 與 `@kywk/react-relive@0.1.2`，可直接從 npm 安裝。
 
 ## GPX 瘦身 CLI
 
@@ -122,7 +122,9 @@ GPX 時間完整且單調遞增時依時間回放，否則依距離回放。`dur
 
 ## 安裝 Obsidian 插件
 
-執行 `npm run build` 後，把 `dist/obsidian/` 內三個檔案放到：
+建議從 [Obsidian Community](https://community.obsidian.md/plugins/relive) 點選 **Add to Obsidian**，在 Obsidian 中安裝並啟用 Relive。0.2.2 已完成自動審核，包含附件簽章與原始碼重建比對。
+
+手動安裝可從 [Release 0.2.2](https://github.com/kywk/relive/releases/tag/0.2.2) 下載同一版本的三個附件；開發者則執行 `npm run build`，使用 `dist/obsidian/` 產物。放到：
 
 ```text
 <vault>/.obsidian/plugins/relive/
@@ -226,7 +228,7 @@ npm run vault:serve
 
 ## 邊界與後續
 
-目前是可建置的第一版。Google 3D 需要使用者 API key，尚未以真實 key 驗證；未實作影片／音樂匯出、海拔圖、Vault 資產修改後即時刷新、離線地圖與發布精靈。超大型 GPX 每幀繪製可能較慢，跨國際換日線的地圖繪製尚未調整 world wrapping。地圖使用 OpenStreetMap 公開圖磚，需要網路；正式流量請確認圖磚服務使用政策並規劃供應商設定。
+目前已發布 0.2.2。Google 3D 需要使用者 API key，尚未以真實 key 驗證；未實作影片／音樂匯出、海拔圖、Vault 資產修改後即時刷新、離線地圖與發布精靈。超大型 GPX 每幀繪製可能較慢，跨國際換日線的地圖繪製尚未調整 world wrapping。地圖使用 OpenStreetMap 公開圖磚，需要網路；正式流量請確認圖磚服務使用政策並規劃供應商設定。
 
 參考： [Obsidian Markdown post processing](https://github.com/obsidianmd/obsidian-developer-docs/blob/main/en/Plugins/Editor/Markdown%20post%20processing.md)、[Docusaurus MDX plugins](https://docusaurus.io/docs/markdown-features/plugins)、[Docusaurus client modules](https://docusaurus.io/docs/advanced/client)、[Leaflet API](https://leafletjs.com/reference.html)。
 
@@ -322,7 +324,7 @@ stopDuration: 3
 
 ## Release CI/CD
 
-維護者：GitHub／npm 帳號均為 `kywk`。Repository 為 [kywk/relive](https://github.com/kywk/relive)。本次發行目標是 [GitHub Release 0.2.2](https://github.com/kywk/relive/releases/tag/0.2.2)，附件與 npm 套件已發布，Obsidian Community 已收錄；最新審核版本見 [Community 頁面](https://community.obsidian.md/plugins/relive)。專案與 CLI 採 MIT 授權。
+維護者：GitHub／npm 帳號均為 `kywk`。Repository 為 [kywk/relive](https://github.com/kywk/relive)。目前穩定版本是 [GitHub Release 0.2.2](https://github.com/kywk/relive/releases/tag/0.2.2)，附件與 npm 套件已發布，Obsidian Community 已收錄；最新審核版本見 [Community 頁面](https://community.obsidian.md/plugins/relive)。專案與 CLI 採 MIT 授權。
 
 | 產品 | 安裝識別 | 發行 tag | Workflow |
 | --- | --- | --- | --- |
@@ -359,7 +361,11 @@ npm run react:release:pack
 
 React 套件在 `packages/react-relive` 獨立維護版本，產物位於 `.release/react/`。它依賴 `@kywk/relive`，首次發布時先發布共用 library，再發布 React 套件；`release-react.yml` 使用自己的 tag 與 npm trusted publisher。它不會隨 Obsidian tag 自動發布。
 
-### 首次上架
+### 發布狀態與後續設定
+
+2026-11-05 已發布 Obsidian／共用套件 0.2.2、React 0.1.2 與 GPX Slim 0.1.0。Community 的 0.2.2 審核已完成，GitHub Release、CI 與 demo 部署皆成功；實際 registry 安裝、React SSR 與 CLI 執行已驗證。
+
+本次 npm 以本機已驗證 tarball 與互動式 2FA 發布。各套件的 GitHub OIDC trusted publisher 尚未完成設定；以下為維護者啟用自動發布的步驟，不能僅憑 workflow 存在就推定已啟用。
 
 1. 建立公開 `kywk/relive` repository 並提交原始碼、LICENSE、manifest、versions 與各套件 lockfile；確認 GitHub Actions 通過。
 2. 登入 npm 的 `kywk` 帳號，確認各產品的 scoped 名稱可發布。首次發布／建立套件依 [npm Trusted Publishing 官方流程](https://docs.npmjs.com/trusted-publishers/) 辦理；如需本機首次發布，使用已驗證的 tarball，完成 npm 要求的登入／2FA。

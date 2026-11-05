@@ -62,7 +62,7 @@ node bin/gpx-slim.js ride.gpx --strip-extensions
 
 ## npm / GitHub 發布
 
-已配置 `bin`、套件檔案白名單與 `prepack` 測試。專案目前**尚未發布**；正式套件名稱為 `@kywk/gpx-slim`，由 npm 帳號 `kywk` 維護。
+已配置 `bin`、套件檔案白名單與 `prepack` 測試。0.1.0 已發布至 npm；正式套件名稱為 `@kywk/gpx-slim`，由 npm 帳號 `kywk` 維護。
 
 先在本機驗證打包與 npx：
 
@@ -72,13 +72,13 @@ npm pack
 npx --yes --package ./kywk-gpx-slim-0.1.0.tgz gpx-slim --help
 ```
 
-已配置 MIT 授權、作者與 `kywk/relive` repository 的子目錄 metadata。正式上架前需完成 npm 登入及 Trusted Publisher 設定，詳見根目錄發佈說明。
+已配置 MIT 授權、作者與 `kywk/relive` repository 的子目錄 metadata。首次發布已透過本機 2FA 完成；後續自動發布仍需設定 npm Trusted Publisher，詳見根目錄發佈說明。
 
 ```sh
 # 登入 npm 並配置妥當後，由維護者執行
 npm publish --access public
 
-# 發布成功後，使用者即可執行（名稱需與實際發布名稱一致）
+# 使用者可直接執行
 npx @kywk/gpx-slim ride.gpx --analyze
 npx @kywk/gpx-slim ride.gpx --preset balanced --reduction 70
 ```
@@ -115,4 +115,4 @@ XML 解析使用 [saxes](https://github.com/lddubeau/saxes)，以其公開事件
 
 Relive CI 在 Node 22／24 自動執行此套件的 prepack 測試，驗證離線 npx 分析、壓縮與檔案保護，並保存 tarball artifact。根目錄可執行 `npm run gpx:release:pack` 重現。
 
-此套件使用獨立 `gpx-slim-v<version>` tag，透過 `release-gpx-slim.yml` 發布 npm；不會由 Obsidian 或根套件的 tag 觸發。首次發布仍須建立遠端 repository 與設定 npm OIDC trusted publisher。詳見 [Relive 發佈說明](../../README.md#release-cicd)。
+此套件使用獨立 `gpx-slim-v<version>` tag，透過 `release-gpx-slim.yml` 發布 npm；不會由 Obsidian 或根套件的 tag 觸發。Repository 與首次 npm 發布已完成，後續使用此 workflow 前仍需設定 npm OIDC trusted publisher。詳見 [Relive 發佈說明](../../README.md#release-cicd)。
