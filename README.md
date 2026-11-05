@@ -1,5 +1,13 @@
 # Relive — Obsidian、React 與 Docusaurus 旅程回放
 
+## English overview
+
+Relive replays GPX journeys with time- and GPS-matched photos in Obsidian. Add a `relive` Markdown code block to a note, choose a GPX file, and optionally add photos and timeline events. It supports playback, seeking, photo stops, Leaflet 2D maps, and bundled MapLibre 3D terrain. Install `main.js`, `manifest.json`, and `styles.css` from the latest GitHub release in your vault's `.obsidian/plugins/relive/` directory, then enable Relive.
+
+**Network and privacy:** OpenStreetMap provides 2D tiles; OpenFreeMap provides vector maps and buildings; Mapterhorn provides terrain. These services receive map-area requests. Remote GPX or photo URLs authored in a note are fetched from those URLs. Local GPX parsing and photo matching run on your device; Relive does not upload vault contents or collect analytics. The plugin does not load executable code from remote services. Google Maps JavaScript API is available only in the separate website/React integration, requires your own key and billing, and is excluded from the Obsidian build.
+
+Code is MIT licensed. Map and photo attribution remains visible. The following sections provide the full Traditional Chinese usage guide.
+
 把 `relive` fenced code block 放進筆記，以 Leaflet 播放 GPX 軌跡並顯示相片。第一版提供 2D 地圖、播放／暫停、拖曳進度、倍速、相機跟隨、相片縮圖與定位提示。支援免金鑰 MapLibre 3D 地形與選配 Google 寫實 3D；尚未提供影片匯出。
 
 ## 官方 Demo 與 GitHub Pages
@@ -268,7 +276,7 @@ MapLibre 搭配 [OpenFreeMap](https://openfreemap.org/) 向量底圖／建築輪
 以 Google Maps JavaScript API 的 `Map3DElement`、`Polyline3DElement` 與 `PopoverElement` 整合 Google 的衛星／寫實 3D 地圖，提供傾斜視角、軌跡線、跟隨鏡頭與地圖對話框。這是 Google Maps 官方嵌入式 3D API，並非把 Google Earth 網頁塞進 iframe；可用影像與建築細節依區域覆蓋而異。
 
 1. Google Cloud 專案需啟用帳務及 Maps JavaScript API，建立適用於使用環境的 key。
-2. Obsidian：到「設定 → Relive」填寫 Google Maps API key，再重新開啟筆記。
+2. Obsidian 版自 0.2.1 起不提供 Google 3D，也不載入 Google 遠端程式；請改用 MapLibre 3D 或 2D。
 3. Docusaurus：將 plugin 設定改成下列形式；key 是瀏覽器端 key，會進入客戶端 bundle，請設定 API 與網站來源限制。
 
 ```js
@@ -314,13 +322,13 @@ stopDuration: 3
 
 ## Release CI/CD
 
-維護者：GitHub／npm 帳號均為 `kywk`。Repository 為 [kywk/relive](https://github.com/kywk/relive)。本次發行目標是 [GitHub Release 0.2.0](https://github.com/kywk/relive/releases/tag/0.2.0)，由 Actions 建置與驗證後發布附件；npm registry 與 Obsidian Community 上架另行處理。專案與 CLI 採 MIT 授權。
+維護者：GitHub／npm 帳號均為 `kywk`。Repository 為 [kywk/relive](https://github.com/kywk/relive)。本次發行目標是 [GitHub Release 0.2.1](https://github.com/kywk/relive/releases/tag/0.2.1)，由 Actions 建置與驗證後發布附件；npm registry 與 Obsidian Community 上架另行處理。專案與 CLI 採 MIT 授權。
 
 | 產品 | 安裝識別 | 發行 tag | Workflow |
 | --- | --- | --- | --- |
-| GitHub Release／Obsidian 安裝包 | plugin ID `relive`，另附三個 npm tarball | `0.2.0` | `release-obsidian.yml` |
-| Docusaurus／共用 library | `@kywk/relive` | `npm-v0.2.0` | `release-npm.yml` |
-| React 元件 | `@kywk/react-relive` | `react-relive-v0.1.0` | `release-react.yml` |
+| GitHub Release／Obsidian 安裝包 | plugin ID `relive`，另附三個 npm tarball | `0.2.1` | `release-obsidian.yml` |
+| Docusaurus／共用 library | `@kywk/relive` | `npm-v0.2.1` | `release-npm.yml` |
+| React 元件 | `@kywk/react-relive` | `react-relive-v0.1.1` | `release-react.yml` |
 | GPX Slim CLI | `@kywk/gpx-slim`，命令 `gpx-slim` | `gpx-slim-v0.1.0` | `release-gpx-slim.yml` |
 
 GitHub 發行流程同時建置網站、測試三個 tarball，附 SHA256SUMS 與 artifact attestations，並使用 `docs/releases/<version>.md` 作為 release notes；建立新版本 tag 前須先備妥該檔案。此流程不會執行 npm publish 或提交 Community。

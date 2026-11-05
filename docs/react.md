@@ -21,7 +21,7 @@ npm run react:release:pack
 再於消費端安裝兩個本機產物，版本依實際檔名調整：
 
 ```sh
-npm install /path/to/relive/.release/docusaurus/kywk-relive-0.2.0.tgz /path/to/relive/.release/react/kywk-react-relive-0.1.0.tgz
+npm install /path/to/relive/.release/docusaurus/kywk-relive-0.2.1.tgz /path/to/relive/.release/react/kywk-react-relive-0.1.1.tgz
 ```
 
 React 套件依賴共用 `@kywk/relive`；首次上架前需同時提供它，不能只把 React tarball 交給 CI。依賴中的 Docusaurus 整合入口不會被 React 入口載入，Docusaurus 本身也不是 runtime dependency。

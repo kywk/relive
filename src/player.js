@@ -2,7 +2,7 @@ import {createPlayback} from './playback.js';
 import {sampleTrack} from './track.js';
 import {timelineLabel,elapsedLabel} from './timeline.js';
 import {createLeafletMap} from './leaflet-map.js';
-import {loadGoogleMaps,createGoogleMap} from './google-map.js';
+import {loadGoogleMaps,createGoogleMap,googleMapsSupported} from './google-map.js';
 
 export function mountPlayer(host,journey,options={}){
   journey.events??=[];
@@ -13,7 +13,7 @@ export function mountPlayer(host,journey,options={}){
   const modeLabel=el('label',header,'地圖 ','relive-map-mode');
   const mode=el('select',modeLabel);mode.setAttribute('aria-label','地圖模式');
   for(const [value,label] of [['leaflet','2D 地圖'],['maplibre-3d','MapLibre 3D'],['google-3d','Google 3D']]){
-    if(value==='google-3d'&&!options.googleMapsApiKey&&journey.renderer!=='google-3d')continue;
+    if(value==='google-3d'&&(!googleMapsSupported||(!options.googleMapsApiKey&&journey.renderer!=='google-3d')))continue;
     el('option',mode,label).value=value;
   }
   const viewport=el('div',host,'','relive-viewport');

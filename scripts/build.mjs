@@ -1,7 +1,8 @@
 import {build} from 'esbuild';
+import {fileURLToPath} from 'node:url';
 import {mkdir, copyFile, readFile, writeFile} from 'node:fs/promises';
 await mkdir('dist/obsidian',{recursive:true});
-await build({entryPoints:['src/obsidian.ts'],outfile:'dist/obsidian/main.js',bundle:true,platform:'browser',format:'cjs',target:'es2020',external:['obsidian'],logLevel:'info'});
+await build({entryPoints:['src/obsidian.ts'],outfile:'dist/obsidian/main.js',bundle:true,platform:'browser',format:'cjs',target:'es2020',external:['obsidian'],plugins:[{name:'obsidian-local-runtime',setup(builder){builder.onResolve({filter:/\/google-map\.js$/},()=>({path:fileURLToPath(new URL('../src/google-map-obsidian.js',import.meta.url))}));}}],logLevel:'info'});
 await copyFile('manifest.json','dist/obsidian/manifest.json');
 const leaflet=await readFile('node_modules/leaflet/dist/leaflet.css','utf8');
 // Embed Leaflet's optional control/marker assets, so the installed plugin is self contained.

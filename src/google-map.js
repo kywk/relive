@@ -1,3 +1,4 @@
+export const googleMapsSupported = true;
 import {createTrailChunks} from './trail.js';
 let pending;
 export function loadGoogleMaps(key){
