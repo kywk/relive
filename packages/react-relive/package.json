@@ -26,7 +26,7 @@
     "typecheck": "tsc --noEmit --strict --types react --module NodeNext --moduleResolution NodeNext --target ES2022 test/types.ts"
   },
   "dependencies": {
-    "@kywk/relive": "^0.1.0",
+    "@kywk/relive": "^0.2.0",
     "leaflet": "^1.9.4",
     "maplibre-gl": "5.24.0"
   },

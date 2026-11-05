@@ -314,12 +314,12 @@ stopDuration: 3
 
 ## Release CI/CD
 
-維護者：GitHub／npm 帳號均為 `kywk`。Repository 為 [kywk/relive](https://github.com/kywk/relive)。本次發行目標是 [GitHub Release 0.1.0](https://github.com/kywk/relive/releases/tag/0.1.0)，由 Actions 建置與驗證後發布附件；npm registry 與 Obsidian Community 上架另行處理。專案與 CLI 採 MIT 授權。
+維護者：GitHub／npm 帳號均為 `kywk`。Repository 為 [kywk/relive](https://github.com/kywk/relive)。本次發行目標是 [GitHub Release 0.2.0](https://github.com/kywk/relive/releases/tag/0.2.0)，由 Actions 建置與驗證後發布附件；npm registry 與 Obsidian Community 上架另行處理。專案與 CLI 採 MIT 授權。
 
 | 產品 | 安裝識別 | 發行 tag | Workflow |
 | --- | --- | --- | --- |
-| GitHub Release／Obsidian 安裝包 | plugin ID `relive`，另附三個 npm tarball | `0.1.0` | `release-obsidian.yml` |
-| Docusaurus／共用 library | `@kywk/relive` | `npm-v0.1.0` | `release-npm.yml` |
+| GitHub Release／Obsidian 安裝包 | plugin ID `relive`，另附三個 npm tarball | `0.2.0` | `release-obsidian.yml` |
+| Docusaurus／共用 library | `@kywk/relive` | `npm-v0.2.0` | `release-npm.yml` |
 | React 元件 | `@kywk/react-relive` | `react-relive-v0.1.0` | `release-react.yml` |
 | GPX Slim CLI | `@kywk/gpx-slim`，命令 `gpx-slim` | `gpx-slim-v0.1.0` | `release-gpx-slim.yml` |
 
