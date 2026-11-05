@@ -265,7 +265,7 @@ MapLibre 搭配 [OpenFreeMap](https://openfreemap.org/) 向量底圖／建築輪
 
 需要網路與 WebGL，資料覆蓋、精度及公共服務可用性依供應商而異；保留地圖右上角署名。初始化失敗、逾時或 WebGL／圖磚錯誤會回到 2D；載入期間也可選回 2D 取消。GPX 與照片由播放器在本機處理，不上傳給底圖服務；服務仍會收到視野範圍的圖磚請求。
 
-網站與 Docusaurus 會延後載入 3D JavaScript。Obsidian 為單檔插件，MapLibre 程式與 worker 已打包進 `main.js`，樣式包含於 `styles.css`，不在執行時從 CDN 下載程式。新增依賴使用 MapLibre 5.24.0 的內含 worker 發行格式，以相容 Vite、Webpack 與 Obsidian 的 CJS 單檔建置。
+網站與 Docusaurus 會延後載入 3D JavaScript。Obsidian 為單檔插件，MapLibre 程式與 worker 已打包進 `main.js`，樣式包含於 `styles.css`，不在執行時從 CDN 下載程式。MapLibre 6.4.1 的 worker 由建置腳本封裝為自足程式，透過本機 Blob URL 啟動，相容 Vite、Webpack 與 Obsidian 單檔建置；網站 CSP 須允許 `worker-src blob:`。
 
 直接使用 `@kywk/relive/player` 的自訂網站，除 Leaflet 與 Relive 樣式外，需載入 `maplibre-gl/dist/maplibre-gl.css`。Docusaurus plugin 與 Obsidian 建置會自動處理。
 
@@ -285,9 +285,9 @@ plugins: [[path.resolve('../src/docusaurus.cjs'), {
 }]],
 ```
 
-設定 key 後，在「地圖」選單選擇「Google 3D」才載入 Google 程式；也可在 `relive` 區塊加入 `renderer: google-3d`，於開啟時自動嘗試。API key 不放在 Markdown 區塊中。沒有 key 或載入失敗會保留 Leaflet 2D；返回 2D 保留目前進度。Obsidian 的 `app://` 來源與 CSP、WebGL 支援需在實際環境驗證，不能假設網站的 referrer 限制也適用於桌面插件。不要為測試關閉 key 限制。
+設定 key 後，在「地圖」選單選擇「Google 3D」才載入 Google 程式；也可在 `relive` 區塊加入 `renderer: google-3d`，於開啟時自動嘗試。API key 不放在 Markdown 區塊中。沒有 key 或載入失敗會保留 Leaflet 2D；返回 2D 保留目前進度。Google 3D 僅供網站使用，請為實際網站設定來源限制，不要為測試關閉 key 限制。
 
-本次已驗證無 key 提示、共用時間軸與網站建置；未提供使用者 key，因此尚未驗證 Google 實景載入、帳務或桌面端授權。官方參考：[3D Overview](https://developers.google.com/maps/documentation/javascript/3d/overview)、[3D shapes](https://developers.google.com/maps/documentation/javascript/3d/shapes-lines)、[Popover API](https://developers.google.com/maps/documentation/javascript/reference/3d-map-draw#PopoverElement)。
+本次已驗證無 key 提示、共用時間軸與網站建置；未提供使用者 key，因此尚未驗證 Google 實景載入與帳務。官方參考：[3D Overview](https://developers.google.com/maps/documentation/javascript/3d/overview)、[3D shapes](https://developers.google.com/maps/documentation/javascript/3d/shapes-lines)、[Popover API](https://developers.google.com/maps/documentation/javascript/reference/3d-map-draw#PopoverElement)。
 
 
 ## 播放器外觀與相片集錦
@@ -322,7 +322,7 @@ stopDuration: 3
 
 ## Release CI/CD
 
-維護者：GitHub／npm 帳號均為 `kywk`。Repository 為 [kywk/relive](https://github.com/kywk/relive)。本次發行目標是 [GitHub Release 0.2.2](https://github.com/kywk/relive/releases/tag/0.2.2)，由 Actions 建置與驗證後發布附件；npm registry 與 Obsidian Community 上架另行處理。專案與 CLI 採 MIT 授權。
+維護者：GitHub／npm 帳號均為 `kywk`。Repository 為 [kywk/relive](https://github.com/kywk/relive)。本次發行目標是 [GitHub Release 0.2.2](https://github.com/kywk/relive/releases/tag/0.2.2)，附件與 npm 套件已發布，Obsidian Community 已收錄；最新審核版本見 [Community 頁面](https://community.obsidian.md/plugins/relive)。專案與 CLI 採 MIT 授權。
 
 | 產品 | 安裝識別 | 發行 tag | Workflow |
 | --- | --- | --- | --- |
