@@ -126,8 +126,9 @@ export function mountPlayer(host,journey,options={}){
     try{
       let api,create;
       if(target==='maplibre-3d'){
-        const [runtime,module]=await Promise.all([import('maplibre-gl'),import('./maplibre-map.js')]);
+        const [runtime,module,worker]=await Promise.all([import('maplibre-gl'),import('./maplibre-map.js'),import('./maplibre-worker.js')]);
         api=runtime.default??runtime;create=module.createMapLibreMap;
+        worker.configureMapLibreWorker(api);
       }else if(target==='google-3d'){api=await loadGoogleMaps(options.googleMapsApiKey);create=createGoogleMap;}
       else create=createLeafletMap;
       if(disposed||id!==switchId)return;

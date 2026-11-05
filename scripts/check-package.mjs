@@ -13,7 +13,7 @@ const result = JSON.parse(execFileSync('npm', ['pack', '--json', '--pack-destina
 const packed = Array.isArray(result) ? result[0] : result[pkg.name];
 assert.ok(packed?.filename, 'npm pack did not return a tarball');
 const files = new Set(packed.files.map(file => file.path));
-for (const entry of ['packages/gpx-slim/src/index.js', 'packages/gpx-slim/package.json', 'packages/gpx-slim/LICENSE', 'LICENSE', 'README.md', 'src/client.js', 'src/styles.css', 'src/remark.cjs', 'src/integration.cjs']) assert.ok(files.has(entry), `Missing ${entry}`);
+for (const entry of ['packages/gpx-slim/src/index.js', 'packages/gpx-slim/package.json', 'packages/gpx-slim/LICENSE', 'LICENSE', 'README.md', 'src/client.js', 'src/styles.css', 'src/remark.cjs', 'src/integration.cjs', 'src/maplibre-worker.js', 'src/maplibre-worker-source.js']) assert.ok(files.has(entry), `Missing ${entry}`);
 assert.ok([...files].every(file => !/^(examples|test|docs\/performance|\.github)\//.test(file)), 'Package contains development data');
 const consumer = mkdtempSync(join(tmpdir(), 'relive-consumer-'));
 try {

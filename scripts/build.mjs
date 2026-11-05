@@ -1,4 +1,5 @@
 import {build} from 'esbuild';
+import './build-maplibre-worker.mjs';
 import {fileURLToPath} from 'node:url';
 import {mkdir, copyFile, readFile, writeFile} from 'node:fs/promises';
 await mkdir('dist/obsidian',{recursive:true});

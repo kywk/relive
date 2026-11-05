@@ -1,6 +1,6 @@
 {
   "name": "@kywk/react-relive",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Framework-independent React component for Relive GPX and photo replay",
   "type": "module",
   "main": "./src/index.js",
@@ -26,7 +26,7 @@
     "typecheck": "tsc --noEmit --strict --types react --module NodeNext --moduleResolution NodeNext --target ES2022 test/types.ts"
   },
   "dependencies": {
-    "@kywk/relive": "^0.2.1",
+    "@kywk/relive": "^0.2.2",
     "leaflet": "^1.9.4",
     "maplibre-gl": "6.4.1"
   },

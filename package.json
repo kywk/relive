@@ -1,6 +1,6 @@
 {
   "name": "@kywk/relive",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "type": "module",
   "description": "GPX and photo replay for Obsidian and Docusaurus",
   "exports": {
@@ -38,7 +38,9 @@
     "react:build": "vite build --config examples/react/vite.config.mjs",
     "react:test": "npm --prefix packages/react-relive test",
     "react:release:check": "node scripts/check-react-release.mjs",
-    "react:release:pack": "node scripts/check-react-package.mjs"
+    "react:release:pack": "node scripts/check-react-package.mjs",
+    "pretest": "node scripts/build-maplibre-worker.mjs",
+    "prepack": "node scripts/build-maplibre-worker.mjs"
   },
   "dependencies": {
     "exifr": "^7.1.3",

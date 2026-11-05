@@ -1,6 +1,21 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {build} from 'esbuild';
+import workerSource from '../src/maplibre-worker-source.js';
+
+test('MapLibre worker is self-contained and registered once before map creation',async()=>{
+ const result=await build({stdin:{contents:workerSource},bundle:true,write:false,format:'iife',metafile:true});
+ assert.deepEqual(Object.values(result.metafile.outputs).flatMap(output=>output.imports),[]);
+ // A missing worker previously passed bundler checks but left all tile requests
+ // waiting forever. Verify that our registered URL actually contains the worker.
+ const {configureMapLibreWorker}=await import('../src/maplibre-worker.js');
+ const urls=[];
+ const api={setWorkerUrl(url){urls.push(url);}};
+ configureMapLibreWorker(api);configureMapLibreWorker(api);
+ assert.equal(urls.length,1);
+ assert.match(urls[0],/^blob:/);
+ assert.equal(await (await fetch(urls[0])).text(),workerSource);
+});
 test('browser player excludes YAML, XML and EXIF parsers',async()=>{
  const result=await build({entryPoints:['src/player.js'],bundle:true,write:false,format:'esm',metafile:true});
  assert.deepEqual(Object.keys(result.metafile.inputs).filter(p=>/node_modules\/(yaml|fast-xml-parser|exifr)\//.test(p)),[]);

@@ -8,7 +8,7 @@ Relive replays GPX journeys with time- and GPS-matched photos in Obsidian. Add a
 
 Code is MIT licensed. Map and photo attribution remains visible. The following sections provide the full Traditional Chinese usage guide.
 
-把 `relive` fenced code block 放進筆記，以 Leaflet 播放 GPX 軌跡並顯示相片。第一版提供 2D 地圖、播放／暫停、拖曳進度、倍速、相機跟隨、相片縮圖與定位提示。支援免金鑰 MapLibre 3D 地形與選配 Google 寫實 3D；尚未提供影片匯出。
+把 `relive` fenced code block 放進筆記，以 Leaflet 播放 GPX 軌跡並顯示相片。第一版提供 2D 地圖、播放／暫停、拖曳進度、倍速、相機跟隨、相片縮圖與定位提示。支援免金鑰 MapLibre 3D 地形；網站與 React 另可選配 Google 寫實 3D；尚未提供影片匯出。
 
 ## 官方 Demo 與 GitHub Pages
 
@@ -152,7 +152,7 @@ const relive = createReliveIntegration({
 // 每個 docs / blog / album 的 remarkPlugins: [...原有插件, relive.remark]
 ```
 
-套件已配置為公開 npm 套件 `@kywk/relive`，目前尚未發布。發布成功後執行 `npm install @kywk/relive`。本機可改成 `require('/本機/relive/src/integration.cjs')`，但這種絕對路徑不能提交給網站 CI 使用。正式部署前須先發布到可由 CI 存取的 registry，並把套件版本和 lockfile 納入網站。安裝步驟不會改寫 Vault 筆記。
+套件已發布至 npm，執行 `npm install @kywk/relive`。本機可改成 `require('/本機/relive/src/integration.cjs')`，但這種絕對路徑不能提交給網站 CI 使用。正式部署前須先發布到可由 CI 存取的 registry，並把套件版本和 lockfile 納入網站。安裝步驟不會改寫 Vault 筆記。
 
 ### 網站建置時的 GPX 瘦身
 
@@ -322,13 +322,13 @@ stopDuration: 3
 
 ## Release CI/CD
 
-維護者：GitHub／npm 帳號均為 `kywk`。Repository 為 [kywk/relive](https://github.com/kywk/relive)。本次發行目標是 [GitHub Release 0.2.1](https://github.com/kywk/relive/releases/tag/0.2.1)，由 Actions 建置與驗證後發布附件；npm registry 與 Obsidian Community 上架另行處理。專案與 CLI 採 MIT 授權。
+維護者：GitHub／npm 帳號均為 `kywk`。Repository 為 [kywk/relive](https://github.com/kywk/relive)。本次發行目標是 [GitHub Release 0.2.2](https://github.com/kywk/relive/releases/tag/0.2.2)，由 Actions 建置與驗證後發布附件；npm registry 與 Obsidian Community 上架另行處理。專案與 CLI 採 MIT 授權。
 
 | 產品 | 安裝識別 | 發行 tag | Workflow |
 | --- | --- | --- | --- |
-| GitHub Release／Obsidian 安裝包 | plugin ID `relive`，另附三個 npm tarball | `0.2.1` | `release-obsidian.yml` |
-| Docusaurus／共用 library | `@kywk/relive` | `npm-v0.2.1` | `release-npm.yml` |
-| React 元件 | `@kywk/react-relive` | `react-relive-v0.1.1` | `release-react.yml` |
+| GitHub Release／Obsidian 安裝包 | plugin ID `relive`，另附三個 npm tarball | `0.2.2` | `release-obsidian.yml` |
+| Docusaurus／共用 library | `@kywk/relive` | `npm-v0.2.2` | `release-npm.yml` |
+| React 元件 | `@kywk/react-relive` | `react-relive-v0.1.2` | `release-react.yml` |
 | GPX Slim CLI | `@kywk/gpx-slim`，命令 `gpx-slim` | `gpx-slim-v0.1.0` | `release-gpx-slim.yml` |
 
 GitHub 發行流程同時建置網站、測試三個 tarball，附 SHA256SUMS 與 artifact attestations，並使用 `docs/releases/<version>.md` 作為 release notes；建立新版本 tag 前須先備妥該檔案。此流程不會執行 npm publish 或提交 Community。
