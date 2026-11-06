@@ -47,7 +47,7 @@ export default function App() {
 
 在 `journey` 設定 `locale: 'en'` 可使用英文播放器介面；`locale: 'zh-Hant'` 或省略此欄位則使用繁體中文。
 
-本機開發執行 `npm run react:demo`，`npm run react:build` 驗證獨立 Vite 範例。npm 發布前，先以 `npm run release:pack` 與 `npm run react:release:pack` 產生並驗證兩個相依 tarball；安裝方式、SSR、照片定位與資料契約見 [React 整合指南](docs/react.md)。目前已發布 `@kywk/relive@0.2.2` 與 `@kywk/react-relive@0.1.2`，可直接從 npm 安裝。
+本機開發執行 `npm run react:demo`，`npm run react:build` 驗證獨立 Vite 範例。npm 發布前，先以 `npm run release:pack` 與 `npm run react:release:pack` 產生並驗證兩個相依 tarball；安裝方式、SSR、照片定位與資料契約見 [React 整合指南](docs/react.md)。目前已發布 `@kywk/relive@0.2.3` 與 `@kywk/react-relive@0.1.3`，可直接從 npm 安裝。
 
 ## GPX 瘦身 CLI
 
@@ -234,7 +234,7 @@ npm run vault:serve
 
 ## 邊界與後續
 
-目前已發布 0.2.2。Google 3D 需要使用者 API key，尚未以真實 key 驗證；未實作影片／音樂匯出、海拔圖、Vault 資產修改後即時刷新、離線地圖與發布精靈。超大型 GPX 每幀繪製可能較慢，跨國際換日線的地圖繪製尚未調整 world wrapping。地圖使用 OpenStreetMap 公開圖磚，需要網路；正式流量請確認圖磚服務使用政策並規劃供應商設定。
+目前 Obsidian 已發布 0.2.2，共用 npm 套件為 0.2.3。Google 3D 需要使用者 API key，尚未以真實 key 驗證；未實作影片／音樂匯出、海拔圖、Vault 資產修改後即時刷新、離線地圖與發布精靈。超大型 GPX 每幀繪製可能較慢，跨國際換日線的地圖繪製尚未調整 world wrapping。地圖使用 OpenStreetMap 公開圖磚，需要網路；正式流量請確認圖磚服務使用政策並規劃供應商設定。
 
 參考： [Obsidian Markdown post processing](https://github.com/obsidianmd/obsidian-developer-docs/blob/main/en/Plugins/Editor/Markdown%20post%20processing.md)、[Docusaurus MDX plugins](https://docusaurus.io/docs/markdown-features/plugins)、[Docusaurus client modules](https://docusaurus.io/docs/advanced/client)、[Leaflet API](https://leafletjs.com/reference.html)。
 
@@ -330,13 +330,13 @@ stopDuration: 3
 
 ## Release CI/CD
 
-維護者：GitHub／npm 帳號均為 `kywk`。Repository 為 [kywk/relive](https://github.com/kywk/relive)。目前穩定版本是 [GitHub Release 0.2.2](https://github.com/kywk/relive/releases/tag/0.2.2)，附件與 npm 套件已發布，Obsidian Community 已收錄；最新審核版本見 [Community 頁面](https://community.obsidian.md/plugins/relive)。專案與 CLI 採 MIT 授權。
+維護者：GitHub／npm 帳號均為 `kywk`。Repository 為 [kywk/relive](https://github.com/kywk/relive)。目前 Obsidian 穩定版本是 [GitHub Release 0.2.2](https://github.com/kywk/relive/releases/tag/0.2.2)，附件與 npm 套件已發布，Obsidian Community 已收錄；最新審核版本見 [Community 頁面](https://community.obsidian.md/plugins/relive)。專案與 CLI 採 MIT 授權。
 
 | 產品 | 安裝識別 | 發行 tag | Workflow |
 | --- | --- | --- | --- |
 | GitHub Release／Obsidian 安裝包 | plugin ID `relive`，另附三個 npm tarball | `0.2.2` | `release-obsidian.yml` |
-| Docusaurus／共用 library | `@kywk/relive` | `npm-v0.2.2` | `release-npm.yml` |
-| React 元件 | `@kywk/react-relive` | `react-relive-v0.1.2` | `release-react.yml` |
+| Docusaurus／共用 library | `@kywk/relive` | `npm-v0.2.3` | `release-npm.yml` |
+| React 元件 | `@kywk/react-relive` | `react-relive-v0.1.3` | `release-react.yml` |
 | GPX Slim CLI | `@kywk/gpx-slim`，命令 `gpx-slim` | `gpx-slim-v0.2.0` | `release-gpx-slim.yml` |
 
 GitHub 發行流程同時建置網站、測試三個 tarball，附 SHA256SUMS 與 artifact attestations，並使用 `docs/releases/<version>.md` 作為 release notes；建立新版本 tag 前須先備妥該檔案。此流程不會執行 npm publish 或提交 Community。
@@ -373,9 +373,9 @@ React 套件在 `packages/react-relive` 獨立維護版本，產物位於 `.rele
 
 2026-11-06 已發布 GPX Slim 0.2.0，新增 `--gps-only`／`gpsOnly`。其 Trusted Publisher 已設定為 `kywk/relive` 的 `release-gpx-slim.yml`（environment 留空），並以 GitHub Actions OIDC 成功發布及附加 provenance。公開 registry 的指定版本與 latest 均已用空快取 npx 驗證。
 
-2026-11-06 也已為 `@kywk/relive` 與 `@kywk/react-relive` 建立並讀回確認 Trusted Publisher，分別限定 `kywk/relive` 的 `release-npm.yml` 與 `release-react.yml`，environment 留空、允許 publish。兩個流程已以 Node 24／npm 12.2.0 在隔離環境通過乾淨安裝、測試、建置與 tarball 驗證；本次未發布這兩個套件的新版本，因此尚未驗證其實際 OIDC 發布。
+2026-11-06 已依序透過 GitHub Actions OIDC 發布 [`@kywk/relive@0.2.3`](https://github.com/kywk/relive/actions/runs/42214587255) 與 [`@kywk/react-relive@0.1.3`](https://github.com/kywk/relive/actions/runs/42215238842)，兩次首次 OIDC 發布均成功並附 provenance。Trusted Publisher 分別限定 `kywk/relive` 的 `release-npm.yml` 與 `release-react.yml`，environment 留空。Node 24／npm 12.2.0 的乾淨安裝、測試、建置及 tarball 驗證均通過；公開 registry 空快取安裝另驗證 GPX、照片時間定位、Remark／integration、React SSR 與生命週期（播放器替身）。React 0.1.3 依賴共用套件 `^0.2.3`；本次未建立 Obsidian 發行，Community 版本仍為 0.2.2。
 
-依 [npm 的設定到期規則](https://docs.npmjs.com/trusted-publishers/#trusted-publisher-configuration-expiry)，新 Publisher 須在建立後兩天內完成首次成功發布；若未完成會到期，後續需刪除重建。先前版本使用本機已驗證 tarball 與互動式 2FA。以下為維護者設定步驟，不能僅憑 workflow 存在就推定 OIDC 已完成實際發布。
+依 [npm 的設定到期規則](https://docs.npmjs.com/trusted-publishers/#trusted-publisher-configuration-expiry)，新 Publisher 須在建立後兩天內完成首次成功發布；若未完成會到期，後續需刪除重建。上述三個套件均已完成首次成功 OIDC 發布。更早的版本使用本機已驗證 tarball 與互動式 2FA；以下保留維護者設定步驟，日後仍須以實際發布結果確認。
 
 1. 建立公開 `kywk/relive` repository 並提交原始碼、LICENSE、manifest、versions 與各套件 lockfile；確認 GitHub Actions 通過。
 2. 登入 npm 的 `kywk` 帳號，確認各產品的 scoped 名稱可發布。首次發布／建立套件依 [npm Trusted Publishing 官方流程](https://docs.npmjs.com/trusted-publishers/) 辦理；如需本機首次發布，使用已驗證的 tarball，完成 npm 要求的登入／2FA。

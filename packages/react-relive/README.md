@@ -26,6 +26,6 @@ export default function App() {
 
 JavaScript 入口可在 SSR 匯入；Leaflet 僅在 client effect 載入。Next.js App Router 請在 client component 傳入 callbacks，並於允許全域 CSS 的入口匯入樣式。CSS entry 包含 Leaflet、MapLibre 與 Relive 樣式，需要支援 npm CSS imports 的 bundler。
 
-0.1.2 已發布至 npm，使用共用播放器 0.2.2。MapLibre 3D Worker 已隨套件封裝，不需另設 URL；有 CSP 的網站需允許 `worker-src blob:`，地圖資料仍需網路及 WebGL。
+0.1.3 已透過 GitHub Actions OIDC 發布至 npm，附 provenance，使用共用播放器 0.2.3（相依範圍 `^0.2.3`）。MapLibre 3D Worker 已隨套件封裝，不需另設 URL；有 CSP 的網站需允許 `worker-src blob:`，地圖資料仍需網路及 WebGL。
 
 完整說明見 [React 整合指南](https://github.com/kywk/relive/blob/main/docs/react.md)，本機範例在 `examples/react`。此套件共用 `@kywk/relive` 播放器，React 為 peer dependency。

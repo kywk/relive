@@ -47,7 +47,7 @@ The stylesheet entry includes Leaflet, MapLibre, and Relive CSS. The component l
 
 Set `locale: 'en'` in `journey` for English player controls. Use `locale: 'zh-Hant'`, or omit the field, for Traditional Chinese.
 
-Run `npm run react:demo` for local development and `npm run react:build` to validate the standalone Vite example. Before publishing to npm, use `npm run release:pack` and `npm run react:release:pack` to produce and validate both dependent tarballs. See the [React integration guide](docs/react.md) (Traditional Chinese) for installation, SSR, photo matching, and the data contract. `@kywk/relive@0.2.2` and `@kywk/react-relive@0.1.2` are published and can be installed directly from npm.
+Run `npm run react:demo` for local development and `npm run react:build` to validate the standalone Vite example. Before publishing to npm, use `npm run release:pack` and `npm run react:release:pack` to produce and validate both dependent tarballs. See the [React integration guide](docs/react.md) (Traditional Chinese) for installation, SSR, photo matching, and the data contract. `@kywk/relive@0.2.3` and `@kywk/react-relive@0.1.3` are published and can be installed directly from npm.
 
 ## GPX Slim CLI
 
@@ -234,7 +234,7 @@ The structure follows a similar separation to StoryMap: data processing, player,
 
 ## Limitations and future work
 
-Version 0.2.2 is published. Google 3D requires a user-supplied API key and has not yet been validated with a real key. Video/music export, elevation charts, live refresh after vault asset changes, offline maps, and a publishing wizard are not implemented. Extremely large GPX tracks may draw slowly per frame; map rendering across the international date line has not yet been adjusted for world wrapping. Maps use public OpenStreetMap tiles and require network access. For production traffic, review the tile service's usage policy and plan provider configuration.
+Obsidian version 0.2.2 and shared npm package 0.2.3 are published. Google 3D requires a user-supplied API key and has not yet been validated with a real key. Video/music export, elevation charts, live refresh after vault asset changes, offline maps, and a publishing wizard are not implemented. Extremely large GPX tracks may draw slowly per frame; map rendering across the international date line has not yet been adjusted for world wrapping. Maps use public OpenStreetMap tiles and require network access. For production traffic, review the tile service's usage policy and plan provider configuration.
 
 References: [Obsidian Markdown post processing](https://github.com/obsidianmd/obsidian-developer-docs/blob/main/en/Plugins/Editor/Markdown%20post%20processing.md), [Docusaurus MDX plugins](https://docusaurus.io/docs/markdown-features/plugins), [Docusaurus client modules](https://docusaurus.io/docs/advanced/client), [Leaflet API](https://leafletjs.com/reference.html).
 
@@ -327,13 +327,13 @@ Real Leaflet and data-processing benchmarks cover 100,000-point GPX tracks. The 
 
 ## Release CI/CD
 
-Maintainer: GitHub and npm account `kywk`. Repository: [kywk/relive](https://github.com/kywk/relive). The current stable version is [GitHub Release 0.2.2](https://github.com/kywk/relive/releases/tag/0.2.2). Release attachments and npm packages are published, and Obsidian Community lists the plugin; see the [Community page](https://community.obsidian.md/plugins/relive) for the latest reviewed version. The project and CLI are MIT licensed.
+Maintainer: GitHub and npm account `kywk`. Repository: [kywk/relive](https://github.com/kywk/relive). The current stable Obsidian version is [GitHub Release 0.2.2](https://github.com/kywk/relive/releases/tag/0.2.2). Release attachments and npm packages are published, and Obsidian Community lists the plugin; see the [Community page](https://community.obsidian.md/plugins/relive) for the latest reviewed version. The project and CLI are MIT licensed.
 
 | Product | Installation identifier | Release tag | Workflow |
 | --- | --- | --- | --- |
 | GitHub Release / Obsidian package | Plugin ID `relive`, plus three npm tarballs | `0.2.2` | `release-obsidian.yml` |
-| Docusaurus / shared library | `@kywk/relive` | `npm-v0.2.2` | `release-npm.yml` |
-| React component | `@kywk/react-relive` | `react-relive-v0.1.2` | `release-react.yml` |
+| Docusaurus / shared library | `@kywk/relive` | `npm-v0.2.3` | `release-npm.yml` |
+| React component | `@kywk/react-relive` | `react-relive-v0.1.3` | `release-react.yml` |
 | GPX Slim CLI | `@kywk/gpx-slim`, command `gpx-slim` | `gpx-slim-v0.2.0` | `release-gpx-slim.yml` |
 
 The GitHub release workflow also builds the website and tests all three tarballs, attaching SHA256SUMS and artifact attestations. It uses `docs/releases/<version>.md` as release notes; prepare that file before creating a new version tag. This workflow does not run npm publish or submit to Community.
@@ -370,9 +370,9 @@ As of 2026-11-05, Obsidian/shared package 0.2.2, React 0.1.2, and GPX Slim 0.1.0
 
 GPX Slim 0.2.0 was published on 2026-11-06 with `--gps-only` / `gpsOnly`. Its Trusted Publisher is configured for `kywk/relive`, workflow `release-gpx-slim.yml`, without an environment restriction. GitHub Actions OIDC publication with provenance succeeded; fresh-cache public npx checks passed for both the exact version and latest.
 
-Trusted Publishers for `@kywk/relive` and `@kywk/react-relive` were also created and read back on 2026-11-06, restricted to `kywk/relive` workflows `release-npm.yml` and `release-react.yml`, respectively, with no environment specified and publication allowed. Both workflows passed isolated Node 24/npm 12.2.0 clean installation, tests, build, and tarball validation. No new versions of these two packages were published in this setup task, so their actual OIDC publication remains unverified.
+On 2026-11-06, [`@kywk/relive@0.2.3`](https://github.com/kywk/relive/actions/runs/42214587255) and then [`@kywk/react-relive@0.1.3`](https://github.com/kywk/relive/actions/runs/42215238842) completed their first GitHub Actions OIDC publications with provenance. Their Trusted Publishers are restricted to `kywk/relive` workflows `release-npm.yml` and `release-react.yml`, respectively, without an environment restriction. Node 24/npm 12.2.0 clean installation, tests, build, and tarball validation passed. A fresh-cache public registry consumer also passed GPX parsing, photo time matching, Remark/integration, React SSR, and lifecycle checks (with a player test double). React 0.1.3 depends on shared package `^0.2.3`. No Obsidian release was created; its Community version remains 0.2.2.
 
-Under [npm configuration expiry rules](https://docs.npmjs.com/trusted-publishers/#trusted-publisher-configuration-expiry), a new Publisher must complete its first successful publication within two days; otherwise it expires and must be deleted and recreated. Earlier releases used locally validated tarballs and interactive 2FA. The following steps explain configuration; workflow existence alone does not establish a successful OIDC publication.
+Under [npm configuration expiry rules](https://docs.npmjs.com/trusted-publishers/#trusted-publisher-configuration-expiry), a new Publisher must complete its first successful publication within two days; otherwise it expires and must be deleted and recreated. All three packages above have completed their first successful OIDC publication. Earlier releases used locally validated tarballs and interactive 2FA. The following configuration steps remain useful for maintainers; future publication must still be verified by its actual result.
 
 1. Create the public `kywk/relive` repository and commit source, LICENSE, manifest, versions, and package lockfiles. Confirm that GitHub Actions passes.
 2. Sign in to npm as `kywk` and confirm publication rights for each scoped package name. Follow the [official npm Trusted Publishing process](https://docs.npmjs.com/trusted-publishers/) for the initial publication/package creation. If the first publication must be local, use the validated tarball and complete npm's login/2FA requirements.
