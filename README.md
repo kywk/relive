@@ -373,7 +373,9 @@ React 套件在 `packages/react-relive` 獨立維護版本，產物位於 `.rele
 
 2026-11-06 已發布 GPX Slim 0.2.0，新增 `--gps-only`／`gpsOnly`。其 Trusted Publisher 已設定為 `kywk/relive` 的 `release-gpx-slim.yml`（environment 留空），並以 GitHub Actions OIDC 成功發布及附加 provenance。公開 registry 的指定版本與 latest 均已用空快取 npx 驗證。
 
-先前版本使用本機已驗證 tarball 與互動式 2FA；其他 npm 套件的 Trusted Publisher 仍需另行確認。以下為維護者設定步驟，不能僅憑 workflow 存在就推定已啟用。
+2026-11-06 也已為 `@kywk/relive` 與 `@kywk/react-relive` 建立並讀回確認 Trusted Publisher，分別限定 `kywk/relive` 的 `release-npm.yml` 與 `release-react.yml`，environment 留空、允許 publish。兩個流程已以 Node 24／npm 12.2.0 在隔離環境通過乾淨安裝、測試、建置與 tarball 驗證；本次未發布這兩個套件的新版本，因此尚未驗證其實際 OIDC 發布。
+
+依 [npm 的設定到期規則](https://docs.npmjs.com/trusted-publishers/#trusted-publisher-configuration-expiry)，新 Publisher 須在建立後兩天內完成首次成功發布；若未完成會到期，後續需刪除重建。先前版本使用本機已驗證 tarball 與互動式 2FA。以下為維護者設定步驟，不能僅憑 workflow 存在就推定 OIDC 已完成實際發布。
 
 1. 建立公開 `kywk/relive` repository 並提交原始碼、LICENSE、manifest、versions 與各套件 lockfile；確認 GitHub Actions 通過。
 2. 登入 npm 的 `kywk` 帳號，確認各產品的 scoped 名稱可發布。首次發布／建立套件依 [npm Trusted Publishing 官方流程](https://docs.npmjs.com/trusted-publishers/) 辦理；如需本機首次發布，使用已驗證的 tarball，完成 npm 要求的登入／2FA。

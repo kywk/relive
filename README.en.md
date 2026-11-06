@@ -370,7 +370,9 @@ As of 2026-11-05, Obsidian/shared package 0.2.2, React 0.1.2, and GPX Slim 0.1.0
 
 GPX Slim 0.2.0 was published on 2026-11-06 with `--gps-only` / `gpsOnly`. Its Trusted Publisher is configured for `kywk/relive`, workflow `release-gpx-slim.yml`, without an environment restriction. GitHub Actions OIDC publication with provenance succeeded; fresh-cache public npx checks passed for both the exact version and latest.
 
-Earlier releases used locally validated tarballs and interactive 2FA. Trusted Publishers for the other packages still need separate confirmation. The following steps explain configuration; the existence of a workflow does not mean it is enabled.
+Trusted Publishers for `@kywk/relive` and `@kywk/react-relive` were also created and read back on 2026-11-06, restricted to `kywk/relive` workflows `release-npm.yml` and `release-react.yml`, respectively, with no environment specified and publication allowed. Both workflows passed isolated Node 24/npm 12.2.0 clean installation, tests, build, and tarball validation. No new versions of these two packages were published in this setup task, so their actual OIDC publication remains unverified.
+
+Under [npm configuration expiry rules](https://docs.npmjs.com/trusted-publishers/#trusted-publisher-configuration-expiry), a new Publisher must complete its first successful publication within two days; otherwise it expires and must be deleted and recreated. Earlier releases used locally validated tarballs and interactive 2FA. The following steps explain configuration; workflow existence alone does not establish a successful OIDC publication.
 
 1. Create the public `kywk/relive` repository and commit source, LICENSE, manifest, versions, and package lockfiles. Confirm that GitHub Actions passes.
 2. Sign in to npm as `kywk` and confirm publication rights for each scoped package name. Follow the [official npm Trusted Publishing process](https://docs.npmjs.com/trusted-publishers/) for the initial publication/package creation. If the first publication must be local, use the validated tarball and complete npm's login/2FA requirements.
