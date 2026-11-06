@@ -1,6 +1,6 @@
 {
   "name": "@kywk/gpx-slim",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Shape-aware GPX simplification with stop and slow-motion detection",
   "type": "module",
   "bin": {

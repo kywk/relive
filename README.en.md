@@ -334,7 +334,7 @@ Maintainer: GitHub and npm account `kywk`. Repository: [kywk/relive](https://git
 | GitHub Release / Obsidian package | Plugin ID `relive`, plus three npm tarballs | `0.2.2` | `release-obsidian.yml` |
 | Docusaurus / shared library | `@kywk/relive` | `npm-v0.2.2` | `release-npm.yml` |
 | React component | `@kywk/react-relive` | `react-relive-v0.1.2` | `release-react.yml` |
-| GPX Slim CLI | `@kywk/gpx-slim`, command `gpx-slim` | `gpx-slim-v0.1.0` | `release-gpx-slim.yml` |
+| GPX Slim CLI | `@kywk/gpx-slim`, command `gpx-slim` | `gpx-slim-v0.2.0` | `release-gpx-slim.yml` |
 
 The GitHub release workflow also builds the website and tests all three tarballs, attaching SHA256SUMS and artifact attestations. It uses `docs/releases/<version>.md` as release notes; prepare that file before creating a new version tag. This workflow does not run npm publish or submit to Community.
 

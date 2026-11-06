@@ -34,7 +34,20 @@ try {
   assert.ok(report.outputPoints < report.inputPoints);
   assert.match(readFileSync(join(consumer, 'ride.slim.gpx'), 'utf8'), /<gpx>/);
   assert.equal(readFileSync(join(consumer, 'ride.gpx'), 'utf8'), xml);
+  // Exercise GPS-only through the tarball, not the source checkout.
+  const gpsXml = '<gpx version="1.1" creator="private-device"><!--private-comment--><metadata><name>private-trip</name></metadata><trk><name>private-track</name><trkseg><trkpt lat="25" lon="121"><ele>10</ele><time>2026-01-01T00:00:00Z</time><extensions><hr>90</hr><cad>80</cad><speed>2</speed></extensions></trkpt><trkpt lat="25.001" lon="121.001"><ele>11</ele><time>2026-01-01T00:00:10Z</time></trkpt></trkseg></trk></gpx>';
+  writeFileSync(join(consumer, 'gps-source.gpx'), gpsXml);
+  const gpsReport = JSON.parse(run('gps-source.gpx', '--gps-only', '--reduction', '0', '--output', 'gps-only.gpx', '--json'));
+  assert.equal(gpsReport.gpsOnly, true);
+  assert.equal(gpsReport.strippedExtensions, true);
+  assert.equal(gpsReport.outputPoints, 2);
+  const gpsOutput = readFileSync(join(consumer, 'gps-only.gpx'), 'utf8');
+  assert.match(gpsOutput, /creator="gpx-slim"/);
+  assert.match(gpsOutput, /lat="25" lon="121"><ele>10<\/ele><time>2026-01-01T00:00:00Z<\/time>/);
+  assert.match(gpsOutput, /lat="25.001" lon="121.001"><ele>11<\/ele><time>2026-01-01T00:00:10Z<\/time>/);
+  assert.doesNotMatch(gpsOutput, /private-|metadata|extensions|<name>|<hr>|<cad>|<speed>|<!--/);
+  assert.equal(readFileSync(join(consumer, 'gps-source.gpx'), 'utf8'), gpsXml);
   const collision = spawnSync('npm', [...args, 'ride.gpx'], {cwd: consumer, env, encoding: 'utf8'});
   assert.notEqual(collision.status, 0, 'CLI must reject overwriting output');
-  console.log(`Verified ${packed.filename}: offline npx analysis, compression, and overwrite protection`);
+  console.log(`Verified ${packed.filename}: offline npx analysis, compression, GPS-only, and overwrite protection`);
 } finally { rmSync(consumer, {recursive: true, force: true}); }

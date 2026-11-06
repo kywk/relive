@@ -67,14 +67,14 @@ node bin/gpx-slim.js ride.gpx --preset gentle --gps-only
 
 ## npm / GitHub 發布
 
-已配置 `bin`、套件檔案白名單與 `prepack` 測試。0.1.0 已發布至 npm；正式套件名稱為 `@kywk/gpx-slim`，由 npm 帳號 `kywk` 維護。
+已配置 `bin`、套件檔案白名單與 `prepack` 測試。0.2.0 新增 `--gps-only`／`gpsOnly`，發布狀態請以 npm registry 為準；正式套件名稱為 `@kywk/gpx-slim`，由 npm 帳號 `kywk` 維護。
 
 先在本機驗證打包與 npx：
 
 ```sh
 npm test
 npm pack
-npx --yes --package ./kywk-gpx-slim-0.1.0.tgz gpx-slim --help
+npx --yes --package ./kywk-gpx-slim-0.2.0.tgz gpx-slim --help
 ```
 
 已配置 MIT 授權、作者與 `kywk/relive` repository 的子目錄 metadata。首次發布已透過本機 2FA 完成；後續自動發布仍需設定 npm Trusted Publisher，詳見根目錄發佈說明。

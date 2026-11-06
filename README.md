@@ -337,7 +337,7 @@ stopDuration: 3
 | GitHub Release／Obsidian 安裝包 | plugin ID `relive`，另附三個 npm tarball | `0.2.2` | `release-obsidian.yml` |
 | Docusaurus／共用 library | `@kywk/relive` | `npm-v0.2.2` | `release-npm.yml` |
 | React 元件 | `@kywk/react-relive` | `react-relive-v0.1.2` | `release-react.yml` |
-| GPX Slim CLI | `@kywk/gpx-slim`，命令 `gpx-slim` | `gpx-slim-v0.1.0` | `release-gpx-slim.yml` |
+| GPX Slim CLI | `@kywk/gpx-slim`，命令 `gpx-slim` | `gpx-slim-v0.2.0` | `release-gpx-slim.yml` |
 
 GitHub 發行流程同時建置網站、測試三個 tarball，附 SHA256SUMS 與 artifact attestations，並使用 `docs/releases/<version>.md` 作為 release notes；建立新版本 tag 前須先備妥該檔案。此流程不會執行 npm publish 或提交 Community。
 
