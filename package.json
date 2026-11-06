@@ -1,6 +1,6 @@
 {
   "name": "@kywk/relive",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "type": "module",
   "description": "GPX and photo replay for Obsidian and Docusaurus",
   "exports": {
