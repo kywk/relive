@@ -371,7 +371,9 @@ React 套件在 `packages/react-relive` 獨立維護版本，產物位於 `.rele
 
 2026-11-05 已發布 Obsidian／共用套件 0.2.2、React 0.1.2 與 GPX Slim 0.1.0。Community 的 0.2.2 審核已完成，GitHub Release、CI 與 demo 部署皆成功；實際 registry 安裝、React SSR 與 CLI 執行已驗證。
 
-本次 npm 以本機已驗證 tarball 與互動式 2FA 發布。各套件的 GitHub OIDC trusted publisher 尚未完成設定；以下為維護者啟用自動發布的步驟，不能僅憑 workflow 存在就推定已啟用。
+2026-11-06 已發布 GPX Slim 0.2.0，新增 `--gps-only`／`gpsOnly`。其 Trusted Publisher 已設定為 `kywk/relive` 的 `release-gpx-slim.yml`（environment 留空），並以 GitHub Actions OIDC 成功發布及附加 provenance。公開 registry 的指定版本與 latest 均已用空快取 npx 驗證。
+
+先前版本使用本機已驗證 tarball 與互動式 2FA；其他 npm 套件的 Trusted Publisher 仍需另行確認。以下為維護者設定步驟，不能僅憑 workflow 存在就推定已啟用。
 
 1. 建立公開 `kywk/relive` repository 並提交原始碼、LICENSE、manifest、versions 與各套件 lockfile；確認 GitHub Actions 通過。
 2. 登入 npm 的 `kywk` 帳號，確認各產品的 scoped 名稱可發布。首次發布／建立套件依 [npm Trusted Publishing 官方流程](https://docs.npmjs.com/trusted-publishers/) 辦理；如需本機首次發布，使用已驗證的 tarball，完成 npm 要求的登入／2FA。
@@ -394,5 +396,5 @@ npx @kywk/gpx-slim ride.gpx --preset balanced --reduction 70
 在正式上架前，可直接驗證本機 CLI tarball：
 
 ```sh
-npx --offline --yes --package ./.release/gpx-slim/kywk-gpx-slim-0.1.0.tgz gpx-slim --help
+npx --offline --yes --package ./.release/gpx-slim/kywk-gpx-slim-0.2.0.tgz gpx-slim --help
 ```

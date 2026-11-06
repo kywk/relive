@@ -368,7 +368,9 @@ The React package maintains an independent version in `packages/react-relive`, w
 
 As of 2026-11-05, Obsidian/shared package 0.2.2, React 0.1.2, and GPX Slim 0.1.0 are published. Community review of 0.2.2 is complete, and GitHub Release, CI, and demo deployment succeeded. Installation from the actual registry, React SSR, and CLI execution have been validated.
 
-These npm releases used locally validated tarballs and interactive 2FA. GitHub OIDC trusted publishers are not yet configured for the packages. The following steps explain how maintainers can enable automatic publishing; the existence of a workflow does not mean it is enabled.
+GPX Slim 0.2.0 was published on 2026-11-06 with `--gps-only` / `gpsOnly`. Its Trusted Publisher is configured for `kywk/relive`, workflow `release-gpx-slim.yml`, without an environment restriction. GitHub Actions OIDC publication with provenance succeeded; fresh-cache public npx checks passed for both the exact version and latest.
+
+Earlier releases used locally validated tarballs and interactive 2FA. Trusted Publishers for the other packages still need separate confirmation. The following steps explain configuration; the existence of a workflow does not mean it is enabled.
 
 1. Create the public `kywk/relive` repository and commit source, LICENSE, manifest, versions, and package lockfiles. Confirm that GitHub Actions passes.
 2. Sign in to npm as `kywk` and confirm publication rights for each scoped package name. Follow the [official npm Trusted Publishing process](https://docs.npmjs.com/trusted-publishers/) for the initial publication/package creation. If the first publication must be local, use the validated tarball and complete npm's login/2FA requirements.
@@ -391,5 +393,5 @@ npx @kywk/gpx-slim ride.gpx --preset balanced --reduction 70
 Before official publication, validate the local CLI tarball directly:
 
 ```sh
-npx --offline --yes --package ./.release/gpx-slim/kywk-gpx-slim-0.1.0.tgz gpx-slim --help
+npx --offline --yes --package ./.release/gpx-slim/kywk-gpx-slim-0.2.0.tgz gpx-slim --help
 ```
