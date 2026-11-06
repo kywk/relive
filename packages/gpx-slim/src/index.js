@@ -158,8 +158,52 @@ function removeRanges(xml, ranges) {
 }
 function length(points) { return points.reduce((sum, p, i) => sum + (i ? distance(points[i - 1], p) : 0), 0); }
 
+// Rebuild an explicitly requested minimal GPX. Do not copy arbitrary attributes,
+// comments, extensions or metadata, which may contain sensitive information.
+function gpsOnlyXml(xml) {
+  const parser = new SaxesParser({ xmlns: true });
+  const allowed = {
+    gpx: new Set(['wpt', 'rte', 'trk']),
+    rte: new Set(['rtept']), trk: new Set(['trkseg']), trkseg: new Set(['trkpt']),
+    wpt: new Set(['ele', 'time']), rtept: new Set(['ele', 'time']), trkpt: new Set(['ele', 'time']),
+  };
+  const escape = value => String(value).replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;');
+  const stack = [], output = ['<?xml version="1.0" encoding="UTF-8"?>'];
+  let rootUri;
+  parser.on('opentag', tag => {
+    const parent = stack.at(-1);
+    if (!parent) rootUri = tag.uri;
+    const keep = !parent ? tag.local === 'gpx' && GPX_NS.has(tag.uri) :
+      parent.keep && tag.uri === rootUri && !!allowed[parent.local]?.has(tag.local);
+    stack.push({ local: tag.local, keep });
+    if (!keep) return;
+    let attrs = '';
+    if (!parent) {
+      if (rootUri) attrs += ` xmlns="${escape(rootUri)}"`;
+      if (tag.attributes.version) attrs += ` version="${escape(tag.attributes.version.value)}"`;
+      attrs += ' creator="gpx-slim"';
+    } else if (['wpt', 'rtept', 'trkpt'].includes(tag.local)) {
+      for (const name of ['lat', 'lon']) if (tag.attributes[name]) attrs += ` ${name}="${escape(tag.attributes[name].value)}"`;
+    }
+    output.push(`<${tag.local}${attrs}>`);
+  });
+  const appendText = text => {
+    const node = stack.at(-1);
+    if (node?.keep && (node.local === 'ele' || node.local === 'time')) output.push(escape(text));
+  };
+  parser.on('text', appendText);
+  parser.on('cdata', appendText);
+  parser.on('closetag', () => {
+    const node = stack.pop();
+    if (node.keep) output.push(`</${node.local}>`);
+  });
+  parser.write(xml).close();
+  return output.join('');
+}
+
 export function compressGpx(input, options = {}) {
-  const { preset = 'balanced', targetReduction, stripExtensions = false } = options;
+  const { preset = 'balanced', targetReduction, stripExtensions = false, gpsOnly = false } = options;
+  if (typeof gpsOnly !== 'boolean') throw new Error('gpsOnly must be a boolean.');
   if (!Object.hasOwn(PRESETS, preset)) throw new Error(`Unknown preset: ${preset}`);
   if (targetReduction !== undefined && (!Number.isFinite(targetReduction) || targetReduction < 0 || targetReduction > 100)) throw new Error('targetReduction must be between 0 and 100.');
   const parsed = typeof input === 'string' ? parseGpx(input) : input;
@@ -194,7 +238,8 @@ export function compressGpx(input, options = {}) {
       }
     });
   });
-  const xml = removeRanges(parsed.xml, ranges);
+  const reduced = removeRanges(parsed.xml, ranges);
+  const xml = gpsOnly ? gpsOnlyXml(reduced) : reduced;
   const remainingPoints = count(kept), removedPoints = originalPoints - remainingPoints;
   const inputBytes = Buffer.byteLength(parsed.xml), outputBytes = Buffer.byteLength(xml);
   return { xml, report: {
@@ -205,7 +250,7 @@ export function compressGpx(input, options = {}) {
     trackSegments: parsed.segments.length,
     stops: prepared.reduce((s, p) => s + p.stops, 0), stopSeconds: prepared.reduce((s, p) => s + p.stopDuration, 0),
     originalMeters, outputMeters, distanceChangePercent: originalMeters ? (outputMeters / originalMeters - 1) * 100 : 0,
-    strippedExtensions: stripExtensions, warnings: [...parsed.warnings,
+    strippedExtensions: stripExtensions || gpsOnly, gpsOnly, warnings: [...parsed.warnings,
       ...(targetReduction !== undefined && removedPoints < Math.floor(originalPoints * targetReduction / 100) ? ['Target not fully reached: protected points, error limits or discrete point counts constrain reduction.'] : [])],
   } };
 }

@@ -26,6 +26,9 @@ node bin/gpx-slim.js ride.gpx --preset balanced --reduction 60 --dry-run
 
 # 額外刪除所有 GPX extensions，包含心率、踏頻等感測器資料
 node bin/gpx-slim.js ride.gpx --strip-extensions
+
+# 除精簡軌跡點，僅保留 GPX 路徑／航點結構、座標、時間與海拔
+node bin/gpx-slim.js ride.gpx --preset gentle --gps-only
 ```
 
 `--analyze` 不接受 `--preset`、`--reduction` 或 `--output`；特定參數的預覽請用 `--dry-run`。
@@ -55,6 +58,8 @@ node bin/gpx-slim.js ride.gpx --strip-extensions
 5. 用非遞迴、逐點誤差加權的 Douglas–Peucker 簡化。相鄰邊的速度都低於門檻時，容許較寬的幾何誤差；時間缺漏時採較保守的幾何上限。
 6. 幾何距離採地心三維座標到有限線段的距離，可處理日界線及極區，長距離受地球曲率影響會保留較多點。高度另做線段投影位置的線性插值誤差檢查。座標不四捨五入。
 7. 直接刪除原始 XML 的點範圍及該行縮排，不重新序列化整份檔案。保留點的原始時間、高度、未知資料、namespace、CDATA 及文字維持原樣。
+
+`--gps-only` 以簡化後的軌跡重建最小 GPX：保留航點、路線、軌跡與分段結構，以及各點的緯度、經度、時間和海拔。移除 metadata、名稱、描述、連結、extensions（含心率、步頻與速度）、其他屬性及 XML 註解；根元素的 creator 改成 `gpx-slim`，保留 GPX namespace 與 version。此選項會改變 XML 格式；加上 `--reduction 0` 可保留全部軌跡點。座標與時間仍可能揭露私人行蹤，發布前請自行確認。
 
 預設保留文件 metadata、路線 `rte/rtept`、獨立航點 `wpt`、所有保留點的擴充資料。被刪點的所有子資訊（包括感測器讀值）也會隨之刪除。`--strip-extensions` 明確移除文件中 GPX namespace 的所有 extensions。
 
@@ -94,6 +99,7 @@ const { xml, report } = compressGpx(parsed, {
   preset: 'balanced',
   targetReduction: 70,
   stripExtensions: false,
+  gpsOnly: false, // true 僅保留 GPS 結構、座標、時間與海拔
 });
 ```
 

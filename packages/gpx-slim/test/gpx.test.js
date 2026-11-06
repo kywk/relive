@@ -48,6 +48,19 @@ test('metadata, routes, waypoints, sensors, CDATA, emoji and CRLF preserved', ()
   const stripped = compressGpx(input, { stripExtensions: true });
   assert.ok(!stripped.xml.includes('<extensions>')); parseGpx(stripped.xml);
 });
+test('GPS-only keeps GPS structure, coordinates, elevation and time while stripping other data', () => {
+  const input = `<?xml version="1.0"?><g:gpx xmlns:g="http://www.topografix.com/GPX/1/1" xmlns:x="urn:sensor" version="1.1" creator="private device" x:secret="secret"><!--private comment--><g:metadata><g:name>private trip</g:name></g:metadata><g:wpt lat="1" lon="2" x:secret="private"><g:ele>30</g:ele><g:time>2026-01-01T00:00:00Z</g:time><g:name>private waypoint</g:name></g:wpt><g:rte><g:name>private route</g:name><g:rtept lat="3" lon="4"><g:ele>5</g:ele></g:rtept></g:rte><g:trk><g:name>private track</g:name><g:trkseg><g:trkpt lat="25" lon="121"><g:ele>10</g:ele><g:time>2026-01-01T00:00:00Z</g:time><g:extensions><x:hr>88</x:hr><x:cad>90</x:cad><x:speed>2</x:speed></g:extensions></g:trkpt><g:trkpt lat="25.0001" lon="121"><g:ele>11</g:ele><g:time>2026-01-01T00:00:10Z</g:time></g:trkpt></g:trkseg><g:trkseg><g:trkpt lat="26" lon="122"/></g:trkseg></g:trk></g:gpx>`;
+  const original = compressGpx(input, { targetReduction: 0 });
+  assert.equal(original.xml, input);
+  const result = compressGpx(input, { targetReduction: 0, gpsOnly: true });
+  assert.equal(result.report.gpsOnly, true);
+  assert.equal(result.report.strippedExtensions, true);
+  assert.deepEqual(parseGpx(result.xml).segments.map(segment => segment.map(({lat, lon, ele, time}) => ({lat, lon, ele, time}))), parseGpx(input).segments.map(segment => segment.map(({lat, lon, ele, time}) => ({lat, lon, ele, time}))));
+  assert.match(result.xml, /<wpt lat="1" lon="2"><ele>30<\/ele><time>2026-01-01T00:00:00Z<\/time><\/wpt>/);
+  assert.match(result.xml, /<rte><rtept lat="3" lon="4"><ele>5<\/ele><\/rtept><\/rte>/);
+  assert.match(result.xml, /creator="gpx-slim"/);
+  assert.doesNotMatch(result.xml, /private|extensions|:hr|:cad|:speed|secret|<!--/);
+});
 test('namespace-prefixed points and self-closing points work', () => {
   const xml = '<g:gpx xmlns:g="http://www.topografix.com/GPX/1/1"><g:trk><g:trkseg><g:trkpt lat="0" lon="0"/><g:trkpt lat="0" lon="0.0001"/><g:trkpt lat="0" lon="0.0002"/></g:trkseg></g:trk></g:gpx>';
   assert.equal(points(compressGpx(xml).xml).length, 2);
@@ -95,6 +108,7 @@ test('reject malformed XML, invalid coordinates, DTD and unsupported encoding', 
 test('invalid CLI/API configuration is rejected', () => {
   for (const targetReduction of [-1,101,NaN,Infinity]) assert.throws(() => compressGpx(gpx(pt(0)),{targetReduction}));
   assert.throws(() => compressGpx(gpx(pt(0)),{preset:'toString'}));
+  assert.throws(() => compressGpx(gpx(pt(0)),{gpsOnly:'true'}));
 });
 test('empty tracks and waypoint-only GPX preserved', () => {
   const xml = '<gpx><wpt lat="1" lon="2"/></gpx>';
@@ -107,6 +121,8 @@ test('CLI analysis, write, collision, symlink safety and invalid UTF-8', async (
   try {
     const input = join(dir,'input.gpx'), output = join(dir,'input.slim.gpx');
     const xml = gpx(pt(0)+pt(.0001)+pt(.0002)); await writeFile(input,xml);
+    const gpsAnalysis = cli(input,'--dry-run','--gps-only','--json'); assert.equal(gpsAnalysis.status,0,gpsAnalysis.stderr); assert.equal(JSON.parse(gpsAnalysis.stdout).gpsOnly,true);
+    const gpsOutput = join(dir,'gps-only.gpx'); assert.equal(cli(input,'--gps-only','-o',gpsOutput).status,0); assert.equal(points(await readFile(gpsOutput,'utf8')).length,2);
     const analysis = cli(input,'--analyze','--json'); assert.equal(analysis.status,0,analysis.stderr);
     assert.equal(JSON.parse(analysis.stdout).length,3);
     await assert.rejects(readFile(output));

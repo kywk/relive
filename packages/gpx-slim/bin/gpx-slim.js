@@ -11,6 +11,7 @@ const help = `gpx-slim <input.gpx> [options]
       --analyze                           Compare all presets without writing GPX
       --dry-run                           Report selected settings without writing
       --strip-extensions                  Remove all GPX extensions (including sensors)
+      --gps-only                          Keep only GPS structure, coordinates, elevation and time
       --json                              Print machine-readable report
   -h, --help                              Show help
 Input must be UTF-8. Output never overwrites an existing file. Routes/waypoints retained.
@@ -19,7 +20,7 @@ async function main() {
   const { values, positionals } = parseArgs({ allowPositionals: true, options: {
     preset: { type: 'string', short: 'p' }, reduction: { type: 'string', short: 'r' },
     output: { type: 'string', short: 'o' }, analyze: { type: 'boolean' },
-    'dry-run': { type: 'boolean' }, 'strip-extensions': { type: 'boolean' },
+    'dry-run': { type: 'boolean' }, 'strip-extensions': { type: 'boolean' }, 'gps-only': { type: 'boolean' },
     json: { type: 'boolean' }, help: { type: 'boolean', short: 'h' },
   } });
   if (values.help) { console.log(help); return; }
@@ -30,7 +31,7 @@ async function main() {
   const buffer = await readFile(input);
   const xml = new TextDecoder('utf-8', { fatal: true, ignoreBOM: true }).decode(buffer);
   const parsed = parseGpx(xml);
-  const options = { preset: values.preset, stripExtensions: values['strip-extensions'] };
+  const options = { preset: values.preset, stripExtensions: values['strip-extensions'], gpsOnly: values['gps-only'] };
   if (values.reduction !== undefined) {
     if (!values.reduction.trim()) throw new Error('--reduction requires a number.');
     options.targetReduction = Number(values.reduction);
